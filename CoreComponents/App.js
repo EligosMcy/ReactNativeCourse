@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text, Image, ImageBackground, ScrollView, Button, Pressable, Modal, StatusBar, ActivityIndicator, Alert } from "react-native";
 const logoImg = require("./assets/adaptive-icon.png");
 import Greet from "./components/Greet";
+import { AppButton, Card, SectionHeader, Spacer } from "./components/ui";
 
 export default function App() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -150,7 +151,26 @@ export default function App() {
       ])} /> */}
 
       {/*第十一部分: Custom Components 自定义组件 */}
-      <Greet name="张三" />
+      <Card>
+        <SectionHeader
+          title="自定义组件"
+          subtitle="CoreComponents/components/ui"
+          right={
+            <AppButton
+              title="提示"
+              variant="secondary"
+              onPress={() => Alert.alert("提示", "你点击了自定义按钮")}
+            />
+          }
+        />
+        <Spacer size={12} />
+        <Greet name="张三" />
+        <Spacer size={12} />
+        <AppButton
+          title="提交"
+          onPress={() => Alert.alert("提交成功", "这是一个自定义按钮")}
+        />
+      </Card>
     </View>
   );
 }
