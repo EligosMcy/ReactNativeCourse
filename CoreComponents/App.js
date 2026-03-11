@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, Image, ImageBackground, ScrollView, Button, Pressable, Modal } from "react-native";
+import { View, StyleSheet, Text, Image, ImageBackground, ScrollView, Button, Pressable, Modal, StatusBar, ActivityIndicator, Alert } from "react-native";
 const logoImg = require("./assets/adaptive-icon.png");
 
 export default function App() {
@@ -122,6 +122,31 @@ export default function App() {
           <Button title="关闭弹窗" color="midnightblue" onPress={() => setModalVisible(false)} />
         </View>
       </Modal> */}
+
+      {/*第八部分 StatusBar: 状态栏*/}
+      {/* only: Android by backgroundColor */}
+      {/* <StatusBar backgroundColor="lightgreen" barStyle="light-content" />  */}
+
+      {/*第九部分 ActivityIndicator : 活动指示器 */}
+      {/* <ActivityIndicator animating={true} size="small" />
+      <ActivityIndicator animating={true} color="red" size="small" />
+      <ActivityIndicator animating={true} color="green" size="large" />
+      <ActivityIndicator animating={false} color="green" size="large" />
+      <ActivityIndicator animating={true} color="green" size="large" /> */}
+
+      {/*第十部分 Alert: 警告弹窗 */}
+      {/* <Button title="显示警告" color="red" onPress={() => Alert.alert("警告")} />
+      <Button title="显示警告 2" color="red" onPress={() => Alert.alert("警告", "这是一个警告弹窗")} />
+      <Button title="显示警告 3" color="red" onPress={() => Alert.alert("警告", "生日信息错误",[
+        {
+          text: "确认",
+          onPress: () => console.log("确认"),
+        },
+        {
+          text: "取消",
+          onPress: () => console.log("取消"),
+        }
+      ])} /> */}
     </View>
   );
 }
