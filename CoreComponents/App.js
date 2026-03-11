@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, Image, ImageBackground, ScrollView, Button, Pressable, Modal, StatusBar, ActivityIndicator, Alert } from "react-native";
 const logoImg = require("./assets/adaptive-icon.png");
+import Greet from "./components/Greet";
 
 export default function App() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -147,6 +148,9 @@ export default function App() {
           onPress: () => console.log("取消"),
         }
       ])} /> */}
+
+      {/*第十一部分: Custom Components 自定义组件 */}
+      <Greet name="张三" />
     </View>
   );
 }
