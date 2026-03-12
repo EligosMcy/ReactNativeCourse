@@ -4,17 +4,32 @@ import Box from './componentes/box';
 export default function App() {
   return (
     <View style={styles.container}>
+      {/* alignItems vs alignSelf
+          - alignItems: 写在父容器上, 统一控制所有子元素在交叉轴上的对齐
+          - alignSelf: 写在某个子元素上, 单独覆盖该元素的对齐方式
+      */}
       {/* <Box title="Hello Box 1" style={{ backgroundColor: '#0B3D91', alignSelf: 'flex-end' }} />
-      <Box title="Hello Box 2" style={{ backgroundColor: '#8B0000', alignSelf: 'flex-start' }} />
-      <Box title="Hello Box 3" style={{ backgroundColor: '#006400', alignSelf: 'center' }} />
-      <Box title="Hello Box 4" style={{ backgroundColor: '#B8860B', alignSelf: 'stretch' }} />
-      <Box title="Hello Box 5" style={{ backgroundColor: '#4B0082', alignSelf: 'auto' }} /> */}
+          <Box title="Hello Box 2" style={{ backgroundColor: '#8B0000', alignSelf: 'flex-start' }} />
+          <Box title="Hello Box 3" style={{ backgroundColor: '#006400', alignSelf: 'center' }} />
+          <Box title="Hello Box 4" style={{ backgroundColor: '#B8860B', alignSelf: 'stretch' }} />
+          <Box title="Hello Box 5" style={{ backgroundColor: '#4B0082', alignSelf: 'auto' }} /> */}
 
+      {/* flexBasis vs height
+          - height: 永远只控制“高度”
+          - flexBasis: 控制 flex 主轴方向上的“基准尺寸”
+              - flexDirection: 'column'(默认) -> 更像“高度基准”
+              - flexDirection: 'row' -> 更像“宽度基准”
+          - flexBasis 常与 flexGrow/flexShrink(或简写 flex) 配合: 先给基准, 再按剩余空间伸缩
+      */}
       {/* <Box title="Hello Box 1" style={{ backgroundColor: '#0B3D91', flexBasis: 150, flex: 1 }} />
-      <Box title="Hello Box 2" style={{ backgroundColor: '#8B0000', height: 150, flex: 1 }} /> */}
+          <Box title="Hello Box 2" style={{ backgroundColor: '#8B0000', height: 150, flex: 1 }} /> */}
 
-      {/* <Box title="Box 1 shrink" style={{ backgroundColor: '#0B3D91', flexShrink: 1 }} /> */}
-      {/* <Box title="Box 2 shrink" style={{ backgroundColor: '#8B0000', flexShrink: 1 }} /> */}
+      {/* flexGrow vs flexShrink
+          - flexGrow: 有剩余空间时如何“分到更多”(数值越大分得越多)
+          - flexShrink: 空间不够时如何“被压缩”(数值越大越愿意缩)
+      */}
+      {/* <Box title="Box 1 shrink" style={{ backgroundColor: '#0B3D91', flexShrink: 1 }} />
+          <Box title="Box 2 shrink" style={{ backgroundColor: '#8B0000', flexShrink: 1 }} /> */}
 
       {/* <Box title="Hello Box 1" style={{ backgroundColor: '#0B3D91' }} />
       <Box title="Hello Box 2" style={{ backgroundColor: '#8B0000' }} />
@@ -25,6 +40,10 @@ export default function App() {
       <Box title="Hello Box 7" style={{ backgroundColor: '#006D77' }} />
       <Box title="Hello Box 8" style={{ backgroundColor: '#5D4037' }} /> */}
 
+      {/* position / top / left
+          - position 默认是 'relative': 元素仍参与正常布局, top/left 只是“相对自己原本位置”做偏移
+          - position: 'absolute': 元素不再参与正常布局, top/left 相对父容器定位(更像浮层)
+      */}
       <Box title="Hello Box 1" style={{ backgroundColor: '#0B3D91' }} />
       <Box title="Hello Box 2" style={{ backgroundColor: '#8B0000' }} />
       <Box title="Hello Box 3" style={{ backgroundColor: '#006400', top: 100, left: 100 }} />
@@ -38,41 +57,31 @@ export default function App() {
   );
 }
 
-//position 不参与正常布局
-
-
-// Relative Layout 是指元素的宽度和高度是根据父元素的宽度和高度来计算的
-// 例如: 父元素的宽度是 300, 子元素的宽度是 50%, 那么子元素的宽度就是 150
-
-// alignSelf 是为了单独修改某个元素的对齐方式,并且alignItems 是为了修改所有元素的对齐方式
-
-// flexBasis 是为了控制元素的宽度,弹性宽度
-// flexShrink 是为了控制元素的缩放比例,弹性收缩
-// flexGrow 是为了控制元素的缩放比例,弹性增长
-
-
-// flexBasis 和 height 的区别是: height 永远是“高度”; flexBasis 是 flex 主轴方向上的“基准尺寸”
-// flexDirection 为 column(默认) 时 flexBasis 更像“高度基准”; flexDirection 为 row 时 flexBasis 更像“宽度基准”
-// flexBasis 往往配合 flexGrow/flexShrink(或简写 flex) 一起使用,用于先定基准再按比例伸缩; height 更偏固定尺寸
+// 百分比尺寸
+// - width/height 支持百分比字符串, 例如 width: '50%' 表示占父容器对应尺寸的 50%
+// - 只有父容器的尺寸可计算(例如有明确 width/height 或受布局约束)时, 百分比才会表现稳定
 
 const styles = StyleSheet.create({
   container: {
-    //flex:1 是为了占满整个屏幕
+    // flex: 1 表示占满父容器剩余空间(常用于撑满整屏)
     flex: 1,
+
+    // 固定尺寸(用于演示百分比/布局时很有用)
     // height: 300,
     // width: 300,
 
-    // gap 是为了控制元素之间的间距
+    // gap / rowGap / columnGap: 控制子元素之间的间距
     // rowGap: 20,
     // columnGap: 20,
     // gap: 30,
 
-    //flexWrap 是为了控制元素是否换行 
+    // flexWrap: 控制子元素是否换行(常与 flexDirection: 'row' 配合)
     // flexWrap: 'nowrap',
     // flexWrap: 'wrap',
     // flexWrap:'wrap-reverse',
 
-    /// alignContent 是为了修改所有元素的对齐方式
+    // alignContent: 多行/多列(发生换行后)的整体分布方式, 类似“多行的 justifyContent”
+    // 只有在 flexWrap 生效且出现多行/多列时才明显
     // alignContent: 'flex-start',
     // alignContent: 'flex-end',
     // alignContent: 'center',
@@ -80,7 +89,7 @@ const styles = StyleSheet.create({
     // alignContent: 'space-between',
     // alignContent: 'space-around',
 
-    // justifyContent 是为了修改元素的排列位置
+    // justifyContent: 主轴方向上的排列方式(起点/终点/间隔分布)
     // justifyContent: 'center',
     // justifyContent: 'flex-start',
     // justifyContent: 'flex-end',
@@ -88,14 +97,14 @@ const styles = StyleSheet.create({
     // justifyContent: 'space-around',
     // justifyContent: 'space-evenly',
 
-    // flexDirection 是为了控制对齐轴方向
+    // flexDirection: 决定主轴方向
     // flexDirection: 'column',
     // flexDirection: 'column-reverse',
     // flexDirection: 'row-reverse',
     // flexDirection: 'row',
 
-    //alignItems 是为了修改所有元素的对齐方式
-    //Logo 高,文字矮,看起来不整齐,你需要改变垂直方向
+    // alignItems: 交叉轴方向上的对齐方式(写在父容器上, 影响所有子元素)
+    // 例如图标高/文字矮导致不齐时, 可以用 alignItems 调整垂直对齐
     // alignItems: 'center',
     // alignItems: 'flex-end',
     // alignItems: 'flex-start',
