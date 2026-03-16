@@ -46,10 +46,10 @@ export default function App() {
       */}
       <Box title="Hello Box 1" style={{ backgroundColor: '#0B3D91' }} />
       <Box title="Hello Box 2" style={{ backgroundColor: '#8B0000' }} />
-      <Box title="Hello Box 3" style={{ backgroundColor: '#006400', top: 100, left: 100 }} />
+      <Box title="Offset Box 3" style={{ backgroundColor: '#006400', top: 100, left: 100 }} />
       <Box title="Hello Box 4" style={{ backgroundColor: '#B8860B' }} />
-      <Box title="Hello Box 5" style={{ backgroundColor: '#4B0082', top: 100, left: 200 }} />
-      <Box title="Hello Box 5" style={{ backgroundColor: '#4B0082', position: 'absolute', top: 100, left: 200 }} />
+      <Box title="Offset Box 5" style={{ backgroundColor: '#4B0082', top: 100, left: 200 }} />
+      <Box title="Pos Box 5" style={{ backgroundColor: '#4B0082', position: 'absolute', top: 100, left: 200 }} />
       <Box title="Hello Box 6" style={{ backgroundColor: '#AD1457' }} />
       <Box title="Hello Box 7" style={{ backgroundColor: '#006D77' }} />
       <Box title="Hello Box 8" style={{ backgroundColor: '#5D4037' }} />
