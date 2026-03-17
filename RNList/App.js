@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList, Platform, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Platform, ScrollView, SectionList } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import pokemonList from './data.json';
+import groupedPokemonList from './grouped-data.json';
 
 const getTypeDetails = (type) => {
   switch (type.toLowerCase()) {
@@ -155,6 +156,59 @@ export default function App() {
           }}
           contentContainerStyle={styles.listContent}
         /> */}
+
+        {/* =======================================================================
+        方法三：使用 SectionList 渲染分组列表（推荐）
+        特点：
+        - 支持分组显示数据，按类型分类显示宝可梦
+        - 每个分组可以有独立的头部和尾部
+        - 适用于需要按类别或类型显示数据的场景
+        - 性能优化，只渲染当前可见的分组项目
+        ======================================================================= */}
+        <SectionList
+          // 分组数据源，包含 type 和 data 字段
+          sections={groupedPokemonList}
+          
+          // 渲染每个分组中的项目
+          renderItem={({ item, section }) => {
+            // 获取当前分组的类型详情（颜色和emoji）
+            const { borderColor, emoji } = getTypeDetails(section.type);
+            
+            return (
+              <View style={[styles.card, { borderColor }]}>
+                <View style={styles.nameContainer}>
+                  <Text style={styles.name}>{item}</Text>
+                  <Text style={styles.id}>#{section.type}</Text>
+                </View>
+                
+                <View style={styles.typeContainer}>
+                  <View style={[styles.badge, { borderColor }]}>
+                    <Text style={styles.typeEmoji}>{emoji}</Text>
+                    <Text style={styles.typeText}>{section.type}</Text>
+                  </View>
+                </View>
+              </View>
+            );
+          }}
+          
+          // 渲染每个分组的头部标题
+          renderSectionHeader={({ section }) => (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>{section.type}</Text>
+              <Text style={styles.sectionSubtitle}>共 {section.data.length} 只宝可梦</Text>
+            </View>
+          )}
+          
+          // 列表内容容器样式
+          contentContainerStyle={styles.listContent}
+          
+          // 优化滚动性能
+          removeClippedSubviews={Platform.OS === 'android'}
+          maxToRenderPerBatch={10}
+          windowSize={10}
+          initialNumToRender={10}
+        />
+
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -275,6 +329,26 @@ const styles = StyleSheet.create({
   footerText: {
     fontSize: 14,
     color: '#999',
+    fontStyle: 'italic',
+  },
+  // 分组组件样式
+  section: {
+    width: '100%',
+    backgroundColor: '#f8f8f8',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 4,
+  },
+  sectionSubtitle: {
+    fontSize: 14,
+    color: '#666',
     fontStyle: 'italic',
   },
 });
