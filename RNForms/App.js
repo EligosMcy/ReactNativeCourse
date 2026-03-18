@@ -7,6 +7,7 @@ export default function App() {
 
   const [name, setName] = useState('');
   const [multilineName, setMultilineName] = useState('');
+  const [isEnabled, setIsEnabled] = useState(false);
 
   // 根据文字长度获取动态颜色
   const getDynamicColor = (text) => {
@@ -85,6 +86,18 @@ export default function App() {
                 {multilineName.length > 0 && ` (${getColorDescription(multilineName.length)})`}
               </Text>
             </View>
+
+            <View style={styles.switchContainer}>
+              <Text style={styles.label}>开关:</Text>
+              <Switch
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+                trackColor={{ false: '#767577', true: '#81b0ff' }}
+                thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+                ios_backgroundColor="#3e3e3e"
+              />
+            </View>
+
           </View>
         </View>
       </SafeAreaView>
@@ -162,5 +175,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#999',
     fontStyle: 'italic',
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical: 15,
   },
 });
