@@ -10,7 +10,8 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <KeyboardAvoidingView behavior="padding" style={styles.formContainer}>
+        {/* <View style={styles.formContainer}> */}
+        <KeyboardAvoidingView behavior='padding' style={styles.formContainer}>
           <Image style={styles.logo} source={require('./assets/icon.png')} />
           <Text style={styles.label}>用户名:</Text>
           <TextInput
@@ -33,7 +34,9 @@ export default function App() {
           />
           <Button style={styles.button} title="登录" onPress={() => alert('登录按钮被点击了')} />
           <Button style={styles.button} title="注册" onPress={() => alert('注册按钮被点击了')} />
+          <View height={20} />
         </KeyboardAvoidingView>
+        {/* </View> */}
       </SafeAreaView>
     </SafeAreaProvider>
   );
