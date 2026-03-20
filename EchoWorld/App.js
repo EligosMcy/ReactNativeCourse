@@ -1,20 +1,66 @@
+import React, { useState, useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { AppStateProvider } from './src/context/AppStateContext';
 
-export default function App() {
+import LoadingScreen from './src/screens/LoadingScreen';
+import WelcomeScreen from './src/screens/WelcomeScreen';
+import LoginScreen from './src/screens/LoginScreen';
+import SignupScreen from './src/screens/SignupScreen';
+import MainScreen from './src/screens/MainScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
+import ConversationScreen from './src/screens/ConversationScreen';
+
+const Stack = createStackNavigator();
+
+function AppContent() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <StatusBar style="auto" translucent backgroundColor="transparent" />
+      <Stack.Navigator 
+        screenOptions={{
+          headerShown: false,
+          gestureEnabled: false,
+          cardStyle: { backgroundColor: '#f9f9f7' }
+        }}
+        initialRouteName="Loading"
+      >
+        <Stack.Screen name="Loading" component={LoadingScreen} />
+        <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Signup" component={SignupScreen} />
+        <Stack.Screen name="Main" component={MainScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Conversation" component={ConversationScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  useEffect(() => {
+    const loadAppResources = async () => {
+      try {
+        setFontsLoaded(true);
+      } catch (error) {
+        console.warn('Error loading fonts:', error);
+        setFontsLoaded(true);
+      }
+    };
+
+    loadAppResources();
+  }, []);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  return (
+    <AppStateProvider>
+      <AppContent />
+    </AppStateProvider>
+  );
+}
