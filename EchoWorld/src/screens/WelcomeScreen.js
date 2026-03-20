@@ -1,27 +1,32 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 const WelcomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.background}>
-        <View style={[styles.gradientCircle, styles.circle1]} />
-        <View style={[styles.gradientCircle, styles.circle2]} />
-      </View>
+      {/* Background Pattern */}
+      <View style={styles.backgroundPattern} />
       
+      {/* Logo/Brand Top Anchor */}
       <View style={styles.logoContainer}>
         <Text style={styles.logoText}>ECHOWORLD</Text>
       </View>
       
-      <View style={styles.content}>
-        <View style={styles.quoteContainer}>
-          <Text style={styles.quoteText}>
-            "这不是游戏，更像是一个数字居所。"
+      {/* Central Content Canvas */}
+      <View style={styles.contentContainer}>
+        {/* Hero Quote */}
+        <View style={styles.heroContainer}>
+          <Text style={styles.heroQuote}>
+            "这不是游戏，{`\n`}更像是一个数字居所。"
           </Text>
-          <View style={styles.quoteDivider} />
+          <View style={styles.divider} />
         </View>
         
+        {/* Interaction Cluster */}
         <View style={styles.buttonContainer}>
+          {/* Primary Action (Signup) */}
           <TouchableOpacity 
             style={styles.primaryButton}
             onPress={() => navigation.navigate('Signup')}
@@ -29,6 +34,7 @@ const WelcomeScreen = ({ navigation }) => {
             <Text style={styles.primaryButtonText}>开启您的居所</Text>
           </TouchableOpacity>
           
+          {/* Secondary Action (Login) */}
           <TouchableOpacity 
             style={styles.secondaryButton}
             onPress={() => navigation.navigate('Login')}
@@ -38,7 +44,9 @@ const WelcomeScreen = ({ navigation }) => {
         </View>
       </View>
       
-      <View style={styles.footer}>
+      {/* Decorative Elements */}
+      <View style={styles.decorativeContainer}>
+        <Text style={styles.estText}>EST. MMXXIV</Text>
         <View style={styles.footerLinks}>
           <Text style={styles.footerLink}>Privacy</Text>
           <Text style={styles.footerLink}>Terms</Text>
@@ -46,8 +54,10 @@ const WelcomeScreen = ({ navigation }) => {
         </View>
       </View>
       
-      <View style={styles.decorativeText}>
-        <Text style={styles.decorativeTextContent}>EST. MMXXIV</Text>
+      {/* Floating Abstract Graphic */}
+      <View style={styles.floatingGraphics}>
+        <View style={[styles.circle, styles.circle1]} />
+        <View style={[styles.circle, styles.circle2]} />
       </View>
     </View>
   );
@@ -60,32 +70,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  background: {
+  backgroundPattern: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-  },
-  gradientCircle: {
-    position: 'absolute',
-    borderRadius: 9999,
-    mixBlendMode: 'multiply',
-    filter: 'blur(120px)',
-  },
-  circle1: {
-    top: '25%',
-    right: '25%',
-    width: 500,
-    height: 500,
-    backgroundColor: '#d4e5f4',
-  },
-  circle2: {
-    bottom: '25%',
-    left: '25%',
-    width: 400,
-    height: 400,
-    backgroundColor: '#f2e3fa',
+    opacity: 0.03,
+    zIndex: -20,
   },
   logoContainer: {
     position: 'absolute',
@@ -93,110 +85,144 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logoText: {
-    fontFamily: 'Inter',
+    fontFamily: 'Noto Serif',
     fontSize: 20,
-    letterSpacing: 16,
+    letterSpacing: 8,
     color: '#2d3432',
-    textTransform: 'uppercase',
     opacity: 0.8,
+    textTransform: 'uppercase',
   },
-  content: {
-    width: '100%',
+  contentContainer: {
     maxWidth: 768,
+    width: '100%',
+    flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
     gap: 64,
+    paddingHorizontal: 32,
   },
-  quoteContainer: {
+  heroContainer: {
     gap: 24,
     alignItems: 'center',
   },
-  quoteText: {
-    fontFamily: 'Inter',
+  heroQuote: {
+    fontFamily: 'Noto Serif',
     fontSize: 36,
     color: '#2d3432',
     fontStyle: 'italic',
-    lineHeight: 40,
     textAlign: 'center',
+    lineHeight: 44,
   },
-  quoteDivider: {
+  divider: {
     width: 48,
     height: 1,
     backgroundColor: 'rgba(173, 179, 176, 0.3)',
   },
   buttonContainer: {
+    flexDirection: 'column',
+    gap: 16,
+    alignItems: 'center',
     width: '100%',
-    maxWidth: 384,
-    gap: 24,
-    flexDirection: 'row',
-    justifyContent: 'center',
+    maxWidth: 400,
   },
   primaryButton: {
-    flex: 1,
+    backgroundColor: '#5f5e5e',
     paddingHorizontal: 40,
     paddingVertical: 16,
-    backgroundColor: '#5f5e5e',
     borderRadius: 12,
     shadowColor: '#2d3432',
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.06,
     shadowRadius: 40,
+    elevation: 5,
+    width: '100%',
   },
   primaryButtonText: {
     fontFamily: 'Inter',
     fontSize: 14,
-    letterSpacing: 1,
     color: '#faf7f6',
+    letterSpacing: 1,
     textAlign: 'center',
   },
   secondaryButton: {
-    flex: 1,
+    backgroundColor: '#f2f4f2',
     paddingHorizontal: 40,
     paddingVertical: 16,
-    backgroundColor: '#f2f4f2',
+    borderRadius: 12,
     borderWidth: 1,
     borderColor: 'rgba(173, 179, 176, 0.1)',
-    borderRadius: 12,
+    width: '100%',
   },
   secondaryButtonText: {
     fontFamily: 'Inter',
     fontSize: 14,
-    letterSpacing: 1,
     color: '#51616e',
+    letterSpacing: 1,
     textAlign: 'center',
   },
-  footer: {
+  decorativeContainer: {
     position: 'absolute',
     bottom: 64,
     width: '100%',
     alignItems: 'center',
+    gap: 16,
+  },
+  estText: {
+    fontFamily: 'Noto Serif',
+    fontSize: 14,
+    letterSpacing: 4,
+    color: '#455562',
+    opacity: 0.4,
+    writingDirection: 'vertical-lr',
+    position: 'absolute',
+    bottom: 80,
+    left: 48,
   },
   footerLinks: {
     flexDirection: 'row',
     gap: 32,
-    opacity: 0.5,
   },
   footerLink: {
     fontFamily: 'Inter',
     fontSize: 10,
     letterSpacing: 2,
     color: '#767c79',
+    opacity: 0.5,
     textTransform: 'uppercase',
   },
   archiveLink: {
     color: '#5f5e5e',
   },
-  decorativeText: {
+  floatingGraphics: {
     position: 'absolute',
-    bottom: 80,
-    left: 48,
-    opacity: 0.4,
+    top: '50%',
+    left: '50%',
+    transform: [{ translateX: -width/2 }, { translateY: -height/2 }],
+    width: '100%',
+    height: '100%',
+    zIndex: -10,
+    opacity: 0.2,
+    pointerEvents: 'none',
   },
-  decorativeTextContent: {
-    fontFamily: 'Inter',
-    fontSize: 14,
-    letterSpacing: 4,
-    color: '#51616e',
-    writingDirection: 'vertical-lr',
+  circle: {
+    position: 'absolute',
+    borderRadius: 9999,
+  },
+  circle1: {
+    top: '25%',
+    right: '25%',
+    width: 500,
+    height: 500,
+    backgroundColor: 'rgba(212, 229, 244, 0.3)',
+    filter: 'blur(120px)',
+  },
+  circle2: {
+    bottom: '25%',
+    left: '25%',
+    width: 400,
+    height: 400,
+    backgroundColor: 'rgba(242, 227, 250, 0.3)',
+    filter: 'blur(100px)',
   },
 });
 

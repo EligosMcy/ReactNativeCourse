@@ -103,8 +103,11 @@ const ProfileScreen = ({ navigation }) => {
               <Text style={styles.preferenceText}>隐私选项</Text>
               <Text style={styles.preferenceArrow}>›</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.preferenceItem}>
-              <Text style={styles.preferenceText}>数据备份</Text>
+            <TouchableOpacity 
+              style={styles.preferenceItem}
+              onPress={() => navigation.navigate('SecurityArchive')}
+            >
+              <Text style={styles.preferenceText}>安全档案</Text>
               <Text style={styles.preferenceArrow}>›</Text>
             </TouchableOpacity>
           </View>

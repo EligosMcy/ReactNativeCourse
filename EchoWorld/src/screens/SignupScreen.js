@@ -1,82 +1,96 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 const SignupScreen = ({ navigation }) => {
-  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const handleSignup = () => {
-    navigation.replace('Main');
+    if (email.trim()) {
+      navigation.navigate('EmailVerification');
+    }
   };
 
   return (
-    <KeyboardAvoidingView 
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.header}>
-          <Text style={styles.title}>ECHOWORLD</Text>
-          <Text style={styles.subtitle}>创建您的数字居所</Text>
-        </View>
+    <View style={styles.container}>
+      {/* Top Navigation Anchor */}
+      <View style={styles.header}>
+        <TouchableOpacity 
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Text style={styles.backIcon}>←</Text>
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>ECHOWORLD</Text>
+      </View>
 
+      {/* Abstract Atmospheric Background Element */}
+      <View style={styles.backgroundElements}>
+        <View style={[styles.circle, styles.circle1]} />
+        <View style={[styles.circle, styles.circle2]} />
+      </View>
+
+      {/* Main Content */}
+      <View style={styles.content}>
         <View style={styles.formContainer}>
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>用户名</Text>
-            <TextInput
-              style={styles.input}
-              value={username}
-              onChangeText={setUsername}
-              placeholder="选择您的身份标识"
-              placeholderTextColor="#adb3b0"
-              autoCapitalize="none"
-            />
-          </View>
-
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>邮箱地址</Text>
-            <TextInput
-              style={styles.input}
-              value={email}
-              onChangeText={setEmail}
-              placeholder="输入您的邮箱"
-              placeholderTextColor="#adb3b0"
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
-          </View>
-
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>密码</Text>
-            <TextInput
-              style={styles.input}
-              value={password}
-              onChangeText={setPassword}
-              placeholder="创建安全密码"
-              placeholderTextColor="#adb3b0"
-              secureTextEntry
-            />
-          </View>
-
-          <View style={styles.termsContainer}>
-            <Text style={styles.termsText}>
-              创建账户即表示您同意我们的服务条款和隐私政策
+          {/* Branding/Title Section */}
+          <View style={styles.titleSection}>
+            <Text style={styles.subtitle}>Identity Registration</Text>
+            <Text style={styles.title}>
+              开始你的{`\n`}数字策展
             </Text>
           </View>
 
-          <TouchableOpacity style={styles.signupButton} onPress={handleSignup}>
-            <Text style={styles.signupButtonText}>创建居所</Text>
-          </TouchableOpacity>
-        </View>
+          {/* Registration Form */}
+          <View style={styles.form}>
+            <View style={styles.inputGroup}>
+              <Text style={styles.inputLabel}>电子邮箱</Text>
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  style={styles.input}
+                  placeholder="curator@echoworld.com"
+                  placeholderTextColor="#adb3b0"
+                  value={email}
+                  onChangeText={setEmail}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                />
+              </View>
+            </View>
 
-        <View style={styles.footer}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={styles.backText}>返回</Text>
-          </TouchableOpacity>
+            {/* Action Section */}
+            <View style={styles.actionSection}>
+              <TouchableOpacity 
+                style={[styles.submitButton, !email.trim() && styles.submitButtonDisabled]}
+                onPress={handleSignup}
+                disabled={!email.trim()}
+              >
+                <Text style={styles.submitButtonText}>下一步</Text>
+                <Text style={styles.submitIcon}>→</Text>
+              </TouchableOpacity>
+              
+              <Text style={styles.agreementText}>
+                继续操作即表示您同意我们的策展人协议与隐私条款。
+              </Text>
+            </View>
+          </View>
         </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+      </View>
+
+      {/* Aesthetic Detail Footer */}
+      <View style={styles.footer}>
+        <View style={styles.progressDots}>
+          <View style={[styles.dot, styles.dotActive]} />
+          <View style={[styles.dot, styles.dotInactive]} />
+          <View style={[styles.dot, styles.dotInactive]} />
+        </View>
+        <Text style={styles.versionText}>Residency V1.0</Text>
+      </View>
+
+      {/* Visual Texture Overlay */}
+      <View style={styles.textureOverlay} />
+    </View>
   );
 };
 
@@ -85,82 +99,202 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f9f9f7',
   },
-  scrollContent: {
-    flexGrow: 1,
-    paddingHorizontal: 32,
-    paddingVertical: 64,
-  },
   header: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 80,
+    flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 64,
+    justifyContent: 'space-between',
+    paddingHorizontal: 32,
+    zIndex: 50,
   },
-  title: {
-    fontFamily: 'Inter',
+  backButton: {
+    padding: 8,
+  },
+  backIcon: {
     fontSize: 20,
-    letterSpacing: 8,
-    color: '#2d3432',
+    color: '#5a605e',
+  },
+  headerTitle: {
+    fontFamily: 'Noto Serif',
+    fontSize: 12,
+    letterSpacing: 3,
+    color: '#767c79',
+    opacity: 0.4,
     textTransform: 'uppercase',
-    marginBottom: 8,
+  },
+  backgroundElements: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: -10,
+    overflow: 'hidden',
+  },
+  circle: {
+    position: 'absolute',
+    borderRadius: 9999,
+  },
+  circle1: {
+    top: '10%',
+    left: '15%',
+    width: width * 0.4,
+    height: height * 0.4,
+    backgroundColor: '#e5e9e6',
+    opacity: 0.4,
+    filter: 'blur(120px)',
+  },
+  circle2: {
+    bottom: '5%',
+    right: '10%',
+    width: width * 0.3,
+    height: height * 0.3,
+    backgroundColor: '#d4e5f4',
+    opacity: 0.2,
+    filter: 'blur(100px)',
+  },
+  content: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 24,
+  },
+  formContainer: {
+    width: '100%',
+    maxWidth: 400,
+    gap: 64,
+  },
+  titleSection: {
+    gap: 16,
   },
   subtitle: {
     fontFamily: 'Inter',
-    fontSize: 14,
-    color: '#767c79',
+    fontSize: 10,
+    letterSpacing: 2,
+    color: '#51616e',
+    textTransform: 'uppercase',
+    opacity: 0.6,
   },
-  formContainer: {
-    gap: 24,
+  title: {
+    fontFamily: 'Noto Serif',
+    fontSize: 36,
+    color: '#2d3432',
+    lineHeight: 40,
+    letterSpacing: -0.5,
+  },
+  form: {
+    gap: 48,
   },
   inputGroup: {
     gap: 8,
   },
-  label: {
+  inputLabel: {
     fontFamily: 'Inter',
-    fontSize: 12,
-    letterSpacing: 2,
-    color: '#2d3432',
+    fontSize: 11,
+    letterSpacing: 1,
+    color: '#adb3b0',
     textTransform: 'uppercase',
+    fontWeight: '500',
+    marginBottom: 8,
+  },
+  inputWrapper: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(173, 179, 176, 0.15)',
+    paddingBottom: 8,
   },
   input: {
-    backgroundColor: '#f2f4f2',
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(173, 179, 176, 0.3)',
-    paddingVertical: 12,
-    paddingHorizontal: 0,
     fontFamily: 'Inter',
-    fontSize: 16,
+    fontSize: 18,
     color: '#2d3432',
+    padding: 0,
   },
-  termsContainer: {
-    marginTop: 16,
+  actionSection: {
+    paddingTop: 16,
+    gap: 32,
   },
-  termsText: {
-    fontFamily: 'Inter',
-    fontSize: 12,
-    color: '#767c79',
-    textAlign: 'center',
-    lineHeight: 18,
-  },
-  signupButton: {
+  submitButton: {
     backgroundColor: '#5f5e5e',
-    paddingVertical: 16,
-    borderRadius: 8,
+    height: 56,
+    borderRadius: 12,
+    flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 32,
+    justifyContent: 'center',
+    gap: 12,
+    shadowColor: '#2d3432',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.1,
+    shadowRadius: 40,
   },
-  signupButtonText: {
+  submitButtonDisabled: {
+    opacity: 0.5,
+  },
+  submitButtonText: {
     fontFamily: 'Inter',
     fontSize: 16,
     color: '#faf7f6',
-    letterSpacing: 1,
+    fontWeight: '500',
+    letterSpacing: 0.5,
+  },
+  submitIcon: {
+    fontSize: 18,
+    color: '#faf7f6',
+  },
+  agreementText: {
+    fontFamily: 'Inter',
+    fontSize: 12,
+    color: '#5a605e',
+    opacity: 0.6,
+    lineHeight: 18,
+    textAlign: 'center',
+    maxWidth: 280,
+    alignSelf: 'center',
   },
   footer: {
+    position: 'absolute',
+    bottom: 48,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 48,
+    justifyContent: 'space-between',
+    paddingHorizontal: 32,
+    opacity: 0.3,
   },
-  backText: {
-    fontFamily: 'Inter',
+  progressDots: {
+    flexDirection: 'row',
+    gap: 16,
+  },
+  dot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+  },
+  dotActive: {
+    backgroundColor: '#535252',
+  },
+  dotInactive: {
+    backgroundColor: '#adb3b0',
+    opacity: 0.3,
+  },
+  versionText: {
+    fontFamily: 'Noto Serif',
     fontSize: 14,
-    color: '#767c79',
+    fontStyle: 'italic',
+    color: '#2d3432',
+  },
+  textureOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    opacity: 0.03,
+    pointerEvents: 'none',
+    zIndex: -5,
   },
 });
 

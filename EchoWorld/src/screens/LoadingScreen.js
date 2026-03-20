@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import { View, Text, StyleSheet, Animated, Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 const LoadingScreen = ({ navigation }) => {
   const progressAnim = new Animated.Value(0);
@@ -7,43 +9,53 @@ const LoadingScreen = ({ navigation }) => {
   useEffect(() => {
     Animated.timing(progressAnim, {
       toValue: 1,
-      duration: 2000,
+      duration: 3000,
       useNativeDriver: false,
     }).start();
 
     const timer = setTimeout(() => {
       navigation.replace('Welcome');
-    }, 3000);
+    }, 3500);
 
     return () => clearTimeout(timer);
   }, []);
 
   const progressWidth = progressAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: ['0%', '100%'],
+    outputRange: ['0%', '35%'],
   });
 
   return (
     <View style={styles.container}>
+      {/* Atmospheric Depth Elements */}
       <View style={styles.backgroundElements}>
         <View style={[styles.circle, styles.circle1]} />
         <View style={[styles.circle, styles.circle2]} />
         <View style={[styles.circle, styles.circle3]} />
       </View>
       
+      {/* Main Content Canvas */}
       <View style={styles.content}>
+        {/* Empty top spacer */}
+        <View style={styles.topSpacer} />
+        
+        {/* Center Identity: ECHOWORLD */}
         <View style={styles.logoContainer}>
           <Text style={styles.logoText}>ECHOWORLD</Text>
           <View style={styles.divider} />
         </View>
         
+        {/* Bottom Loading Logic */}
         <View style={styles.loadingContainer}>
+          {/* Progress Bar Container */}
           <View style={styles.progressBar}>
             <Animated.View style={[styles.progressFill, { width: progressWidth }]} />
           </View>
           
+          {/* Status Text */}
           <View style={styles.statusContainer}>
             <Text style={styles.statusText}>正在开启...</Text>
+            {/* Narrative tag */}
             <View style={styles.tagContainer}>
               <Text style={styles.tagText}>The Digital Curator</Text>
             </View>
@@ -51,6 +63,7 @@ const LoadingScreen = ({ navigation }) => {
         </View>
       </View>
       
+      {/* Visual Polish: Soft Vignette */}
       <View style={styles.vignette} />
     </View>
   );
@@ -78,23 +91,26 @@ const styles = StyleSheet.create({
   circle1: {
     top: '-10%',
     left: '-10%',
-    width: '50%',
-    height: '50%',
+    width: width * 0.5,
+    height: height * 0.5,
     backgroundColor: 'rgba(212, 229, 244, 0.3)',
+    filter: 'blur(80px)',
   },
   circle2: {
     top: '20%',
     right: '-5%',
-    width: '40%',
-    height: '60%',
+    width: width * 0.4,
+    height: height * 0.6,
     backgroundColor: 'rgba(242, 227, 250, 0.2)',
+    filter: 'blur(80px)',
   },
   circle3: {
     bottom: '-15%',
     left: '20%',
-    width: '60%',
-    height: '40%',
+    width: width * 0.6,
+    height: height * 0.4,
     backgroundColor: 'rgba(222, 228, 224, 0.4)',
+    filter: 'blur(80px)',
   },
   content: {
     flex: 1,
@@ -104,12 +120,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  topSpacer: {
+    width: '100%',
+  },
   logoContainer: {
     alignItems: 'center',
     gap: 24,
   },
   logoText: {
-    fontFamily: 'Inter',
+    fontFamily: 'Noto Serif',
     fontSize: 40,
     letterSpacing: 16,
     color: '#2d3432',

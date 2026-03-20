@@ -1,83 +1,107 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 const MainScreen = ({ navigation }) => {
-  const [selectedCharacter, setSelectedCharacter] = useState('Aurelius_01');
+  const handleCreateResident = () => {
+    // 导航到创建居民界面
+    navigation.navigate('CreateResident');
+  };
 
-  const characters = [
-    { id: 'Aurelius_01', name: 'Aurelius_01', mood: '沉思', lastActive: '2小时前' },
-    { id: 'Echo_02', name: 'Echo_02', mood: '好奇', lastActive: '5分钟前' },
-    { id: 'Nova_03', name: 'Nova_03', mood: '平静', lastActive: '1天前' },
-  ];
+  const handleSettings = () => {
+    navigation.navigate('Settings');
+  };
 
-  const scenes = [
-    { id: 'scene1', title: '记忆回廊', description: '探索过去的回声', icon: '🏛️' },
-    { id: 'scene2', title: '情感花园', description: '培育内心的情感', icon: '🌿' },
-    { id: 'scene3', title: '思维殿堂', description: '构建思想的架构', icon: '🏛️' },
-    { id: 'scene4', title: '未来投影', description: '预见可能的轨迹', icon: '🔮' },
-  ];
+  const handleMenu = () => {
+    // 打开侧边菜单
+    console.log('Open menu');
+  };
 
   return (
     <View style={styles.container}>
+      {/* TopAppBar Section */}
       <View style={styles.header}>
-        <Text style={styles.title}>ECHOWORLD</Text>
-        <TouchableOpacity 
-          style={styles.profileButton}
-          onPress={() => navigation.navigate('Profile')}
-        >
-          <Text style={styles.profileButtonText}>档案</Text>
-        </TouchableOpacity>
+        <View style={styles.headerContent}>
+          <TouchableOpacity style={styles.menuButton} onPress={handleMenu}>
+            <Text style={styles.menuIcon}>≡</Text>
+          </TouchableOpacity>
+          
+          <Text style={styles.headerTitle}>ECHOWORLD</Text>
+          
+          <TouchableOpacity style={styles.settingsButton} onPress={handleSettings}>
+            <Text style={styles.settingsIcon}>⚙</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.headerDivider} />
       </View>
 
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <View style={styles.characterSection}>
-          <Text style={styles.sectionTitle}>当前角色</Text>
-          <View style={styles.characterCard}>
-            <View style={styles.characterInfo}>
-              <Text style={styles.characterName}>Aurelius_01</Text>
-              <Text style={styles.characterMood}>沉思状态</Text>
-              <Text style={styles.characterStatus}>最后活跃: 2小时前</Text>
+      {/* Blurred Map Background Layer */}
+      <ImageBackground 
+        source={{ uri: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBeJiTifViA2v9TC0BqFPip5rFVgYn7bAR5K6z3Z6lMoSpN611iFsF3qCk9jo2_BVpv3_sudRwuMC63jYb2icRYSX6uKxkfOM-q6c5xyGNPXLAxixw2B5eST1umEgO43ZJKFWaoZa5kZrTpSuVi1UC-3TerSZvnMAVH-_hOq1OiPQNw0MCcJmAN0FxIbTM3s7mp7rT9MLaMJuZkra1sUcyjFJPQvVbINXtMNTH-gVd-pB-ZTt4ubkEOTCAViyxcVbsmdgPPl4aUPZQ' }}
+        style={styles.mapBackground}
+        imageStyle={styles.mapImage}
+      >
+        {/* Main Canvas: Empty Map State */}
+        <View style={styles.mainContent}>
+          {/* Center Content */}
+          <View style={styles.centerContent}>
+            {/* Decorative Icon / Glyph */}
+            <View style={styles.iconContainer}>
+              <Text style={styles.icon}>🌍</Text>
             </View>
+            
+            <Text style={styles.title}>
+              这个世界是空的。
+            </Text>
+            <Text style={styles.subtitle}>
+              创建您的第一个居民以开始叙述。
+            </Text>
+            
+            {/* Primary Action */}
             <TouchableOpacity 
-              style={styles.conversationButton}
-              onPress={() => navigation.navigate('Conversation', { character: 'Aurelius_01' })}
+              style={styles.createButton}
+              onPress={handleCreateResident}
             >
-              <Text style={styles.conversationButtonText}>对话</Text>
+              <Text style={styles.createIcon}>+</Text>
+              <Text style={styles.createButtonText}>创建居民</Text>
             </TouchableOpacity>
+            
+            {/* Secondary Hint */}
+            <View style={styles.hintSection}>
+              <View style={styles.hintLine} />
+              <Text style={styles.hintText}>Archive Empty</Text>
+            </View>
           </View>
         </View>
+      </ImageBackground>
 
-        <View style={styles.scenesSection}>
-          <Text style={styles.sectionTitle}>可用场景</Text>
-          <View style={styles.scenesGrid}>
-            {scenes.map((scene) => (
-              <TouchableOpacity key={scene.id} style={styles.sceneCard}>
-                <Text style={styles.sceneIcon}>{scene.icon}</Text>
-                <Text style={styles.sceneTitle}>{scene.title}</Text>
-                <Text style={styles.sceneDescription}>{scene.description}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
-
-        <View style={styles.recentSection}>
-          <Text style={styles.sectionTitle}>最近活动</Text>
-          <View style={styles.activityList}>
-            <View style={styles.activityItem}>
-              <Text style={styles.activityText}>与 Aurelius_01 进行了深度对话</Text>
-              <Text style={styles.activityTime}>今天 14:30</Text>
-            </View>
-            <View style={styles.activityItem}>
-              <Text style={styles.activityText}>在 情感花园 记录了新的感受</Text>
-              <Text style={styles.activityTime}>昨天 09:15</Text>
-            </View>
-            <View style={styles.activityItem}>
-              <Text style={styles.activityText}>更新了个人档案信息</Text>
-              <Text style={styles.activityTime}>3天前</Text>
-            </View>
-          </View>
-        </View>
-      </ScrollView>
+      {/* BottomNavBar Section */}
+      <View style={styles.bottomNav}>
+        {/* Map (Active) */}
+        <TouchableOpacity style={styles.navItemActive}>
+          <Text style={styles.navIconActive}>🗺</Text>
+          <Text style={styles.navLabelActive}>Map</Text>
+        </TouchableOpacity>
+        
+        {/* Archive */}
+        <TouchableOpacity style={styles.navItem}>
+          <Text style={styles.navIcon}>📚</Text>
+          <Text style={styles.navLabel}>Archive</Text>
+        </TouchableOpacity>
+        
+        {/* Echoes */}
+        <TouchableOpacity style={styles.navItem}>
+          <Text style={styles.navIcon}>🌊</Text>
+          <Text style={styles.navLabel}>Echoes</Text>
+        </TouchableOpacity>
+        
+        {/* Profile */}
+        <TouchableOpacity style={styles.navItem}>
+          <Text style={styles.navIcon}>👤</Text>
+          <Text style={styles.navLabel}>Profile</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -88,139 +112,203 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9f9f7',
   },
   header: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 50,
+    backgroundColor: 'rgba(249, 249, 247, 0.8)',
+    backdropFilter: 'blur(20px)',
+    shadowColor: '#2d3432',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.04,
+    shadowRadius: 40,
+  },
+  headerContent: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 32,
-    paddingTop: 64,
-    paddingBottom: 32,
+    justifyContent: 'space-between',
+    paddingHorizontal: 24,
+    height: 64,
   },
-  title: {
-    fontFamily: 'Inter',
+  menuButton: {
+    padding: 8,
+  },
+  menuIcon: {
     fontSize: 20,
-    letterSpacing: 8,
-    color: '#2d3432',
-    textTransform: 'uppercase',
+    color: '#5f5e5e',
   },
-  profileButton: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    backgroundColor: '#f2f4f2',
-    borderRadius: 6,
-  },
-  profileButtonText: {
-    fontFamily: 'Inter',
-    fontSize: 14,
-    color: '#51616e',
-  },
-  content: {
-    flex: 1,
-    paddingHorizontal: 32,
-  },
-  characterSection: {
-    marginBottom: 40,
-  },
-  scenesSection: {
-    marginBottom: 40,
-  },
-  recentSection: {
-    marginBottom: 40,
-  },
-  sectionTitle: {
-    fontFamily: 'Inter',
-    fontSize: 16,
+  headerTitle: {
+    fontFamily: 'Noto Serif',
+    fontSize: 20,
     letterSpacing: 2,
     color: '#2d3432',
-    marginBottom: 16,
     textTransform: 'uppercase',
   },
-  characterCard: {
+  settingsButton: {
+    padding: 8,
+  },
+  settingsIcon: {
+    fontSize: 20,
+    color: '#5f5e5e',
+  },
+  headerDivider: {
     backgroundColor: '#f2f4f2',
-    borderRadius: 12,
-    padding: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    height: 1,
+    width: '100%',
+    opacity: 0.3,
   },
-  characterInfo: {
+  mapBackground: {
     flex: 1,
+    marginTop: 64,
+    marginBottom: 80,
   },
-  characterName: {
-    fontFamily: 'Inter',
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#2d3432',
-    marginBottom: 4,
+  mapImage: {
+    opacity: 0.4,
+    filter: 'grayscale(100%) contrast(90%) blur(4px)',
   },
-  characterMood: {
-    fontFamily: 'Inter',
-    fontSize: 14,
-    color: '#51616e',
-    marginBottom: 4,
+  mainContent: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 16,
+    paddingBottom: 96,
   },
-  characterStatus: {
-    fontFamily: 'Inter',
-    fontSize: 12,
+  centerContent: {
+    maxWidth: 400,
+    paddingHorizontal: 32,
+    alignItems: 'center',
+    textAlign: 'center',
+  },
+  iconContainer: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#f2f4f2',
+    alignItems: 'center',
+    justifyContent: 'center',
+    opacity: 0.8,
+    marginBottom: 48,
+  },
+  icon: {
+    fontSize: 32,
     color: '#767c79',
   },
-  conversationButton: {
-    backgroundColor: '#5f5e5e',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 6,
+  title: {
+    fontFamily: 'Noto Serif',
+    fontSize: 36,
+    color: '#2d3432',
+    textAlign: 'center',
+    marginBottom: 24,
+    lineHeight: 40,
   },
-  conversationButtonText: {
+  subtitle: {
+    fontFamily: 'Inter',
+    fontSize: 18,
+    color: '#5a605e',
+    fontWeight: '300',
+    textAlign: 'center',
+    marginBottom: 48,
+    lineHeight: 24,
+    maxWidth: 300,
+  },
+  createButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    backgroundColor: '#5f5e5e',
+    paddingHorizontal: 32,
+    paddingVertical: 16,
+    borderRadius: 12,
+    shadowColor: '#5f5e5e',
+    shadowOffset: { width: 0, height: 20 },
+    shadowOpacity: 0.15,
+    shadowRadius: 40,
+  },
+  createIcon: {
+    fontSize: 18,
+    color: '#faf7f6',
+  },
+  createButtonText: {
     fontFamily: 'Inter',
     fontSize: 14,
     color: '#faf7f6',
+    fontWeight: '500',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
-  scenesGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 16,
-  },
-  sceneCard: {
-    width: '48%',
-    backgroundColor: '#f2f4f2',
-    borderRadius: 12,
-    padding: 20,
+  hintSection: {
+    marginTop: 80,
     alignItems: 'center',
-    gap: 12,
-  },
-  sceneIcon: {
-    fontSize: 32,
-  },
-  sceneTitle: {
-    fontFamily: 'Inter',
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#2d3432',
-    textAlign: 'center',
-  },
-  sceneDescription: {
-    fontFamily: 'Inter',
-    fontSize: 12,
-    color: '#767c79',
-    textAlign: 'center',
-  },
-  activityList: {
     gap: 16,
+    opacity: 0.4,
   },
-  activityItem: {
-    backgroundColor: '#f2f4f2',
-    borderRadius: 8,
-    padding: 16,
+  hintLine: {
+    width: 1,
+    height: 48,
+    backgroundColor: '#adb3b0',
   },
-  activityText: {
+  hintText: {
     fontFamily: 'Inter',
-    fontSize: 14,
-    color: '#2d3432',
+    fontSize: 10,
+    letterSpacing: 4,
+    color: '#767c79',
+    textTransform: 'uppercase',
+    fontWeight: '500',
+  },
+  bottomNav: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingTop: 12,
+    paddingBottom: 32,
+    paddingHorizontal: 16,
+    backgroundColor: 'rgba(249, 249, 247, 0.9)',
+    backdropFilter: 'blur(20px)',
+    zIndex: 50,
+    shadowColor: '#2d3432',
+    shadowOffset: { width: 0, height: -5 },
+    shadowOpacity: 0.03,
+    shadowRadius: 30,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+  },
+  navItem: {
+    alignItems: 'center',
+    padding: 8,
+    opacity: 0.6,
+  },
+  navItemActive: {
+    alignItems: 'center',
+    padding: 8,
+  },
+  navIcon: {
+    fontSize: 20,
+    color: '#adb3b0',
     marginBottom: 4,
   },
-  activityTime: {
+  navIconActive: {
+    fontSize: 20,
+    color: '#5f5e5e',
+    marginBottom: 4,
+  },
+  navLabel: {
     fontFamily: 'Inter',
-    fontSize: 12,
-    color: '#767c79',
+    fontSize: 10,
+    letterSpacing: 1,
+    color: '#adb3b0',
+    textTransform: 'uppercase',
+  },
+  navLabelActive: {
+    fontFamily: 'Inter',
+    fontSize: 10,
+    letterSpacing: 1,
+    color: '#5f5e5e',
+    textTransform: 'uppercase',
   },
 });
 
