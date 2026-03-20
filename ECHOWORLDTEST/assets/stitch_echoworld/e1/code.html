@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#e5e9e6",
+              "on-error-container": "#752121",
+              "tertiary": "#665b6e",
+              "surface-container": "#ecefec",
+              "surface-tint": "#5f5e5e",
+              "on-tertiary": "#fff6ff",
+              "tertiary-container": "#f2e3fa",
+              "on-background": "#2d3432",
+              "background": "#f9f9f7",
+              "primary-fixed-dim": "#d6d4d3",
+              "surface": "#f9f9f7",
+              "secondary-fixed": "#d4e5f4",
+              "on-secondary-fixed": "#32414d",
+              "on-primary-fixed-variant": "#5c5b5b",
+              "secondary": "#51616e",
+              "on-primary-container": "#525151",
+              "surface-container-highest": "#dee4e0",
+              "error-dim": "#4e0309",
+              "primary-fixed": "#e4e2e1",
+              "tertiary-fixed-dim": "#e3d5eb",
+              "on-error": "#fff7f6",
+              "outline-variant": "#adb3b0",
+              "on-surface": "#2d3432",
+              "error": "#9f403d",
+              "tertiary-fixed": "#f2e3fa",
+              "surface-container-low": "#f2f4f2",
+              "on-tertiary-fixed-variant": "#665b6e",
+              "outline": "#767c79",
+              "tertiary-dim": "#594f61",
+              "primary-container": "#e4e2e1",
+              "on-primary-fixed": "#3f3f3f",
+              "secondary-container": "#d4e5f4",
+              "surface-variant": "#dee4e0",
+              "on-secondary-fixed-variant": "#4e5d6a",
+              "primary": "#5f5e5e",
+              "on-secondary": "#f5f9ff",
+              "surface-dim": "#d4dcd8",
+              "inverse-on-surface": "#9c9d9b",
+              "on-primary": "#faf7f6",
+              "surface-bright": "#f9f9f7",
+              "primary-dim": "#535252",
+              "on-tertiary-fixed": "#493f51",
+              "on-secondary-container": "#445460",
+              "secondary-fixed-dim": "#c6d6e6",
+              "on-surface-variant": "#5a605e",
+              "inverse-surface": "#0c0f0e",
+              "secondary-dim": "#455562",
+              "on-tertiary-container": "#5b5163",
+              "surface-container-lowest": "#ffffff",
+              "error-container": "#fe8983",
+              "inverse-primary": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f9f9f7;
+            color: #2d3432;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-tertiary-container selection:text-on-tertiary-container">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#f9f9f7]/80 backdrop-blur-xl shadow-[0_10px_40px_rgba(45,52,50,0.04)]">
+<div class="flex items-center justify-between px-6 h-16 w-full">
+<button class="text-[#5f5e5e] hover:opacity-70 transition-opacity duration-300 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-noto-serif text-xl tracking-[0.2em] text-[#2d3432] uppercase">ECHOWORLD</h1>
+<button class="text-[#5f5e5e] hover:opacity-70 transition-opacity duration-300 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+<div class="bg-[#f2f4f2] h-[1px] w-full opacity-30"></div>
+</nav>
+<!-- Main Timeline Canvas -->
+<main class="pt-24 pb-32 px-4 md:px-0 max-w-2xl mx-auto space-y-20">
+<!-- Post Item 1 -->
+<article class="flex flex-col space-y-6">
+<div class="relative group overflow-hidden rounded-xl bg-surface-container-low transition-all duration-700">
+<img alt="Mist covered mountains at dawn" class="w-full aspect-[4/5] object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700" data-alt="Misty mountain landscape during a quiet dawn" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7x-ZlalnB61fjgrENKLuLAknRskjO_9Qb__FGnHFQQDZMTAUcvIRhqJLz1yXU4exImkhjrvNz1JUn2_G0_eZzbLhomCb-hisMflzgQigNA4ctss8idIsFZattt3juFWZ7JDhMVNSItKg2ExLCna8P7FjvFWsdCbuAcL-VHb1n5rd4RUXwgrVNEntG7fox5dlFg5rSrhP1Jjp3uKgBYsaxx6ybn_8zT13oxZ7ObyfiutwPbaQgWrXudF8QqScuSLvxUtQsomPrkAk"/>
+<div class="absolute top-4 left-4 flex items-center space-x-2 px-3 py-1.5 bg-surface/40 backdrop-blur-md rounded-full text-[10px] tracking-widest uppercase text-on-surface">
+<span class="material-symbols-outlined text-[14px]" data-icon="location_on">location_on</span>
+<span>The Whispering Peaks</span>
+</div>
+</div>
+<div class="px-2 space-y-4">
+<p class="font-headline italic text-lg leading-relaxed text-on-surface/90 text-center max-w-md mx-auto">
+                    "Silence is not the absence of sound, but the presence of time catching its breath."
+                </p>
+<div class="flex justify-center items-center space-x-12 pt-4">
+<button class="flex flex-col items-center space-y-1 group transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="favorite">favorite</span>
+<span class="text-[10px] uppercase tracking-tighter text-outline group-hover:text-primary">Resonate</span>
+</button>
+<button class="flex flex-col items-center space-y-1 group transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="waves">waves</span>
+<span class="text-[10px] uppercase tracking-tighter text-outline group-hover:text-primary">Echo</span>
+</button>
+<button class="flex flex-col items-center space-y-1 group transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="share">share</span>
+<span class="text-[10px] uppercase tracking-tighter text-outline group-hover:text-primary">Trace</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Post Item 2 -->
+<article class="flex flex-col space-y-6">
+<div class="relative group overflow-hidden rounded-xl bg-surface-container-low transition-all duration-700">
+<img alt="Dappled sunlight through ancient trees" class="w-full aspect-square object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700" data-alt="Soft sunlight filtering through deep forest canopy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGAhv6s6YxSbg5f02OjS7TlRDML0MOQ6n9RWdnbxyeod9fkxc8gg98CjqhUyvjLvgsY9iPCl2a1_OR7TydEfOR0lB_auIVWFjnVezui6p5nMkj6x8FJyE67_HewdjLIstIjyIBXvT7MiAlMC9ZgAqb2sJh-xQ2yoZ57pT_tIgcVA_Wgyk8f7YO7R4p8QgDiJXvLVU74sSQQQR1Iknb7urgur_thorpwsq_G1MqL5lmYgldzUVwYeffcZ9ZuhcGx5xmRx7y5k1rBD8"/>
+<div class="absolute top-4 left-4 flex items-center space-x-2 px-3 py-1.5 bg-surface/40 backdrop-blur-md rounded-full text-[10px] tracking-widest uppercase text-on-surface">
+<span class="material-symbols-outlined text-[14px]" data-icon="location_on">location_on</span>
+<span>Eternal Grove</span>
+</div>
+</div>
+<div class="px-2 space-y-4">
+<p class="font-headline italic text-lg leading-relaxed text-on-surface/90 text-center max-w-md mx-auto">
+                    "Each leaf carries the memory of the light it once held."
+                </p>
+<div class="flex justify-center items-center space-x-12 pt-4">
+<button class="flex flex-col items-center space-y-1 group transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="favorite">favorite</span>
+<span class="text-[10px] uppercase tracking-tighter text-outline group-hover:text-primary">Resonate</span>
+</button>
+<button class="flex flex-col items-center space-y-1 group transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="waves">waves</span>
+<span class="text-[10px] uppercase tracking-tighter text-outline group-hover:text-primary">Echo</span>
+</button>
+<button class="flex flex-col items-center space-y-1 group transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="share">share</span>
+<span class="text-[10px] uppercase tracking-tighter text-outline group-hover:text-primary">Trace</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Post Item 3 -->
+<article class="flex flex-col space-y-6">
+<div class="relative group overflow-hidden rounded-xl bg-surface-container-low transition-all duration-700">
+<img alt="Lone boat on a glass-like lake" class="w-full aspect-[16/10] object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-700" data-alt="Minimalist scene of a boat on still water" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnSIvFPWoiunNahMpzNZtUCt1Lm4ILt6Q9W7JvwzEFMfgIaQ9IEzBBatDPwvqTDGh0gFs82u59GeDw1tlM0MHpfdQlopUcxeFxfP2XiXw6wtuEAfo3gVwQsyMrbVWU4Rx5U0fN52ze4GlV-3fOck-p_dkQIUNYnJkgQNMtRff0YMITVatgx0NPDGCuERozJB9X_LaYA1mky1CyoCL96W_SAvhVlgzFRghf2b4shcxYFXUa_kFd-esftDrT-iBAcWGqUae0WkJOU9M"/>
+<div class="absolute top-4 left-4 flex items-center space-x-2 px-3 py-1.5 bg-surface/40 backdrop-blur-md rounded-full text-[10px] tracking-widest uppercase text-on-surface">
+<span class="material-symbols-outlined text-[14px]" data-icon="location_on">location_on</span>
+<span>Still Waters</span>
+</div>
+</div>
+<div class="px-2 space-y-4">
+<p class="font-headline italic text-lg leading-relaxed text-on-surface/90 text-center max-w-md mx-auto">
+                    "To drift is to find the shore you never knew you were seeking."
+                </p>
+<div class="flex justify-center items-center space-x-12 pt-4">
+<button class="flex flex-col items-center space-y-1 group transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="favorite">favorite</span>
+<span class="text-[10px] uppercase tracking-tighter text-outline group-hover:text-primary">Resonate</span>
+</button>
+<button class="flex flex-col items-center space-y-1 group transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="waves">waves</span>
+<span class="text-[10px] uppercase tracking-tighter text-outline group-hover:text-primary">Echo</span>
+</button>
+<button class="flex flex-col items-center space-y-1 group transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="share">share</span>
+<span class="text-[10px] uppercase tracking-tighter text-outline group-hover:text-primary">Trace</span>
+</button>
+</div>
+</div>
+</article>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center pt-3 pb-8 px-4 bg-[#f9f9f7]/90 backdrop-blur-lg rounded-t-3xl z-50 shadow-[0_-5px_30px_rgba(45,52,50,0.03)]">
+<!-- Map -->
+<a class="flex flex-col items-center justify-center text-[#adb3b0] opacity-60 hover:text-[#5f5e5e] transition-colors active:scale-90 transition-all duration-500" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="map">map</span>
+<span class="font-sans text-[10px] tracking-[0.1em] uppercase">Map</span>
+</a>
+<!-- Archive (Active) -->
+<a class="flex flex-col items-center justify-center text-[#5f5e5e] relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-[#5f5e5e] after:rounded-full active:scale-90 transition-all duration-500" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="shelves">shelves</span>
+<span class="font-sans text-[10px] tracking-[0.1em] uppercase">Archive</span>
+</a>
+<!-- Echoes -->
+<a class="flex flex-col items-center justify-center text-[#adb3b0] opacity-60 hover:text-[#5f5e5e] transition-colors active:scale-90 transition-all duration-500" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="waves">waves</span>
+<span class="font-sans text-[10px] tracking-[0.1em] uppercase">Echoes</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-[#adb3b0] opacity-60 hover:text-[#5f5e5e] transition-colors active:scale-90 transition-all duration-500" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person_pin">person_pin</span>
+<span class="font-sans text-[10px] tracking-[0.1em] uppercase">Profile</span>
+</a>
+</nav>
+<!-- Subtle Texture Overlay -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]"></div>
+</body></html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ECHOWORLD | 编辑资料</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-high": "#e5e9e6",
+                        "on-error-container": "#752121",
+                        "tertiary": "#665b6e",
+                        "surface-container": "#ecefec",
+                        "surface-tint": "#5f5e5e",
+                        "on-tertiary": "#fff6ff",
+                        "tertiary-container": "#f2e3fa",
+                        "on-background": "#2d3432",
+                        "background": "#f9f9f7",
+                        "primary-fixed-dim": "#d6d4d3",
+                        "surface": "#f9f9f7",
+                        "secondary-fixed": "#d4e5f4",
+                        "on-secondary-fixed": "#32414d",
+                        "on-primary-fixed-variant": "#5c5b5b",
+                        "secondary": "#51616e",
+                        "on-primary-container": "#525151",
+                        "surface-container-highest": "#dee4e0",
+                        "error-dim": "#4e0309",
+                        "primary-fixed": "#e4e2e1",
+                        "tertiary-fixed-dim": "#e3d5eb",
+                        "on-error": "#fff7f6",
+                        "outline-variant": "#adb3b0",
+                        "on-surface": "#2d3432",
+                        "error": "#9f403d",
+                        "tertiary-fixed": "#f2e3fa",
+                        "surface-container-low": "#f2f4f2",
+                        "on-tertiary-fixed-variant": "#665b6e",
+                        "outline": "#767c79",
+                        "tertiary-dim": "#594f61",
+                        "primary-container": "#e4e2e1",
+                        "on-primary-fixed": "#3f3f3f",
+                        "secondary-container": "#d4e5f4",
+                        "surface-variant": "#dee4e0",
+                        "on-secondary-fixed-variant": "#4e5d6a",
+                        "primary": "#5f5e5e",
+                        "on-secondary": "#f5f9ff",
+                        "surface-dim": "#d4dcd8",
+                        "inverse-on-surface": "#9c9d9b",
+                        "on-primary": "#faf7f6",
+                        "surface-bright": "#f9f9f7",
+                        "primary-dim": "#535252",
+                        "on-tertiary-fixed": "#493f51",
+                        "on-secondary-container": "#445460",
+                        "secondary-fixed-dim": "#c6d6e6",
+                        "on-surface-variant": "#5a605e",
+                        "inverse-surface": "#0c0f0e",
+                        "secondary-dim": "#455562",
+                        "on-tertiary-container": "#5b5163",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#fe8983",
+                        "inverse-primary": "#ffffff"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .font-noto-serif {
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#f9f9f7]/80 backdrop-blur-xl shadow-[0_10px_40px_rgba(45,52,50,0.04)]">
+<div class="flex items-center justify-between px-6 h-16 w-full">
+<button class="text-[#5f5e5e] active:scale-95 transition-transform hover:opacity-70">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-noto-serif text-xl tracking-[0.2em] text-[#2d3432] uppercase">ECHOWORLD</h1>
+<button class="text-[#5f5e5e] active:scale-95 transition-transform hover:opacity-70">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="bg-[#f2f4f2] h-[1px] w-full opacity-30"></div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto">
+<!-- Editorial Header Section -->
+<section class="mb-12">
+<h2 class="font-headline text-3xl text-on-surface mb-2 tracking-tight">编辑居民档案</h2>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed max-w-md opacity-80">
+                在这里，您的身份不仅是数据，而是正在回响的故事。请审慎地更新您的档案，保持精神的共鸣。
+            </p>
+</section>
+<!-- Profile Form -->
+<form class="space-y-10">
+<!-- Avatar Section: Asymmetrical Layout -->
+<div class="flex flex-col md:flex-row items-start md:items-center gap-8 mb-16">
+<div class="relative group">
+<div class="w-32 h-32 rounded-full overflow-hidden bg-surface-container-highest ring-offset-4 ring-offset-surface ring-2 ring-primary-container/20">
+<img alt="Resident Portrait" class="w-full h-full object-cover grayscale contrast-125" data-alt="Portrait of a sophisticated man in grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEqTmh3xNMc9WMVnyVr_RCJhDdeyc8tP1BPgGVBR-QJag7Soc0OeG_b463XKYRsbfbhBBbZWvQkihDfuEhp2ddCkCmcQlEFfYVzxrhNnRF6oQAJUeDtheK-8SktPUW06uTdLVS4SoyVomEOP6OsQU815WkhuUJi5pXwfILRE_hmSkBHcYdhBmS_7j9OcoIj0J61EdKfW8NHV5be_OEWTVpnlE3EHC7EsNNRpskz4W_5snqgpHELqvUg-kxyorWBD6YnjbPXOgWoPc"/>
+</div>
+<div class="absolute inset-0 flex items-center justify-center bg-on-surface/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-full">
+<span class="material-symbols-outlined text-surface text-2xl">photo_camera</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-label tracking-[0.2em] uppercase text-outline mb-2">Resident Visuals</span>
+<button class="text-primary font-medium text-sm hover:underline underline-offset-4 transition-all decoration-primary/30" type="button">
+                        更换头像
+                    </button>
+<p class="text-[10px] text-outline-variant mt-2 tracking-wide uppercase">Recommended: 512x512 PNG/JPG</p>
+</div>
+</div>
+<!-- Inputs -->
+<div class="space-y-12">
+<!-- Field: Name -->
+<div class="group">
+<label class="block text-xs font-label tracking-[0.15em] uppercase text-on-surface-variant mb-3 transition-colors group-focus-within:text-primary">
+                        居民姓名
+                    </label>
+<input class="w-full bg-surface-container-low border-0 border-b border-outline-variant/30 px-0 py-3 text-lg font-body focus:ring-0 focus:border-secondary transition-all placeholder:text-outline-variant" placeholder="输入您的名字..." type="text" value="Julian Thorne"/>
+</div>
+<!-- Field: Pronouns/Gender (Semantic Chip Selection) -->
+<div>
+<label class="block text-xs font-label tracking-[0.15em] uppercase text-on-surface-variant mb-6">
+                        共鸣 (性别)
+                    </label>
+<div class="flex flex-wrap gap-3">
+<button class="px-5 py-2 rounded-full bg-surface-container-highest text-on-surface text-sm font-label transition-all active:scale-95" type="button">He</button>
+<button class="px-5 py-2 rounded-full bg-primary text-on-primary text-sm font-label transition-all active:scale-95" type="button">She</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-label hover:bg-surface-container-high transition-all active:scale-95" type="button">They</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-label hover:bg-surface-container-high transition-all active:scale-95" type="button">Other</button>
+</div>
+</div>
+<!-- Field: Bio (The Serif Moment) -->
+<div class="group">
+<label class="block text-xs font-label tracking-[0.15em] uppercase text-on-surface-variant mb-3 transition-colors group-focus-within:text-primary">
+                        回响语录
+                    </label>
+<textarea class="w-full bg-surface-container-low border-0 border-b border-outline-variant/30 px-0 py-3 text-xl font-headline italic leading-relaxed focus:ring-0 focus:border-secondary transition-all resize-none placeholder:text-outline-variant/50" placeholder="写下您的回响..." rows="3">Seeking the quiet between the echoes.</textarea>
+<p class="text-[11px] text-outline-variant mt-4 text-right italic">"Words carry weight in the archive."</p>
+</div>
+</div>
+<!-- Form Actions -->
+<div class="pt-16 flex flex-col sm:flex-row items-center gap-6">
+<button class="w-full sm:w-auto px-12 py-4 bg-primary text-on-primary rounded-lg text-sm font-label tracking-[0.1em] uppercase hover:opacity-90 active:scale-95 transition-all shadow-[0_10px_30px_rgba(95,94,94,0.15)]" type="submit">
+                    保存更改
+                </button>
+<button class="w-full sm:w-auto px-12 py-4 bg-transparent text-secondary border border-outline-variant/20 rounded-lg text-sm font-label tracking-[0.1em] uppercase hover:bg-surface-container-low transition-all" type="button">
+                    放弃修改
+                </button>
+</div>
+</form>
+<!-- Footer Aesthetic Detail -->
+<div class="mt-24 pt-12 text-center opacity-30">
+<div class="inline-block w-12 h-[1px] bg-outline-variant mb-4"></div>
+<p class="text-[10px] tracking-[0.4em] uppercase font-label">The Digital Curator System v1.1</p>
+</div>
+</main>
+<!-- BottomNavBar (Hidden as per Contextual Suppression for Transactional Pages) -->
+<!-- But keeping structure ready if needed for top-level -->
+<nav class="hidden md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center pt-3 pb-8 px-4 bg-[#f9f9f7]/90 backdrop-blur-lg rounded-t-3xl shadow-[0_-5px_30px_rgba(45,52,50,0.03)] z-50">
+<div class="flex flex-col items-center justify-center text-[#adb3b0] opacity-60">
+<span class="material-symbols-outlined">map</span>
+<span class="font-sans text-[10px] tracking-[0.1em] uppercase mt-1">Map</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#adb3b0] opacity-60">
+<span class="material-symbols-outlined">shelves</span>
+<span class="font-sans text-[10px] tracking-[0.1em] uppercase mt-1">Archive</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#adb3b0] opacity-60">
+<span class="material-symbols-outlined">waves</span>
+<span class="font-sans text-[10px] tracking-[0.1em] uppercase mt-1">Echoes</span>
+</div>
+<!-- Active Tab: Profile (Closest match to Edit Profile) -->
+<div class="flex flex-col items-center justify-center text-[#5f5e5e] relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-[#5f5e5e] after:rounded-full">
+<span class="material-symbols-outlined">person_pin</span>
+<span class="font-sans text-[10px] tracking-[0.1em] uppercase mt-1">Profile</span>
+</div>
+</nav>
+</body></html>

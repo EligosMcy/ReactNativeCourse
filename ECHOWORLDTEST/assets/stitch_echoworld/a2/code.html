@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ECHOWORLD - 开启您的数字居所</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-high": "#e5e9e6",
+                        "on-error-container": "#752121",
+                        "tertiary": "#665b6e",
+                        "surface-container": "#ecefec",
+                        "surface-tint": "#5f5e5e",
+                        "on-tertiary": "#fff6ff",
+                        "tertiary-container": "#f2e3fa",
+                        "on-background": "#2d3432",
+                        "background": "#f9f9f7",
+                        "primary-fixed-dim": "#d6d4d3",
+                        "surface": "#f9f9f7",
+                        "secondary-fixed": "#d4e5f4",
+                        "on-secondary-fixed": "#32414d",
+                        "on-primary-fixed-variant": "#5c5b5b",
+                        "secondary": "#51616e",
+                        "on-primary-container": "#525151",
+                        "surface-container-highest": "#dee4e0",
+                        "error-dim": "#4e0309",
+                        "primary-fixed": "#e4e2e1",
+                        "tertiary-fixed-dim": "#e3d5eb",
+                        "on-error": "#fff7f6",
+                        "outline-variant": "#adb3b0",
+                        "on-surface": "#2d3432",
+                        "error": "#9f403d",
+                        "tertiary-fixed": "#f2e3fa",
+                        "surface-container-low": "#f2f4f2",
+                        "on-tertiary-fixed-variant": "#665b6e",
+                        "outline": "#767c79",
+                        "tertiary-dim": "#594f61",
+                        "primary-container": "#e4e2e1",
+                        "on-primary-fixed": "#3f3f3f",
+                        "secondary-container": "#d4e5f4",
+                        "surface-variant": "#dee4e0",
+                        "on-secondary-fixed-variant": "#4e5d6a",
+                        "primary": "#5f5e5e",
+                        "on-secondary": "#f5f9ff",
+                        "surface-dim": "#d4dcd8",
+                        "inverse-on-surface": "#9c9d9b",
+                        "on-primary": "#faf7f6",
+                        "surface-bright": "#f9f9f7",
+                        "primary-dim": "#535252",
+                        "on-tertiary-fixed": "#493f51",
+                        "on-secondary-container": "#445460",
+                        "secondary-fixed-dim": "#c6d6e6",
+                        "on-surface-variant": "#5a605e",
+                        "inverse-surface": "#0c0f0e",
+                        "secondary-dim": "#455562",
+                        "on-tertiary-container": "#5b5163",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#fe8983",
+                        "inverse-primary": "#ffffff"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9f7;
+            color: #2d3432;
+        }
+        .serif-text {
+            font-family: 'Noto Serif', serif;
+        }
+        .bg-ethereal-mist {
+            background: radial-gradient(circle at 20% 30%, #f2f4f2 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, #ecefec 0%, transparent 40%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface selection:bg-primary-container selection:text-on-primary-container overflow-hidden">
+<!-- Login/Signup Entry Page -->
+<main class="relative h-screen w-full flex flex-col items-center justify-center px-8 bg-ethereal-mist">
+<!-- Logo/Brand Top Anchor -->
+<div class="absolute top-16 flex flex-col items-center">
+<h1 class="font-headline text-xl tracking-[0.4em] text-on-surface uppercase opacity-80">ECHOWORLD</h1>
+</div>
+<!-- Central Content Canvas -->
+<div class="max-w-3xl w-full flex flex-col items-center text-center space-y-16 lg:space-y-24">
+<!-- Hero Quote -->
+<div class="space-y-6">
+<blockquote class="font-headline text-3xl md:text-5xl lg:text-6xl text-on-surface italic leading-snug lg:leading-tight">
+                    “这不是游戏，<br class="hidden md:block"/>更像是一个数字居所。”
+                </blockquote>
+<div class="flex justify-center">
+<div class="w-12 h-[1px] bg-outline-variant/30"></div>
+</div>
+</div>
+<!-- Interaction Cluster -->
+<div class="flex flex-col md:flex-row items-center justify-center gap-6 w-full max-w-md">
+<!-- Primary Action (Signup) -->
+<button class="w-full md:w-auto px-10 py-4 bg-primary text-on-primary rounded-xl font-body text-sm tracking-[0.1em] hover:opacity-90 active:scale-[0.98] transition-all duration-300 shadow-[0_10px_40px_rgba(45,52,50,0.06)]"><div class="flex items-center justify-center gap-2"><span class="material-symbols-outlined text-[18px]">home</span><span>开启您的居所</span></div></button>
+<!-- Secondary Action (Login) -->
+<button class="w-full md:w-auto px-10 py-4 bg-surface-container-low text-secondary rounded-xl font-body text-sm tracking-[0.1em] border border-outline-variant/10 hover:bg-surface-container-high active:scale-[0.98] transition-all duration-300"><div class="flex items-center justify-center gap-2"><span class="material-symbols-outlined text-[18px]">login</span><span>返回家园</span></div></button>
+</div>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute bottom-20 left-12 hidden lg:block opacity-40">
+<p class="font-headline text-sm tracking-widest text-secondary-dim writing-vertical-lr select-none">EST. MMXXIV</p>
+</div>
+<div class="absolute bottom-16 w-full flex justify-center lg:justify-end lg:pr-16">
+<div class="flex items-center space-x-8 opacity-50">
+<span class="font-label text-[10px] tracking-[0.2em] uppercase text-outline">Privacy</span>
+<span class="font-label text-[10px] tracking-[0.2em] uppercase text-outline">Terms</span>
+<span class="font-label text-[10px] tracking-[0.2em] uppercase text-outline text-surface-tint">Archives</span>
+</div>
+</div>
+<!-- Floating Abstract Graphic -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10 pointer-events-none opacity-20">
+<div class="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-secondary-container rounded-full mix-blend-multiply filter blur-[120px]"></div>
+<div class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-tertiary-container rounded-full mix-blend-multiply filter blur-[100px]"></div>
+</div>
+</main>
+<!-- Background Pattern -->
+<div class="fixed inset-0 -z-20 pointer-events-none opacity-[0.03]">
+<svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="40" id="grid" patternunits="userSpaceOnUse" width="40">
+<path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="1"></path>
+</pattern>
+</defs>
+<rect fill="url(#grid)" height="100%" width="100%"></rect>
+</svg>
+</div>
+<!-- Visual Script Mapping (Mental Model) -->
+<!-- 
+        Requirement Met: A2 Entry Page. 
+        Quote Included: “这不是游戏，更像是一个数字居所。”
+        Buttons: '开启您的居所' (Register), '返回家园' (Login).
+        Style: Minimalist, Soft Gradients, High-End Editorial.
+        Nav Suppressed: Per "Semantic Shell" mandate for Transactional/Entry focus.
+    -->
+</body></html>

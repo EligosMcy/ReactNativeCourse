@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#e5e9e6",
+              "on-error-container": "#752121",
+              "tertiary": "#665b6e",
+              "surface-container": "#ecefec",
+              "surface-tint": "#5f5e5e",
+              "on-tertiary": "#fff6ff",
+              "tertiary-container": "#f2e3fa",
+              "on-background": "#2d3432",
+              "background": "#f9f9f7",
+              "primary-fixed-dim": "#d6d4d3",
+              "surface": "#f9f9f7",
+              "secondary-fixed": "#d4e5f4",
+              "on-secondary-fixed": "#32414d",
+              "on-primary-fixed-variant": "#5c5b5b",
+              "secondary": "#51616e",
+              "on-primary-container": "#525151",
+              "surface-container-highest": "#dee4e0",
+              "error-dim": "#4e0309",
+              "primary-fixed": "#e4e2e1",
+              "tertiary-fixed-dim": "#e3d5eb",
+              "on-error": "#fff7f6",
+              "outline-variant": "#adb3b0",
+              "on-surface": "#2d3432",
+              "error": "#9f403d",
+              "tertiary-fixed": "#f2e3fa",
+              "surface-container-low": "#f2f4f2",
+              "on-tertiary-fixed-variant": "#665b6e",
+              "outline": "#767c79",
+              "tertiary-dim": "#594f61",
+              "primary-container": "#e4e2e1",
+              "on-primary-fixed": "#3f3f3f",
+              "secondary-container": "#d4e5f4",
+              "surface-variant": "#dee4e0",
+              "on-secondary-fixed-variant": "#4e5d6a",
+              "primary": "#5f5e5e",
+              "on-secondary": "#f5f9ff",
+              "surface-dim": "#d4dcd8",
+              "inverse-on-surface": "#9c9d9b",
+              "on-primary": "#faf7f6",
+              "surface-bright": "#f9f9f7",
+              "primary-dim": "#535252",
+              "on-tertiary-fixed": "#493f51",
+              "on-secondary-container": "#445460",
+              "secondary-fixed-dim": "#c6d6e6",
+              "on-surface-variant": "#5a605e",
+              "inverse-surface": "#0c0f0e",
+              "secondary-dim": "#455562",
+              "on-tertiary-container": "#5b5163",
+              "surface-container-lowest": "#ffffff",
+              "error-container": "#fe8983",
+              "inverse-primary": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .camera-overlay {
+            background: radial-gradient(circle, transparent 40%, rgba(45, 52, 50, 0.05) 100%);
+        }
+        .glass-panel {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .shutter-glow:active {
+            box-shadow: 0 0 20px rgba(95, 94, 94, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container overflow-hidden h-screen w-screen">
+<!-- Header / TopAppBar (Shared Component Execution) -->
+<header class="fixed top-0 w-full z-50 bg-[#f9f9f7]/80 dark:bg-[#2d3432]/80 backdrop-blur-xl shadow-[0_10px_40px_rgba(45,52,50,0.04)] h-16 flex items-center justify-between px-6">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform hover:opacity-70 text-[#5f5e5e] dark:text-[#e4e2e1]">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<div class="font-noto-serif text-xl tracking-[0.2em] text-[#2d3432] dark:text-[#faf7f6] uppercase">ECHOWORLD</div>
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform hover:opacity-70 text-[#5f5e5e] dark:text-[#e4e2e1]">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<!-- Main Viewfinder -->
+<main class="relative w-full h-full flex flex-col pt-16 pb-24">
+<!-- Live View Area -->
+<div class="relative flex-1 w-full mx-auto max-w-4xl overflow-hidden md:rounded-xl shadow-inner bg-surface-container-low group">
+<img alt="Corner of a minimalist room with soft morning sunlight hitting a textured wall" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Minimalist room corner with soft morning sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZSSsoC7MZNB688538VqSKKD3uBY-iIYWqhCixoRcU8357RNjtdwoYCUb987U0pfMlQuzxgGF5GSWDCoi30KnZVbKhE-hMHGvaxmNNq7H0zBdpJeexdmbVAf6E7g7-XIDRsbHG88TbGwAPBcp4G3lEWxfzEAmPSpJOCfp0CyCiwVTL5VO9WKiO6VfE07_30Aaqas_nt8_iiH5aPek01sSOOEtYyfrORBGKe6oqRChOfyY6HmVZaDD7Dia5cnkUUtHvODqlE5J3xCk"/>
+<!-- Camera Interface Overlays -->
+<div class="absolute inset-0 camera-overlay pointer-events-none"></div>
+<!-- Focus Brackets -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 pointer-events-none opacity-40">
+<div class="absolute top-0 left-0 w-8 h-8 border-t border-l border-on-surface"></div>
+<div class="absolute top-0 right-0 w-8 h-8 border-t border-r border-on-surface"></div>
+<div class="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-on-surface"></div>
+<div class="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-on-surface"></div>
+</div>
+<!-- Analysis Tags -->
+<div class="absolute top-6 left-6 flex flex-col gap-3">
+<div class="glass-panel bg-surface/40 px-4 py-2 rounded-full border border-surface-container-highest/20">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="text-[10px] tracking-[0.15em] uppercase font-medium text-secondary">环境光: 柔和, 漫射</span>
+</div>
+</div>
+<div class="glass-panel bg-surface/40 px-4 py-2 rounded-full border border-surface-container-highest/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-[10px] tracking-[0.15em] uppercase font-medium text-secondary">色调配置文件: 空灵档案</span>
+</div>
+</div>
+</div>
+<!-- Instruction Text -->
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-full px-6 text-center">
+<p class="font-headline italic text-on-surface text-lg md:text-xl drop-shadow-sm">
+                    拍摄房间的一角，用于生成居民的居所气质。
+                </p>
+</div>
+</div>
+<!-- Controls Bar -->
+<div class="h-40 flex items-center justify-center gap-12 px-8">
+<!-- Gallery Preview -->
+<button class="w-12 h-12 rounded-lg overflow-hidden border border-outline-variant/30 active:scale-95 transition-all">
+<img alt="Recent room captures" class="w-full h-full object-cover grayscale-[30%]" data-alt="Small preview of a recent room photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjsjvhIDwJKrgDEUanIYpdmxIg7XFIMGzvB271gJ2C4_jCmXbJBmsKdR4sHLfWDgZX9fYktWdEmrTEZyv-JJVXPrQEonq3O1klS9W_ZjDR224HFu6KZ2E93Cezxfyj2AyICyutwJP1FFkIjCe6Nv9P_bibjbHkjho-NQlMiIg4XcqJE2e-GryrDkKwA7DJg-52baxaoYuq8itm9vzz97dsy4Owb-nqxWWuFI9fT9cL92gNWxnsTUIWcbRaTIdrjmgmSxDBAiR_Pak"/>
+</button>
+<!-- Main Shutter Button -->
+<button class="relative group active:scale-90 transition-all duration-300">
+<div class="w-20 h-20 rounded-full border-2 border-primary/20 flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center group-hover:scale-95 transition-transform shadow-lg shutter-glow">
+<span class="material-symbols-outlined text-on-primary text-3xl" data-icon="photo_camera">photo_camera</span>
+</div>
+</div>
+<!-- Pulsing Ring -->
+<div class="absolute inset-0 rounded-full border border-primary/40 animate-ping opacity-20 scale-110"></div>
+</button>
+<!-- Aspect Ratio / Settings -->
+<button class="w-12 h-12 flex items-center justify-center text-secondary active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="aspect_ratio">aspect_ratio</span>
+</button>
+</div>
+</main>
+<!-- Navigation Suppressed for Focused Camera Intent as per Rules -->
+<!-- Secondary Contextual Info (Bottom Drawer Style) -->
+<div class="fixed bottom-0 left-0 w-full pointer-events-none">
+<div class="max-w-4xl mx-auto px-6 pb-6">
+<div class="pointer-events-auto bg-surface/80 backdrop-blur-md rounded-t-xl border-x border-t border-surface-container-highest/30 p-4 flex justify-between items-center shadow-xl">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="filter_vintage">filter_vintage</span>
+</div>
+<div>
+<div class="text-[10px] text-outline tracking-wider uppercase">Current Aura</div>
+<div class="text-xs font-medium text-secondary">Serene Curated</div>
+</div>
+</div>
+<div class="flex gap-2">
+<span class="w-2 h-2 rounded-full bg-surface-container-highest"></span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="w-2 h-2 rounded-full bg-surface-container-highest"></span>
+</div>
+</div>
+</div>
+</div>
+</body></html>

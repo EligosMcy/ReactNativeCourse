@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#e5e9e6",
+              "on-error-container": "#752121",
+              "tertiary": "#665b6e",
+              "surface-container": "#ecefec",
+              "surface-tint": "#5f5e5e",
+              "on-tertiary": "#fff6ff",
+              "tertiary-container": "#f2e3fa",
+              "on-background": "#2d3432",
+              "background": "#f9f9f7",
+              "primary-fixed-dim": "#d6d4d3",
+              "surface": "#f9f9f7",
+              "secondary-fixed": "#d4e5f4",
+              "on-secondary-fixed": "#32414d",
+              "on-primary-fixed-variant": "#5c5b5b",
+              "secondary": "#51616e",
+              "on-primary-container": "#525151",
+              "surface-container-highest": "#dee4e0",
+              "error-dim": "#4e0309",
+              "primary-fixed": "#e42e1",
+              "tertiary-fixed-dim": "#e3d5eb",
+              "on-error": "#fff7f6",
+              "outline-variant": "#adb3b0",
+              "on-surface": "#2d3432",
+              "error": "#9f403d",
+              "tertiary-fixed": "#f2e3fa",
+              "surface-container-low": "#f2f4f2",
+              "on-tertiary-fixed-variant": "#665b6e",
+              "outline": "#767c79",
+              "tertiary-dim": "#594f61",
+              "primary-container": "#e4e2e1",
+              "on-primary-fixed": "#3f3f3f",
+              "secondary-container": "#d4e5f4",
+              "surface-variant": "#dee4e0",
+              "on-secondary-fixed-variant": "#4e5d6a",
+              "primary": "#5f5e5e",
+              "on-secondary": "#f5f9ff",
+              "surface-dim": "#d4dcd8",
+              "inverse-on-surface": "#9c9d9b",
+              "on-primary": "#faf7f6",
+              "surface-bright": "#f9f9f7",
+              "primary-dim": "#535252",
+              "on-tertiary-fixed": "#493f51",
+              "on-secondary-container": "#445460",
+              "secondary-fixed-dim": "#c6d6e6",
+              "on-surface-variant": "#5a605e",
+              "inverse-surface": "#0c0f0e",
+              "secondary-dim": "#455562",
+              "on-tertiary-container": "#5b5163",
+              "surface-container-lowest": "#ffffff",
+              "error-container": "#fe8983",
+              "inverse-primary": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        .map-texture {
+            background-image: radial-gradient(circle at 2px 2px, #adb3b0 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#f9f9f7]/80 backdrop-blur-xl shadow-[0_10px_40px_rgba(45,52,50,0.04)]">
+<div class="flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="text-[#5f5e5e] active:scale-95 transition-transform hover:opacity-70 transition-opacity duration-300">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="font-noto-serif text-xl tracking-[0.2em] text-[#2d3432] uppercase">ECHOWORLD</div>
+<div class="flex items-center gap-4">
+<button class="text-[#5f5e5e] active:scale-95 transition-transform hover:opacity-70 transition-opacity duration-300">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+<div class="bg-[#f2f4f2] h-[1px] w-full opacity-30"></div>
+</header>
+<main class="relative min-h-screen flex items-center justify-center pt-16 pb-24 overflow-hidden">
+<!-- World Map Background (Atmospheric Layer) -->
+<div class="absolute inset-0 z-0 bg-surface-container-low opacity-40 map-texture" data-location="Tokyo, Japan" style=""></div>
+<!-- Subtle Map Elements -->
+<div class="absolute inset-0 z-0 flex items-center justify-center opacity-10 pointer-events-none">
+<svg class="w-[120%] h-[120%] stroke-outline-variant fill-none" viewbox="0 0 800 400">
+<path d="M100,200 Q200,100 300,250 T500,150 T700,300" stroke-width="0.5"></path>
+<path d="M150,300 Q250,200 350,350 T550,250 T750,100" stroke-width="0.5"></path>
+</svg>
+</div>
+<!-- Content Canvas -->
+<div class="relative z-10 w-full max-w-4xl px-6 flex flex-col items-center">
+<!-- Landmark Detail Card -->
+<div class="w-full max-w-md bg-surface-container-lowest/70 backdrop-blur-2xl rounded-xl shadow-[0_20px_60px_rgba(45,52,50,0.08)] overflow-hidden border border-surface-container-highest/30">
+<!-- Hero Image Area -->
+<div class="relative h-64 w-full overflow-hidden">
+<img alt="Daikanyama T-Site architecture" class="w-full h-full object-cover grayscale-[0.2] contrast-[1.1]" data-alt="Modern geometric bookstore architecture with trees and soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJU6WWJyQJpzEZVO8JcMlsacOyABQ5eKVDZsvEA3xePCyf2gNaCLcRPR8LWDTl-u45iBmmzMOOUrUXZtvqfywYKs6r7j6yToT6x928BUAkK0JN0qNHWHgV5alrzvI_tjEbiT1UhmwvTV-Jy3Ia0tjJ815hcjL7-YXzQaGuEdllS38yiqAzNmR3mkEYyQnRTRGrF1ta5jSFO8l4rhIYg1iAnsUN8rJ7pqlV8d-wKcvMpcNe83Mv48dRIu6wxBkM1kh1o7bES_gt4sU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<!-- Floating Badge -->
+<div class="absolute top-4 right-4 bg-tertiary-container/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+<span class="text-[10px] font-label font-medium tracking-wider text-on-tertiary-container uppercase">12 人在场</span>
+</div>
+</div>
+<!-- Card Content -->
+<div class="p-8 space-y-6">
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-label font-semibold tracking-[0.2em] text-secondary uppercase">文化地标</span>
+<span class="material-symbols-outlined text-outline-variant">bookmark</span>
+</div>
+<h1 class="font-headline text-3xl text-on-surface tracking-tight leading-tight">代官山 T-SITE</h1>
+</div>
+<div class="relative">
+<!-- Decorative Quote Mark -->
+<span class="absolute -top-4 -left-2 font-headline text-4xl text-surface-container-highest select-none">“</span>
+<p class="font-body text-on-surface-variant leading-relaxed text-sm italic pl-4">
+                            光影交织的建筑，书香与咖啡香气弥漫，是思想漫步的最佳去处。
+                        </p>
+</div>
+<!-- Action Layer -->
+<div class="pt-4 flex flex-col gap-4">
+<button class="w-full bg-primary text-on-primary py-4 rounded-md font-label text-sm font-medium tracking-widest flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all duration-300">
+                            前往探索
+                            <span class="material-symbols-outlined text-sm">north_east</span>
+</button>
+<div class="flex items-center justify-center gap-6">
+<button class="flex items-center gap-2 text-outline text-[11px] font-label tracking-widest hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">share</span>
+                                分享此地
+                            </button>
+<button class="flex items-center gap-2 text-outline text-[11px] font-label tracking-widest hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">history_edu</span>
+                                撰写回响
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Asymmetric Supporting Element -->
+<div class="mt-12 self-end max-w-xs text-right opacity-40 hidden md:block">
+<p class="font-headline text-sm italic text-secondary leading-relaxed">
+                    “在这座森林般的书店里，时间仿佛凝固在每一页泛黄的纸张与每一滴深褐的咖啡中。”
+                </p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center pt-3 pb-8 px-4 bg-[#f9f9f7]/90 backdrop-blur-lg shadow-[0_-5px_30px_rgba(45,52,50,0.03)] rounded-t-3xl z-50">
+<a class="flex flex-col items-center justify-center text-[#5f5e5e] relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-[#5f5e5e] after:rounded-full active:scale-90 transition-all duration-500" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-sans text-[10px] tracking-[0.1em] uppercase mt-1">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adb3b0] opacity-60 hover:text-[#5f5e5e] transition-colors active:scale-90 transition-all duration-500" href="#">
+<span class="material-symbols-outlined" data-icon="shelves">shelves</span>
+<span class="font-sans text-[10px] tracking-[0.1em] uppercase mt-1">Archive</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adb3b0] opacity-60 hover:text-[#5f5e5e] transition-colors active:scale-90 transition-all duration-500" href="#">
+<span class="material-symbols-outlined" data-icon="waves">waves</span>
+<span class="font-sans text-[10px] tracking-[0.1em] uppercase mt-1">Echoes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adb3b0] opacity-60 hover:text-[#5f5e5e] transition-colors active:scale-90 transition-all duration-500" href="#">
+<span class="material-symbols-outlined" data-icon="person_pin">person_pin</span>
+<span class="font-sans text-[10px] tracking-[0.1em] uppercase mt-1">Profile</span>
+</a>
+</nav>
+</body></html>
