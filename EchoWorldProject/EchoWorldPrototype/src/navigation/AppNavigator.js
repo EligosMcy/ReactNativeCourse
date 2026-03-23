@@ -8,6 +8,8 @@ import { Ionicons } from '@expo/vector-icons';
 import SplashScreen from '../screens/Auth/SplashScreen';
 import LoginScreen from '../screens/Auth/LoginScreen';
 import RegisterScreen from '../screens/Auth/RegisterScreen';
+
+// 角色创建屏幕
 import CharacterCreationScreen from '../screens/CharacterCreation/CharacterCreationScreen';
 import CameraScreen from '../screens/CharacterCreation/CameraScreen';
 

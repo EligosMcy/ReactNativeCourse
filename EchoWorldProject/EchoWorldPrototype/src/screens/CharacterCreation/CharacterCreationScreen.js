@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Alert, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function CharacterCreationScreen({ navigation }) {
-  const [currentStep, setCurrentStep] = useState(1);
+export default function CharacterCreationScreen({ navigation, route }) {
+  const [currentStep, setCurrentStep] = useState(route.params?.step || 1);
   const [prototypePhoto, setPrototypePhoto] = useState(null);
   const [roomPhoto, setRoomPhoto] = useState(null);
   const [maturity, setMaturity] = useState('young');
   const [characterName, setCharacterName] = useState('');
+
+  useEffect(() => {
+    if (route.params?.imageUri && route.params?.type) {
+      const { imageUri, type } = route.params;
+      if (type === 'prototype') {
+        setPrototypePhoto(imageUri);
+      } else if (type === 'room') {
+        setRoomPhoto(imageUri);
+      }
+    }
+  }, [route.params]);
 
   const steps = [
     { id: 1, title: '拍摄角色原型', description: '选择一个物件作为角色原型' },
@@ -52,16 +63,14 @@ export default function CharacterCreationScreen({ navigation }) {
   };
 
   const handleTakePhoto = (type) => {
-    navigation.navigate('Camera', {
-      type: type,
-      onPhotoTaken: (uri) => {
-        if (type === 'prototype') {
-          setPrototypePhoto(uri);
-        } else {
-          setRoomPhoto(uri);
-        }
+    // 模拟拍照功能
+    setTimeout(() => {
+      if (type === 'prototype') {
+        setPrototypePhoto('https://randomuser.me/api/portraits/men/32.jpg');
+      } else {
+        setRoomPhoto('https://picsum.photos/id/1048/500/300');
       }
-    });
+    }, 500);
   };
 
   const renderStepContent = () => {
@@ -73,9 +82,9 @@ export default function CharacterCreationScreen({ navigation }) {
             {!prototypePhoto ? (
               <TouchableOpacity
                 style={styles.photoButton}
-                onPress={() => handleTakePhoto('prototype')}
+                onPress={() => navigation.navigate('Camera', { type: 'prototype', step: currentStep })}
               >
-                <Ionicons name="camera" size={48} color="#fff" />
+                <Ionicons name="camera" size={40} color="#007AFF" />
                 <Text style={styles.photoButtonText}>拍摄原型照片</Text>
               </TouchableOpacity>
             ) : (
@@ -86,7 +95,7 @@ export default function CharacterCreationScreen({ navigation }) {
                 </View>
                 <TouchableOpacity
                   style={styles.retakeButton}
-                  onPress={() => handleTakePhoto('prototype')}
+                  onPress={() => setPrototypePhoto(null)}
                 >
                   <Text style={styles.retakeButtonText}>重新拍摄</Text>
                 </TouchableOpacity>
@@ -101,9 +110,9 @@ export default function CharacterCreationScreen({ navigation }) {
             {!roomPhoto ? (
               <TouchableOpacity
                 style={styles.photoButton}
-                onPress={() => handleTakePhoto('room')}
+                onPress={() => navigation.navigate('Camera', { type: 'room', step: currentStep })}
               >
-                <Ionicons name="camera" size={48} color="#fff" />
+                <Ionicons name="camera" size={40} color="#007AFF" />
                 <Text style={styles.photoButtonText}>拍摄房间角落</Text>
               </TouchableOpacity>
             ) : (
@@ -114,7 +123,7 @@ export default function CharacterCreationScreen({ navigation }) {
                 </View>
                 <TouchableOpacity
                   style={styles.retakeButton}
-                  onPress={() => handleTakePhoto('room')}
+                  onPress={() => setRoomPhoto(null)}
                 >
                   <Text style={styles.retakeButtonText}>重新拍摄</Text>
                 </TouchableOpacity>
