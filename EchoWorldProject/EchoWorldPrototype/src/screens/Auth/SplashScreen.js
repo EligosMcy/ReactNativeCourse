@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Colors, Typography, BorderRadius, Gradients, Glassmorphism } from '../../theme/DesignSystem';
 
 export default function SplashScreen({ navigation }) {
   return (
@@ -37,69 +38,79 @@ export default function SplashScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#667eea',
+    backgroundColor: Colors.surface,
   },
   content: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 40,
+    paddingHorizontal: 32,
+    paddingVertical: 64,
   },
   logoContainer: {
     alignItems: 'center',
-    marginTop: 100,
+    marginTop: 80,
   },
   logo: {
-    width: 120,
-    height: 120,
-    backgroundColor: '#fff',
-    borderRadius: 60,
+    width: 140,
+    height: 140,
+    backgroundColor: Colors.surfaceContainerLowest,
+    borderRadius: BorderRadius.full,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 32,
+    ...Glassmorphism,
   },
   logoText: {
-    fontSize: 36,
+    fontSize: 48,
     fontWeight: 'bold',
-    color: '#667eea',
+    color: Colors.primary,
+    fontFamily: Typography.serif,
   },
   appName: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: 'bold',
-    color: '#fff',
-    marginBottom: 8,
+    color: Colors.digitalInk,
+    marginBottom: 16,
+    fontFamily: Typography.serif,
+    letterSpacing: Typography.titleLetterSpacing,
   },
   tagline: {
-    fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.8)',
+    fontSize: 18,
+    color: Colors.onSurface,
+    fontFamily: Typography.sansSerif,
+    opacity: 0.7,
+    lineHeight: Typography.bodyLgLineHeight * 18,
   },
   buttonContainer: {
     width: '100%',
-    gap: 16,
+    gap: 20,
   },
   loginButton: {
-    backgroundColor: '#fff',
-    paddingVertical: 16,
-    borderRadius: 8,
+    backgroundColor: Colors.primary,
+    paddingVertical: 20,
+    borderRadius: BorderRadius.md,
     alignItems: 'center',
   },
   loginButtonText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
-    color: '#667eea',
+    color: Colors.onPrimary,
+    fontFamily: Typography.sansSerif,
   },
   registerButton: {
     backgroundColor: 'transparent',
-    borderWidth: 2,
-    borderColor: '#fff',
-    paddingVertical: 16,
-    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: Colors.outlineVariant,
+    borderOpacity: 0.15,
+    paddingVertical: 20,
+    borderRadius: BorderRadius.md,
     alignItems: 'center',
   },
   registerButtonText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
-    color: '#fff',
+    color: Colors.digitalInk,
+    fontFamily: Typography.sansSerif,
   },
 });

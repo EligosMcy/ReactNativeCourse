@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { Colors, Typography, BorderRadius } from '../../theme/DesignSystem';
 
 export default function RegisterScreen({ navigation }) {
   const [username, setUsername] = useState('');
@@ -167,67 +168,76 @@ export default function RegisterScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.surface,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+    backgroundColor: Colors.surfaceContainerLow,
   },
   backButton: {
-    padding: 8,
+    padding: 12,
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
-    marginLeft: 16,
+    color: Colors.digitalInk,
+    marginLeft: 24,
+    fontFamily: Typography.serif,
+    letterSpacing: Typography.titleLetterSpacing,
   },
   form: {
-    padding: 20,
+    padding: 32,
   },
   inputGroup: {
-    marginBottom: 20,
+    marginBottom: 28,
   },
   label: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#333',
-    marginBottom: 8,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    fontSize: 16,
-    color: '#333',
-  },
-  inputError: {
-    borderColor: '#FF3B30',
-  },
-  errorText: {
-    fontSize: 12,
-    color: '#FF3B30',
-    marginTop: 4,
-  },
-  registerButton: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 16,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  registerButtonDisabled: {
-    backgroundColor: '#CCCCCC',
-  },
-  registerButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#fff',
+    color: Colors.onSurface,
+    marginBottom: 12,
+    fontFamily: Typography.sansSerif,
+    letterSpacing: Typography.bodyLetterSpacing,
+  },
+  input: {
+    backgroundColor: Colors.surfaceContainerLow,
+    borderRadius: BorderRadius.md,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    fontSize: 18,
+    color: Colors.digitalInk,
+    fontFamily: Typography.sansSerif,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.outlineVariant,
+    borderBottomOpacity: 0.15,
+  },
+  inputError: {
+    borderBottomColor: '#FF3B30',
+    borderBottomOpacity: 1,
+  },
+  errorText: {
+    fontSize: 14,
+    color: '#FF3B30',
+    marginTop: 8,
+    fontFamily: Typography.sansSerif,
+  },
+  registerButton: {
+    backgroundColor: Colors.primary,
+    paddingVertical: 20,
+    borderRadius: BorderRadius.md,
+    alignItems: 'center',
+    marginTop: 32,
+  },
+  registerButtonDisabled: {
+    backgroundColor: Colors.surfaceContainerHighest,
+  },
+  registerButtonText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: Colors.onPrimary,
+    fontFamily: Typography.sansSerif,
   },
 });

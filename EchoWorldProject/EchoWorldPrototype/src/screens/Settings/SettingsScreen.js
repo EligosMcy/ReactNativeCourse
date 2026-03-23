@@ -187,10 +187,10 @@ export default function SettingsScreen({ navigation }) {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.userSection}>
-          <Image source={{ uri: user.avatar }} style={styles.userAvatar} />
+          <Image source={{ uri: user?.avatar }} style={styles.userAvatar} />
           <View style={styles.userInfo}>
-            <Text style={styles.userName}>{user.name}</Text>
-            <Text style={styles.userEmail}>{user.email}</Text>
+            <Text style={styles.userName}>{user?.name}</Text>
+            <Text style={styles.userEmail}>{user?.email}</Text>
           </View>
           <TouchableOpacity
             style={styles.editButton}

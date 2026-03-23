@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, Image, Alert } from 'react-na
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import { Colors, Typography, BorderRadius } from '../../theme/DesignSystem';
 
 export default function CameraScreen({ navigation, route }) {
   const { type, step } = route.params; // 'prototype' 或 'room'，以及当前步骤
@@ -110,23 +111,24 @@ export default function CameraScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: Colors.surface,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+    backgroundColor: Colors.surfaceContainerLow,
   },
   backButton: {
-    padding: 8,
+    padding: 12,
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '600',
-    color: '#fff',
+    color: Colors.digitalInk,
+    fontFamily: Typography.sansSerif,
   },
   cameraContainer: {
     flex: 1,
@@ -143,48 +145,49 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+    backgroundColor: Colors.surfaceContainerLow,
   },
   placeholderText: {
-    fontSize: 16,
-    color: '#999',
-    marginTop: 16,
+    fontSize: 18,
+    color: Colors.onSurface,
+    marginTop: 24,
+    fontFamily: Typography.sansSerif,
+    opacity: 0.7,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    paddingVertical: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    paddingVertical: 24,
+    backgroundColor: Colors.surfaceContainerLow,
   },
   sideButton: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    width: 64,
+    height: 64,
+    borderRadius: BorderRadius.full,
+    backgroundColor: Colors.surfaceContainerHighest,
     justifyContent: 'center',
     alignItems: 'center',
   },
   captureButton: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
-    backgroundColor: '#fff',
+    width: 80,
+    height: 80,
+    borderRadius: BorderRadius.full,
+    backgroundColor: Colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 4,
-    borderColor: '#333',
   },
   captureButtonInner: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: '#000',
+    width: 68,
+    height: 68,
+    borderRadius: BorderRadius.full,
+    backgroundColor: Colors.onPrimary,
   },
   confirmButton: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: '#007AFF',
+    width: 64,
+    height: 64,
+    borderRadius: BorderRadius.full,
+    backgroundColor: Colors.vitalityMint,
     justifyContent: 'center',
     alignItems: 'center',
   },

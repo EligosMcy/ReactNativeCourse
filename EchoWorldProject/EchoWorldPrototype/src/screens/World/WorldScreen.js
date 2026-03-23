@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Modal, Image } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Modal, Image, PanResponder, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useWorldStore } from '../../stores/worldStore';
 
@@ -7,6 +7,77 @@ export default function WorldScreen({ navigation }) {
   const { characters, locations, mapRegion, fetchCharacters, fetchLocations, selectCharacter } = useWorldStore();
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  
+  // 拖拽状态
+  const translateX = useRef(new Animated.Value(0)).current;
+  const translateY = useRef(new Animated.Value(0)).current;
+  const scale = useRef(new Animated.Value(1)).current;
+  const baseScale = useRef(1);
+  const baseTranslateX = useRef(0);
+  const baseTranslateY = useRef(0);
+  const initialDistance = useRef(0);
+  const lastX = useRef(0);
+  const lastY = useRef(0);
+  
+  // 设置PanResponder
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderGrant: (_, gestureState) => {
+        if (gestureState.numberActiveTouches === 2 && gestureState.locationX && gestureState.locationY) {
+          // 双指缩放
+          const dx = gestureState.locationX[0] - gestureState.locationX[1];
+          const dy = gestureState.locationY[0] - gestureState.locationY[1];
+          initialDistance.current = Math.sqrt(dx * dx + dy * dy);
+          baseScale.current = scale.__getValue();
+          baseTranslateX.current = translateX.__getValue();
+          baseTranslateY.current = translateY.__getValue();
+        } else if (gestureState.numberActiveTouches === 1) {
+          // 单指拖拽
+          baseTranslateX.current = translateX.__getValue();
+          baseTranslateY.current = translateY.__getValue();
+          lastX.current = gestureState.x0;
+          lastY.current = gestureState.y0;
+        }
+      },
+      onPanResponderMove: (_, gestureState) => {
+        if (gestureState.numberActiveTouches === 2 && gestureState.locationX && gestureState.locationY) {
+          // 双指缩放和拖拽
+          const dx = gestureState.locationX[0] - gestureState.locationX[1];
+          const dy = gestureState.locationY[0] - gestureState.locationY[1];
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const newScale = (distance / initialDistance.current) * baseScale.current;
+          
+          // 限制缩放范围
+          const boundedScale = Math.min(Math.max(newScale, 1), 3);
+          
+          // 计算中心点
+          const focusX = (gestureState.locationX[0] + gestureState.locationX[1]) / 2;
+          const focusY = (gestureState.locationY[0] + gestureState.locationY[1]) / 2;
+          
+          // 计算新的位置
+          const newTranslateX = baseTranslateX.current + (focusX - gestureState.x0) * (1 - boundedScale / baseScale.current);
+          const newTranslateY = baseTranslateY.current + (focusY - gestureState.y0) * (1 - boundedScale / baseScale.current);
+          
+          scale.setValue(boundedScale);
+          translateX.setValue(newTranslateX);
+          translateY.setValue(newTranslateY);
+        } else if (gestureState.numberActiveTouches === 1) {
+          // 单指拖拽
+          const deltaX = gestureState.dx;
+          const deltaY = gestureState.dy;
+          translateX.setValue(baseTranslateX.current + deltaX);
+          translateY.setValue(baseTranslateY.current + deltaY);
+        }
+      },
+      onPanResponderRelease: () => {
+        // 更新基础位置
+        baseTranslateX.current = translateX.__getValue();
+        baseTranslateY.current = translateY.__getValue();
+      },
+    })
+  ).current;
 
   useEffect(() => {
     fetchCharacters();
@@ -31,9 +102,21 @@ export default function WorldScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.mapContainer}>
-        <View style={styles.mapPlaceholder}>
+        <Animated.View
+          style={[
+            styles.mapPlaceholder,
+            {
+              transform: [
+                { translateX },
+                { translateY },
+                { scale }
+              ]
+            }
+          ]}
+          {...panResponder.panHandlers}
+        >
           <Text style={styles.mapText}>世界地图</Text>
-          {characters.map((character) => (
+          {characters && characters.map((character) => (
             <TouchableOpacity
               key={character.id}
               style={[
@@ -55,7 +138,7 @@ export default function WorldScreen({ navigation }) {
               {character.status === 'active' && <View style={styles.activeIndicator} />}
             </TouchableOpacity>
           ))}
-        </View>
+        </Animated.View>
       </View>
 
       <Modal
@@ -100,11 +183,15 @@ const styles = StyleSheet.create({
   },
   mapContainer: {
     flex: 1,
+    overflow: 'hidden',
   },
   mapPlaceholder: {
-    flex: 1,
+    width: 600,
+    height: 600,
     backgroundColor: '#E8F4FD',
     position: 'relative',
+    alignSelf: 'center',
+    justifyContent: 'center',
   },
   mapText: {
     position: 'absolute',

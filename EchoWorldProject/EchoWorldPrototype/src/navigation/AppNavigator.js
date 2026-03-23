@@ -98,9 +98,12 @@ function MainTabNavigator() {
         tabBarActiveTintColor: '#007AFF',
         tabBarInactiveTintColor: 'gray',
         tabBarStyle: {
-          height: 44,
-          paddingBottom: 4,
-          paddingTop: 4
+          height: 60,
+          paddingBottom: 8,
+          paddingTop: 8,
+          backgroundColor: '#fff',
+          borderTopWidth: 1,
+          borderTopColor: '#E0E0E0'
         },
         tabBarLabelStyle: {
           fontSize: 12,

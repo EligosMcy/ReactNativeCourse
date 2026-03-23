@@ -16,6 +16,12 @@ export default function TimelineScreen({ navigation }) {
     ? posts 
     : posts.filter(post => post.characterId === selectedFilter);
 
+  useEffect(() => {
+    console.log('过滤器状态:', selectedFilter);
+    console.log('过滤后的帖子数量:', filteredPosts.length);
+    console.log('filters数组:', filters);
+  }, [selectedFilter, filteredPosts, filters]);
+
   const handleRefresh = async () => {
     setRefreshing(true);
     await fetchPosts();
@@ -128,19 +134,19 @@ export default function TimelineScreen({ navigation }) {
         <Text style={styles.headerTitle}>发现</Text>
       </View>
 
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.filterContainer}
-      >
-        {filters.map((filter) => (
+      <View style={styles.filterContainer}>
+        {filters && filters.map((filter) => (
           <TouchableOpacity
             key={filter.id}
             style={[
               styles.filterChip,
               selectedFilter === filter.id && styles.filterChipActive
             ]}
-            onPress={() => setSelectedFilter(filter.id)}
+            onPress={() => {
+              console.log('点击过滤器:', filter.id);
+              setSelectedFilter(filter.id);
+            }}
+            activeOpacity={0.7}
           >
             <Text style={[
               styles.filterText,
@@ -150,7 +156,7 @@ export default function TimelineScreen({ navigation }) {
             </Text>
           </TouchableOpacity>
         ))}
-      </ScrollView>
+      </View>
 
       <FlatList
         data={filteredPosts}
@@ -200,15 +206,19 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   filterContainer: {
+    flexDirection: 'row',
     paddingHorizontal: 16,
     paddingVertical: 12,
-    gap: 8,
+    gap: 12,
+    backgroundColor: '#fff',
   },
   filterChip: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    width: 80,
+    height: 36,
     backgroundColor: '#F0F0F0',
-    borderRadius: 20,
+    borderRadius: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   filterChipActive: {
     backgroundColor: '#007AFF',
