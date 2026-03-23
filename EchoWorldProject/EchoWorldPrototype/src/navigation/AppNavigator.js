@@ -4,6 +4,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 
+// 认证相关屏幕
+import SplashScreen from '../screens/Auth/SplashScreen';
+import LoginScreen from '../screens/Auth/LoginScreen';
+import RegisterScreen from '../screens/Auth/RegisterScreen';
+import CharacterCreationScreen from '../screens/CharacterCreation/CharacterCreationScreen';
+import CameraScreen from '../screens/CharacterCreation/CameraScreen';
+
+// 主应用屏幕
 import WorldScreen from '../screens/World/WorldScreen';
 import ChatScreen from '../screens/Chat/ChatScreen';
 import ProfileScreen from '../screens/Profile/ProfileScreen';
@@ -68,62 +76,75 @@ function SettingsStack() {
   );
 }
 
+function MainTabNavigator() {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === 'World') {
+            iconName = focused ? 'globe' : 'globe-outline';
+          } else if (route.name === 'Timeline') {
+            iconName = focused ? 'time' : 'time-outline';
+          } else if (route.name === 'Settings') {
+            iconName = focused ? 'settings' : 'settings-outline';
+          }
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: '#007AFF',
+        tabBarInactiveTintColor: 'gray',
+        tabBarStyle: {
+          height: 44,
+          paddingBottom: 4,
+          paddingTop: 4
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: '500'
+        }
+      })}
+    >
+      <Tab.Screen 
+        name="World" 
+        component={WorldStack} 
+        options={{ 
+          title: '世界',
+          headerShown: false
+        }} 
+      />
+      <Tab.Screen 
+        name="Timeline" 
+        component={TimelineStack} 
+        options={{ 
+          title: '发现',
+          headerShown: false
+        }} 
+      />
+      <Tab.Screen 
+        name="Settings" 
+        component={SettingsStack} 
+        options={{ 
+          title: '设置',
+          headerShown: false
+        }} 
+      />
+    </Tab.Navigator>
+  );
+}
+
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-
-            if (route.name === 'World') {
-              iconName = focused ? 'globe' : 'globe-outline';
-            } else if (route.name === 'Timeline') {
-              iconName = focused ? 'time' : 'time-outline';
-            } else if (route.name === 'Settings') {
-              iconName = focused ? 'settings' : 'settings-outline';
-            }
-
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: '#007AFF',
-          tabBarInactiveTintColor: 'gray',
-          tabBarStyle: {
-            height: 44,
-            paddingBottom: 4,
-            paddingTop: 4
-          },
-          tabBarLabelStyle: {
-            fontSize: 12,
-            fontWeight: '500'
-          }
-        })}
-      >
-        <Tab.Screen 
-          name="World" 
-          component={WorldStack} 
-          options={{ 
-            title: '世界',
-            headerShown: false
-          }} 
-        />
-        <Tab.Screen 
-          name="Timeline" 
-          component={TimelineStack} 
-          options={{ 
-            title: '发现',
-            headerShown: false
-          }} 
-        />
-        <Tab.Screen 
-          name="Settings" 
-          component={SettingsStack} 
-          options={{ 
-            title: '设置',
-            headerShown: false
-          }} 
-        />
-      </Tab.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Splash" component={SplashScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen name="CharacterCreation" component={CharacterCreationScreen} />
+      <Stack.Screen name="Camera" component={CameraScreen} />
+      <Stack.Screen name="Main" component={MainTabNavigator} />
+    </Stack.Navigator>
     </NavigationContainer>
   );
 }
