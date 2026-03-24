@@ -669,7 +669,7 @@ EXPO_PUBLIC_STATUS_POLL_INTERVAL_MS=60000
 | 类型文件 | camelCase，.types.ts | `character.types.ts` |
 | 常量 | SCREAMING_SNAKE | `MAX_POLL_INTERVAL` |
 
-### 13.3 组件规范
+### 14.3 组件规范
 
 - 样式统一用 `StyleSheet.create` 放在组件底部
 - Props 接口明确定义，不使用 `any`
