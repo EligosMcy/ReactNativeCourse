@@ -68,7 +68,7 @@ export const SettingsScreen: React.FC = () => {
               await AsyncStorage.clear();
               navigation.reset({
                 index: 0,
-                routes: [{ name: 'Login' }],
+                routes: [{ name: 'Splash' }],
               });
             } catch (error) {
               Alert.alert('错误', '清空数据失败，请重试');
