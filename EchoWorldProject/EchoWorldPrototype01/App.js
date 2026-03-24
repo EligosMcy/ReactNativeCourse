@@ -1,20 +1,44 @@
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AppNavigator } from './src/navigation/AppNavigator';
+import { initializeAuth } from './src/stores/authStore';
+import { useCharacterStore } from './src/stores/characterStore';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 2,
+      gcTime: 1000 * 60 * 10,
+      retry: 2,
+    },
   },
 });
+
+export default function App() {
+  const [isReady, setIsReady] = useState(false);
+  const { loadDraft } = useCharacterStore();
+
+  useEffect(() => {
+    const init = async () => {
+      await initializeAuth();
+      await loadDraft();
+      setIsReady(true);
+    };
+    init();
+  }, []);
+
+  if (!isReady) {
+    return null;
+  }
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaProvider>
+        <StatusBar style="dark" />
+        <AppNavigator />
+      </SafeAreaProvider>
+    </QueryClientProvider>
+  );
+}

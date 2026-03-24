@@ -1,7 +1,7 @@
 # ECHOWORLD Prototype · 开发技术文档
 
 **技术栈：Expo · React Native · TypeScript**
-**范围：MVP · 单角色 · 单玩家**
+**范围：MVP · 多角色 · 单玩家**
 **版本：Prototype v1.0**
 
 ---
@@ -217,7 +217,7 @@ interface TimelinePost {
 
 **authStore**：player、tokens、isAuthenticated、setAuth()、clearAuth()、updatePlayer()
 
-**characterStore**：character、hasCharacter、draft（创建流程草稿）、setCharacter()、updateCharacter()、draft 相关操作
+**characterStore**：characters、hasCharacters、currentCharacterId、draft（创建流程草稿）、addCharacter()、updateCharacter()、setCurrentCharacter()、draft 相关操作
 
 **chatStore**：messages 列表、prependMessages()、appendMessage()、markAsRead()
 
@@ -288,6 +288,7 @@ photo-character → photo-room → generating（轮询）→ maturity → confir
 - 出生城市通过 `expo-location` 获取拍摄时的坐标，由后端反解析为城市名。
 - 生成仪式页后台每 3 秒轮询生成状态（`GET /character/generate/{id}`），完成后自动跳转。
 - 创建进度断点恢复：当前步骤存入 AsyncStorage，下次进入角色创建流程时恢复。
+- **修复**：成熟度选择步骤（第4步）添加验证逻辑，必须选择选项才能进入下一步。
 
 ### 6.2 世界地图
 
@@ -296,6 +297,9 @@ photo-character → photo-room → generating（轮询）→ maturity → confir
 - 角色图标：通过 Marker 组件展示，包含头像 + 状态点
 - 地图每 60 秒自动静默 refetch `characterStatus`
 - 支持自定义地图样式（如暖色主题）
+- **新增**：添加5个景点标记，支持点击查看详情
+  - 使用 TouchableOpacity 实现景点标记的点击交互
+  - 点击景点弹出 Modal 显示景点详情（名称、描述、图标）
 
 ### 6.3 对话系统
 
@@ -315,6 +319,8 @@ photo-character → photo-room → generating（轮询）→ maturity → confir
 - 不显示「正在输入…」
 - 角色回复时间由后端行为引擎决定，前端不模拟
 - 角色不一定回复每条消息，沉默时前端无任何提示
+
+**修复**：删除输入框左侧的礼物图标（🎁），保持界面简洁
 
 ### 6.4 缺席状态计算
 
@@ -366,7 +372,10 @@ function formatPlayerTime(isoTime: string): string {
 
 - 无限滚动：React Query `useInfiniteQuery`，`getNextPageParam` 取 `nextCursor`。
 - 点赞：乐观更新（立即切换状态），失败后回滚。
-- 筛选栏：按角色 ID 过滤，MVP 单角色时筛选栏仍渲染（样式预留，功能占位）。
+- **多角色支持**：为每个创建的角色生成5条随机帖子，使用角色真实名字
+- **角色筛选**：支持按角色名称筛选动态，显示所有用户创建的角色按钮
+- **数据保存**：生成的帖子数据保存到mockApi，确保详情页能正确加载
+- **新增**：添加测试数据（为每个角色生成5条随机动态），包括文字和图片类型的动态
 
 ---
 
@@ -665,6 +674,7 @@ EXPO_PUBLIC_STATUS_POLL_INTERVAL_MS=60000
 - 样式统一用 `StyleSheet.create` 放在组件底部
 - Props 接口明确定义，不使用 `any`
 - 复杂条件渲染拆分为独立子组件配合 `React.memo`
+- **更新**：所有页面必须使用 `SafeAreaView` 包装，防止内容被状态栏遮挡
 
 ### 13.4 错误处理
 
@@ -676,14 +686,17 @@ EXPO_PUBLIC_STATUS_POLL_INTERVAL_MS=60000
 
 ## 14. MVP 后扩展接口预留
 
-### 14.1 多角色
+### 14.1 多角色（已实现）
 
 ```typescript
-// characterStore 中预留（MVP 阶段 characters 保持 null）
+// characterStore 已实现多角色支持
 interface CharacterStore {
-  character: Character | null;           // MVP 使用
-  characters: Character[] | null;        // 多角色扩展预留
-  activeCharacterId: string | null;
+  characters: Character[];              // 存储所有角色
+  hasCharacters: boolean;               // 是否有角色
+  currentCharacterId: string | null;    // 当前选中角色
+  addCharacter(character: Character): void;
+  updateCharacter(characterId: string, data: Partial<Character>): void;
+  setCurrentCharacter(characterId: string | null): void;
 }
 ```
 
