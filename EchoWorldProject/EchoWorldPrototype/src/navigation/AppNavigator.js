@@ -12,6 +12,7 @@ import RegisterScreen from '../screens/Auth/RegisterScreen';
 // 角色创建屏幕
 import CharacterCreationScreen from '../screens/CharacterCreation/CharacterCreationScreen';
 import CameraScreen from '../screens/CharacterCreation/CameraScreen';
+import DraftScreen from '../screens/CharacterCreation/DraftScreen';
 
 // 主应用屏幕
 import WorldScreen from '../screens/World/WorldScreen';
@@ -148,6 +149,7 @@ export default function AppNavigator() {
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen name="CharacterCreation" component={CharacterCreationScreen} />
       <Stack.Screen name="Camera" component={CameraScreen} />
+      <Stack.Screen name="Draft" component={DraftScreen} />
       <Stack.Screen name="Main" component={MainTabNavigator} />
     </Stack.Navigator>
     </NavigationContainer>
