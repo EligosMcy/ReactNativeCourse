@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>A1 启动界面 (Splash)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Noto+Serif:wght@300;400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed": "#ffddb1",
+              "on-primary-container": "#fffaf8",
+              "primary-container": "#8b6f47",
+              "on-error-container": "#93000a",
+              "tertiary": "#406251",
+              "on-tertiary-fixed-variant": "#2c4d3d",
+              "surface-tint": "#745a34",
+              "surface-container-high": "#eae8e5",
+              "surface-dim": "#dbdad7",
+              "secondary-fixed": "#ede0d5",
+              "on-secondary": "#ffffff",
+              "primary": "#705731",
+              "on-error": "#ffffff",
+              "on-background": "#1b1c1a",
+              "on-primary-fixed-variant": "#5a431f",
+              "on-secondary-fixed": "#211b14",
+              "on-primary": "#ffffff",
+              "on-tertiary-fixed": "#002114",
+              "surface-container-low": "#f5f3f0",
+              "outline": "#80756a",
+              "secondary": "#665d54",
+              "inverse-surface": "#30312f",
+              "background": "#fbf9f6",
+              "outline-variant": "#d1c4b7",
+              "surface-container": "#efeeeb",
+              "inverse-primary": "#e3c193",
+              "tertiary-fixed": "#c5ebd5",
+              "error": "#ba1a1a",
+              "surface": "#fbf9f6",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary-fixed-variant": "#4d453d",
+              "tertiary-container": "#587b68",
+              "secondary-fixed-dim": "#d1c4b9",
+              "surface-variant": "#e4e2df",
+              "secondary-container": "#eaddd2",
+              "surface-bright": "#fbf9f6",
+              "tertiary-fixed-dim": "#aacfb9",
+              "on-surface": "#1b1c1a",
+              "on-secondary-container": "#6a6158",
+              "on-tertiary": "#ffffff",
+              "surface-container-highest": "#e4e2df",
+              "on-tertiary-container": "#eefff3",
+              "on-surface-variant": "#4e453b",
+              "error-container": "#ffdad6",
+              "primary-fixed-dim": "#e3c193",
+              "on-primary-fixed": "#291800",
+              "inverse-on-surface": "#f2f0ed"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif", "serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fbf9f6;
+        }
+        .serif-display {
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased overflow-hidden">
+<!-- Suppressing Navigation Shell for Transactional/Splash screen as per Protocol -->
+<main class="relative min-h-screen w-full flex flex-col items-center justify-between px-8 py-16 md:py-24">
+<!-- Background Aesthetic Elements (The Curated Sanctuary) -->
+<div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+<div class="absolute top-[-10%] right-[-5%] w-[60%] h-[50%] bg-surface-container-low rounded-full blur-[120px] opacity-60"></div>
+<div class="absolute bottom-[-10%] left-[-5%] w-[50%] h-[40%] bg-secondary-container/30 rounded-full blur-[100px] opacity-40"></div>
+<!-- Subtle Image Integration -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl opacity-[0.03] grayscale mix-blend-multiply">
+<img alt="" class="w-full h-full object-cover" data-alt="Minimalist interior with warm sunlight hitting a textured plaster wall and a single organic ceramic vase on a stone plinth" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByYj8wO1kOg0LsIjQ6iUSOmkZzY27ko73NRR485ivMMdDk51_Bre35ZEFrBW6i8H4MFUhP-W7rxbSx1_T5btuJZOiYVN6DcX9CW57tWdOfgAJy-Tp5XzYjLhCNCvtJ5eOs14K75t6iS3wftGyxLx9l5iTaQcUexzjbcUlDROP1j3xMLf7NspTmZeeRov_pFmkaJwBZzRx5mRTK0MSifWMbIgMNIcBMa1GGX3xYC2QEZbn_n7tzmqT6wRvd-v8kEUbxIev6Q2B1e42K"/>
+</div>
+</div>
+<!-- Top Branding / Spacer -->
+<div class="relative z-10 w-full flex justify-center">
+<span class="text-primary font-body tracking-[0.4em] text-[10px] uppercase font-medium opacity-60">Est. 2024</span>
+</div>
+<!-- Center Content: Identity -->
+<div class="relative z-10 flex flex-col items-center text-center max-w-2xl">
+<div class="mb-8 overflow-hidden">
+<!-- Exact Casing as per JSON (Echoworld) but following prompt's caps for Splash emphasis -->
+<h1 class="serif-display text-primary text-5xl md:text-7xl font-light tracking-[0.25em] leading-tight">
+                    ECHOWORLD
+                </h1>
+</div>
+<div class="h-px w-12 bg-outline-variant/30 mb-8"></div>
+<p class="font-body text-secondary text-lg md:text-xl tracking-wide font-light max-w-md">
+                A Digital Residence
+            </p>
+<div class="mt-12 flex gap-2">
+<span class="material-symbols-outlined text-primary/40 text-sm">filter_vintage</span>
+<span class="material-symbols-outlined text-primary/40 text-sm">filter_vintage</span>
+<span class="material-symbols-outlined text-primary/40 text-sm">filter_vintage</span>
+</div>
+</div>
+<!-- Bottom Actions: Primary Interactions -->
+<div class="relative z-10 w-full max-w-xs flex flex-col items-center gap-8">
+<!-- Primary Bronze Gold Button -->
+<button class="w-full py-5 px-10 bg-primary-container text-on-primary-container rounded-full shadow-[0_20px_40px_rgba(139,111,71,0.15)] hover:shadow-[0_25px_50px_rgba(139,111,71,0.25)] transition-all duration-500 ease-in-out transform hover:-translate-y-1 active:scale-[0.98] group">
+<span class="font-body font-medium tracking-[0.15em] uppercase text-sm flex items-center justify-center gap-3">
+                    Start
+                    <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</span>
+</button>
+<!-- Secondary Action / Link -->
+<div class="flex flex-col items-center gap-2">
+<a class="group flex flex-col items-center" href="#">
+<span class="font-body text-secondary text-sm tracking-wide transition-colors group-hover:text-primary">
+                        Have an account? <span class="text-primary font-medium underline underline-offset-8 decoration-outline-variant/50 hover:decoration-primary transition-all">Log in</span>
+</span>
+</a>
+</div>
+<!-- Footer Decorative -->
+<div class="mt-8 flex items-center gap-4 opacity-20">
+<div class="h-[1px] w-8 bg-primary"></div>
+<span class="material-symbols-outlined text-xs">temple_buddhist</span>
+<div class="h-[1px] w-8 bg-primary"></div>
+</div>
+</div>
+</main>
+<!-- Ambient Texture Overlay -->
+<div class="fixed inset-0 pointer-events-none z-[100] opacity-[0.015] contrast-150" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBvMT0uU6Imros3iWuMArQZZu8J08IpCcjnDJXlDG4T2hBaSNGm37M3W0Jqf7pDWv5_ZSMKlqmN5tN4MJxBOyOnF4rMqU77JmyUr7Vf5nIltlGb2xXz7gD5IrxVjufOrCAlT1xithIUEPebkZhCYQ6-UEmMZCryqDg4-P9D0O5jAPlXPap1dZeMAreNZa2UUZkF_d-WD3nC6uSOzjqoJWuOR6C2Vam8TLBcAzAcV9npSxILgN2TC1Pnzdux2sCsgBLRIiWtdSB-zTzr');"></div>
+</body></html>

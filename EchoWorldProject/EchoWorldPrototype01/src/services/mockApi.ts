@@ -112,6 +112,12 @@ export const mockApi = {
       await delay(500);
       return { success: true };
     },
+
+    checkEmailExists: async (email: string) => {
+      await delay(500);
+      // 模拟邮箱已存在的情况，这里简单返回false，实际应该查询数据库
+      return false;
+    },
   },
 
   player: {

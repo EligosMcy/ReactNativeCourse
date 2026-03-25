@@ -37,7 +37,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   const textStyles: TextStyle[] = [
     styles.text,
-    styles[`\${variant}Text` as keyof typeof styles] as TextStyle,
+    styles[`${variant}Text` as keyof typeof styles] as TextStyle,
     disabled && styles.disabledText,
   ];
 

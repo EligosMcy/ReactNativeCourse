@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { colors, typography, spacing } from '../../theme';
-import { Button } from '../../components/ui';
 import { useAuthStore, initializeAuth, useCharacterStore } from '../../stores';
 import type { RootStackParamList } from '../../types';
 
@@ -20,15 +18,12 @@ export const SplashScreen: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // 只在加载完成且未完成导航时执行一次
     if (!isLoading && !isNavigationComplete) {
       setIsNavigationComplete(true);
       if (isAuthenticated && characters.length > 0) {
         navigation.replace('Main');
       } else if (isAuthenticated) {
         navigation.replace('PlayerSetup');
-      } else {
-        // Stay on splash, user will navigate
       }
     }
   }, [isLoading, isAuthenticated, characters, navigation, isNavigationComplete]);
@@ -43,19 +38,29 @@ export const SplashScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Text style={styles.logo}>ECHO</Text>
-        <Text style={styles.logo}>WORLD</Text>
-        <Text style={styles.tagline}>一个数字居所</Text>
-      </View>
+      <StatusBar hidden />
+      <View style={styles.content}>
+        <View style={styles.logoContainer}>
+          <Text style={styles.logo}>ECHO</Text>
+          <Text style={styles.logo}>WORLD</Text>
+          <View style={styles.divider} />
+          <Text style={styles.tagline}>一个数字居所</Text>
+        </View>
 
-      <View style={styles.divider} />
-
-      <View style={styles.buttonContainer}>
-        <Button title="开始" onPress={handleStart} />
-        <View style={styles.loginLink}>
-          <Text style={styles.loginText}>已有账户？</Text>
-          <Button title="登录" variant="ghost" onPress={handleLogin} />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.startButton}
+            onPress={handleStart}
+          >
+            <Text style={styles.startButtonText}>开始</Text>
+          </TouchableOpacity>
+          
+          <View style={styles.loginLink}>
+            <Text style={styles.loginText}>已有账户？</Text>
+            <TouchableOpacity onPress={handleLogin}>
+              <Text style={styles.loginButtonText}>登录</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -65,45 +70,68 @@ export const SplashScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background.primary,
-    paddingHorizontal: spacing.pagePadding,
+    backgroundColor: '#FAF8F5',
+  },
+  content: {
+    flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
   },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: spacing.xl,
+    marginBottom: 96,
   },
   logo: {
-    fontFamily: 'serif',
-    fontSize: typography.pageTitle.fontSize,
-    fontWeight: typography.pageTitle.fontWeight,
-    letterSpacing: 12,
-    color: colors.text.primary,
+    fontSize: 26,
+    fontWeight: '300',
+    letterSpacing: 16,
+    color: '#1A1714',
   },
   tagline: {
-    fontSize: typography.caption.fontSize,
-    color: colors.text.tertiary,
+    fontSize: 13,
+    color: '#A89D92',
     letterSpacing: 3,
-    marginTop: spacing.lg,
+    marginTop: 24,
   },
   divider: {
     width: 80,
     height: 1,
-    backgroundColor: colors.border.subtle,
-    alignSelf: 'center',
-    marginBottom: spacing.xl * 2,
+    backgroundColor: '#EAE3D9',
+    marginTop: 24,
+    marginBottom: 24,
   },
   buttonContainer: {
-    gap: spacing.md,
+    width: '100%',
+    gap: 16,
+  },
+  startButton: {
+    backgroundColor: '#8B6F47',
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    borderRadius: 999,
+    alignItems: 'center',
+  },
+  startButtonText: {
+    color: '#FAF8F5',
+    fontSize: 15,
+    fontWeight: '500',
+    letterSpacing: 2,
   },
   loginLink: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: spacing.xs,
+    gap: 4,
   },
   loginText: {
-    fontSize: typography.caption.fontSize,
-    color: colors.text.tertiary,
+    fontSize: 13,
+    color: '#A89D92',
+  },
+  loginButtonText: {
+    color: '#8B6F47',
+    fontSize: 15,
+    fontWeight: '500',
+    letterSpacing: 2,
   },
 });

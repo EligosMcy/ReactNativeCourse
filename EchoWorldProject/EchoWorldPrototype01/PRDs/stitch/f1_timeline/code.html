@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Noto+Serif:wght@300;400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed": "#ffddb1",
+              "on-primary-container": "#fffaf8",
+              "primary-container": "#8b6f47",
+              "on-error-container": "#93000a",
+              "tertiary": "#406251",
+              "on-tertiary-fixed-variant": "#2c4d3d",
+              "surface-tint": "#745a34",
+              "surface-container-high": "#eae8e5",
+              "surface-dim": "#dbdad7",
+              "secondary-fixed": "#ede0d5",
+              "on-secondary": "#ffffff",
+              "primary": "#705731",
+              "on-error": "#ffffff",
+              "on-background": "#1b1c1a",
+              "on-primary-fixed-variant": "#5a431f",
+              "on-secondary-fixed": "#211b14",
+              "on-primary": "#ffffff",
+              "on-tertiary-fixed": "#002114",
+              "surface-container-low": "#f5f3f0",
+              "outline": "#80756a",
+              "secondary": "#665d54",
+              "inverse-surface": "#30312f",
+              "background": "#fbf9f6",
+              "outline-variant": "#d1c4b7",
+              "surface-container": "#efeeeb",
+              "inverse-primary": "#e3c193",
+              "tertiary-fixed": "#c5ebd5",
+              "error": "#ba1a1a",
+              "surface": "#fbf9f6",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary-fixed-variant": "#4d453d",
+              "tertiary-container": "#587b68",
+              "secondary-fixed-dim": "#d1c4b9",
+              "surface-variant": "#e4e2df",
+              "secondary-container": "#eaddd2",
+              "surface-bright": "#fbf9f6",
+              "tertiary-fixed-dim": "#aacfb9",
+              "on-surface": "#1b1c1a",
+              "on-secondary-container": "#6a6158",
+              "on-tertiary": "#ffffff",
+              "surface-container-highest": "#e4e2df",
+              "on-tertiary-container": "#eefff3",
+              "on-surface-variant": "#4e453b",
+              "error-container": "#ffdad6",
+              "primary-fixed-dim": "#e3c193",
+              "on-primary-fixed": "#291800",
+              "inverse-on-surface": "#f2f0ed"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fbf9f6;
+            color: #1A1714;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body selection:bg-primary-fixed">
+<!-- TopAppBar -->
+<header class="bg-[#fbf9f6]/80 dark:bg-[#1A1714]/80 backdrop-blur-xl fixed top-0 z-50 flex items-center justify-between px-8 h-20 w-full transition-colors duration-500 shadow-[0_20px_40px_rgba(139,111,71,0.05)]">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border-2 border-primary-container/20">
+<img class="w-full h-full object-cover" data-alt="Soft focused character portrait of a young woman with a calm expression, warm golden hour lighting, cinematic film grain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdMUcwZCZgeH3BmQea6S3hUw0R6oaWjv3uEvgoCFRVAXjPD9yXAUaFCQbpI4_lQFxmno7B29dfz8Qmv8qt_yBBZUkOTOQc7gbZ-X9UlPPqnkJ3z8Y9P4CVjinkOVz06UQYMZQYBX6cKygsfm9U4joWfSZijjkoxonrxK_HZgFdZ0eI5d8OwjmIBtqwmmwYKq5F3-D-Lp148s1tGD38ZZcz2in_zDmYySUWycvyVu5s4WEEQNUsFgHEJl2ayU_VHrVCXp5bfA9jh-wM"/>
+</div>
+<span class="font-noto-serif font-light tracking-[0.2em] text-[#705731] dark:text-[#8B6F47] uppercase text-2xl">Echoworld</span>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[#705731] hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-28 pb-32 max-w-3xl mx-auto px-6">
+<!-- Page Title Section -->
+<section class="mb-12">
+<h1 class="font-headline text-5xl font-light tracking-wide text-primary mb-2">F1 发现动态 (Timeline)</h1>
+<p class="text-secondary font-light tracking-widest text-sm uppercase">来自共振的回响</p>
+</section>
+<!-- Filter Bar -->
+<section class="mb-12 no-scrollbar overflow-x-auto">
+<div class="flex items-center gap-4 pb-4">
+<button class="px-8 py-3 rounded-full bg-primary-container text-on-primary-container font-medium tracking-wide shadow-lg shadow-primary-container/20 transition-all duration-300">
+                    All
+                </button>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 pr-6 pl-2 py-2 rounded-full bg-surface-container-low hover:bg-surface-container-high transition-colors duration-300 group">
+<div class="w-8 h-8 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of a thoughtful man in a linen shirt, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANCdUxV2FRylq68Ti6hikW5HAWG4j2v3gJn-8L7ktAWG7F7nVBZ_XJeWIs8HABCM-VW8I-7lVJ7r6gLsq3GqVK7BJdkYsfm3NPcjSP1xEo_OHzaJjfVryoqtxEM_0dPvI_89bLyscWWM-sgeUEHdqAa2UdZ_2XI7wH5QgB6cMt-cYq1bKfGNecdES14cUGcgwy5q3dtvEtI5v3MO43Kn-SrYL7kfKCxYjTx0_V3ZnLCj__2p9x-X6Sx4ZZD9pI65OGK7l9vU3TVx4p"/>
+</div>
+<span class="text-secondary group-hover:text-primary font-medium text-sm transition-colors">Elias</span>
+</button>
+<button class="flex items-center gap-2 pr-6 pl-2 py-2 rounded-full bg-surface-container-low hover:bg-surface-container-high transition-colors duration-300 group">
+<div class="w-8 h-8 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young woman with braided hair, outdoor soft-focus background, ethereal mood" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbO1em_aTwP3IsLWwSJ32cJu1yi0epeAxmN-ai5aqbdPrxC_1j6g3IDnwaO8ZFd0Gks8EDhKoX4pohwasyd5U8feTOX-x9Q_ObRkGT_AkSKiI9pIuCuDsDVp2VgCRTrsZpT0Wn44aZZMF_aMC1Zxlp8zxXNycyHzUT1DBGw71eQkdM3N-EyzPGvMttt7_V6Iaj2AV98mkxiqcMOIxVwDQPibLTBTj_4nq_BhD57a6yeCR9LTKFkS3x7T43QWOwwKv3o0bIwWbIxlfv"/>
+</div>
+<span class="text-secondary group-hover:text-primary font-medium text-sm transition-colors">Sora</span>
+</button>
+<button class="flex items-center gap-2 pr-6 pl-2 py-2 rounded-full bg-surface-container-low hover:bg-surface-container-high transition-colors duration-300 group">
+<div class="w-8 h-8 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a person with a slight smile, warm sunlit background, airy atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3MtoMLQuIOiiLDKsCm89Fcww28Wd1iOhwZvxBIPgrs9P2YFGqRwgfUBh_4um_TBy_c3dx3qsikCEeQKwnVvlahXeSmZBuf55K4y5PnUpBmHXBN3WCKXnITE9vJ8aLFm0_rKYLso0eOCSAf_7GY8OLoUmcZ7U4buyhzYuXi7_ICpW2CNoBd0BJ15Oy3Yja50TM1o51vZpoc92AgTrnDcQflGAoj3ztxkYzlxihNX-wa-eyyD9GSKe9wj2CAqaCXy_As3a6936KFPHc"/>
+</div>
+<span class="text-secondary group-hover:text-primary font-medium text-sm transition-colors">Kael</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Feed Snapshots -->
+<div class="space-y-16">
+<!-- Post 1: Image Post -->
+<article class="group">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-lREi1PAFBI8tOdsqcCzHN4uBVnfGcgCYpvcX3LJSSwAF1qtzZDH10U9AuxwywSCStnRLtk7uz6L7aGn_c9v89v7GhJ14-jvjUR2ZSDNsffg5GbJps6qCe-2EPOGaQ6eJpMpBCPZYBxmO8K-wtSvQngJhLorPtKDYD0mbvKlS3i02GcwQWDnC45U1nltUloOJleWdEcHERzH2qneVO27Yde9tQZzFQwXKYpNo87awPMBzeWXRM3J5YBKjrTLQLBA8iYZkmwfg7B1G"/>
+</div>
+<div>
+<h3 class="font-semibold text-on-surface leading-none">Sora</h3>
+<div class="flex items-center gap-2 text-outline text-[10px] tracking-widest uppercase mt-1">
+<span>2h ago</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[12px]" data-icon="location_on">location_on</span>Azure Reef</span>
+</div>
+</div>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<div class="relative rounded-lg overflow-hidden bg-surface-container mb-6 shadow-sm group-hover:shadow-xl transition-shadow duration-500">
+<img class="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Stunning aerial view of a tropical coastline at sunset, orange and purple sky reflecting in calm turquoise water, editorial style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjwZdbBHcySNQtJOyRKaIt8RbgMoxCDURW65fiQxACJg9WTi-8VNLgT708W5CClaRbFL-WaZe46FAb_epnbbpKmlqxPUISREat1jK9i3w0ZUUeCgjWMmvYsp-cfmHffJwdifcFMvKQbKnK59JwC_wqKtWYtEuzk7DJPzBfSM3pm2Cty-p9HT96ZXn6g0CdpjJwPwq2OIFXXVQVI4Hjp9nOSL079jNQjjNYsiulFz-EMnWfzXhTQ7oLI0OeLiWMwtf9dDNkJLM1S86u"/>
+</div>
+<div class="px-2">
+<p class="font-headline text-xl text-on-surface-variant leading-relaxed mb-6 italic">"Quiet evening by the coast."</p>
+<div class="flex items-center gap-8 pt-4 border-t border-outline-variant/10">
+<button class="flex items-center gap-2 text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+<span class="text-xs font-medium">124</span>
+</button>
+<button class="flex items-center gap-2 text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-xs font-medium">18</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Post 2: Text Post -->
+<article class="p-10 rounded-lg bg-surface-container-low shadow-sm hover:shadow-md transition-all duration-500 relative overflow-hidden group">
+<!-- Abstract Texture Background -->
+<div class="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-primary via-transparent to-transparent"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOpokcGvkdQpYGTJriKr_B6F6zQNSWFY2ron_0pAxFoaUbB7mm2W0mdWkgPpwsKe0LRdjO0-H3gecCSph81hkxBC4TzFGU6Ue7ZZ2MA5u9sFAENmoeNgzEHXNu0aG5JcGaHMqQj91kOlN408l5KzMkOQRvPC2A8G76DcsLqBPm3OLleHeVf15AbAV-CxjWXXR5Q5_-fqm2b-Omb4fxtktbKScQHihtcTWDgwXipcl2jxBdp1ONYJGo0B2rSvy1RAGBehh5mfEi9HwC"/>
+</div>
+<div>
+<h3 class="font-semibold text-on-surface leading-none">Elias</h3>
+<p class="text-outline text-[10px] tracking-widest uppercase mt-1">4h ago</p>
+</div>
+</div>
+<blockquote class="font-headline text-3xl font-light text-primary leading-snug mb-10 tracking-wide">
+                        I wonder what it's like on the other side.
+                    </blockquote>
+<div class="flex items-center gap-8 pt-6 border-t border-outline-variant/20">
+<button class="flex items-center gap-2 text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+<span class="text-xs font-medium">89</span>
+</button>
+<button class="flex items-center gap-2 text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-xs font-medium">32</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Post 3: Image Post (Vertical) -->
+<article class="group">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdyxp0HJwgI6yK_1bFS_rZlgmYmv93Gdby3Xxb_jWq4-jD2ucfNIv7Na1yQAgDOl33R0xsdqvxREB28K7yfsOI7qo40zQVdWqL2gkBODloCHhCRVAJu8AkuRLl4xOtRlf4yR-K1quK6qnVqV6h7H6wKq6wtRZdkth_PydUFyVSkZt_bljmmUGQKq46Jci3Ey0rmdXTqu3NavwEXGc6weDIoeq4AZns8CuXxaKOMx36vLF_WjMJQ7T2hOAFURBV6F4pAW_ykQKC10bv"/>
+</div>
+<div>
+<h3 class="font-semibold text-on-surface leading-none">Kael</h3>
+<div class="flex items-center gap-2 text-outline text-[10px] tracking-widest uppercase mt-1">
+<span>6h ago</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[12px]" data-icon="location_on">location_on</span>Echo Peaks</span>
+</div>
+</div>
+</div>
+</div>
+<div class="rounded-lg overflow-hidden bg-surface-container mb-6 shadow-sm group-hover:shadow-xl transition-shadow duration-500">
+<img class="w-full aspect-[16/9] object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Misty mountain peaks at dawn with soft blue and grey tones, minimalistic landscape photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUDKlx17oLM-S_JuYTbQQiZSOjRSzrjd2UijvY99ng8xg-P090KA-SetyYONIX2TzS8ngzMDeDdwKL1rW99JDSMRrnEpm7paTxpKf7ujlnRoYQjmFJXL3nEr1z0ivecKtfNMuK8eXW5tEcfGXLJQs9FQ3eN8hwn0fDOtijLWJCl1aQXjKh5Czpupv8V-lMy0xgHc60BHIVqGipLwM2vnDYRHRl2UD0Eb4dW7yDWzUDSY0mf3nLhb4Akhs6-tti1wqgqLqJOvqstkXw"/>
+</div>
+<div class="px-2">
+<p class="font-headline text-xl text-on-surface-variant leading-relaxed mb-6 italic">"The clouds feel heavy today, but the air is crisp."</p>
+<div class="flex items-center gap-8 pt-4 border-t border-outline-variant/10">
+<button class="flex items-center gap-2 text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+<span class="text-xs font-medium">210</span>
+</button>
+<button class="flex items-center gap-2 text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-xs font-medium">45</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-8 bg-[#f5f3f0]/90 dark:bg-[#1A1714]/90 backdrop-blur-2xl shadow-[0_-10px_30px_rgba(0,0,0,0.03)] h-[84pt] rounded-t-[2rem]">
+<button class="flex flex-col items-center justify-center text-[#665d54] dark:text-[#a19589] px-6 py-3 hover:text-[#705731] dark:hover:text-[#fbf9f6] scale-95 active:scale-90 transition-transform duration-300">
+<span class="material-symbols-outlined mb-1" data-icon="public">public</span>
+<span class="font-inter text-[10px] tracking-widest uppercase font-medium">World</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-[#e4e2df] dark:bg-[#2c2824] text-[#705731] dark:text-[#fbf9f6] rounded-[2rem] px-6 py-3 transition-all duration-500 scale-95 active:scale-90">
+<span class="material-symbols-outlined mb-1" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-inter text-[10px] tracking-widest uppercase font-medium">发现</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#665d54] dark:text-[#a19589] px-6 py-3 hover:text-[#705731] dark:hover:text-[#fbf9f6] scale-95 active:scale-90 transition-transform duration-300">
+<span class="material-symbols-outlined mb-1" data-icon="settings">settings</span>
+<span class="font-inter text-[10px] tracking-widest uppercase font-medium">Settings</span>
+</button>
+</nav>
+</body></html>

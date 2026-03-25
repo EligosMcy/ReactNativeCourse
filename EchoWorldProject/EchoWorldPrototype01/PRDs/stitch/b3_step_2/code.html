@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@300;400;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#eae8e5",
+              "outline": "#80756a",
+              "on-secondary-fixed": "#211b14",
+              "on-primary-fixed-variant": "#5a431f",
+              "background": "#fbf9f6",
+              "on-background": "#1b1c1a",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#1b1c1a",
+              "on-secondary": "#ffffff",
+              "inverse-on-surface": "#f2f0ed",
+              "tertiary-fixed": "#c5ebd5",
+              "on-error": "#ffffff",
+              "on-surface-variant": "#4e453b",
+              "on-tertiary-fixed": "#002114",
+              "on-secondary-container": "#6a6158",
+              "tertiary-container": "#587b68",
+              "surface-variant": "#e4e2df",
+              "on-tertiary-container": "#eefff3",
+              "on-primary-fixed": "#291800",
+              "surface-tint": "#745a34",
+              "primary-fixed-dim": "#e3c193",
+              "primary-container": "#8b6f47",
+              "inverse-primary": "#e3c193",
+              "outline-variant": "#d1c4b7",
+              "inverse-surface": "#30312f",
+              "on-tertiary": "#ffffff",
+              "secondary": "#665d54",
+              "tertiary-fixed-dim": "#aacfb9",
+              "surface": "#fbf9f6",
+              "error": "#ba1a1a",
+              "error-container": "#ffdad6",
+              "surface-dim": "#dbdad7",
+              "primary": "#705731",
+              "secondary-container": "#eaddd2",
+              "on-secondary-fixed-variant": "#4d453d",
+              "on-primary": "#ffffff",
+              "secondary-fixed": "#ede0d5",
+              "primary-fixed": "#ffddb1",
+              "surface-container-highest": "#e4e2df",
+              "on-tertiary-fixed-variant": "#2c4d3d",
+              "on-primary-container": "#fffaf8",
+              "on-error-container": "#93000a",
+              "surface-container-low": "#f5f3f0",
+              "surface-container": "#efeeeb",
+              "surface-bright": "#fbf9f6",
+              "tertiary": "#406251",
+              "secondary-fixed-dim": "#d1c4b9"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .camera-grid {
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 33.33% 33.33%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body antialiased">
+<!-- TopAppBar Navigation Shell -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#fbf9f6] dark:bg-[#1A1714]">
+<div class="flex items-center gap-4">
+<button class="text-[#705731] dark:text-[#8B6F47] hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+</div>
+<h1 class="text-xl font-bold tracking-widest text-[#705731] dark:text-[#8B6F47] font-['Noto_Serif'] uppercase">ECHOWORLD</h1>
+<div class="flex items-center gap-4">
+<button class="text-[#705731] dark:text-[#8B6F47] hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-lg mx-auto min-h-screen flex flex-col">
+<!-- Progress Header -->
+<div class="mb-8">
+<div class="flex justify-between items-end mb-2">
+<span class="font-headline text-primary text-sm tracking-widest uppercase">Step 2 of 5</span>
+<span class="font-body text-secondary text-xs">Capture Sanctuary</span>
+</div>
+<div class="h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/5 rounded-full"></div>
+</div>
+</div>
+<!-- Section Title -->
+<div class="mb-8">
+<h2 class="font-headline text-3xl font-light tracking-tight text-on-surface mb-3 leading-tight">
+                拍下你的一个角落
+            </h2>
+<p class="text-on-surface-variant text-sm leading-relaxed max-w-[80%]">
+                选择你房间里最能代表你生活气息的一个角落。寻找那些温暖的、属于你的瞬间。
+            </p>
+</div>
+<!-- Viewfinder Canvas -->
+<div class="relative aspect-[3/4] rounded-lg overflow-hidden bg-surface-container-highest shadow-2xl group border-[12px] border-surface-container-lowest">
+<!-- Simulated Camera Feed -->
+<img alt="Warm sunlit corner of a minimal room with a wooden chair and soft shadows on a beige wall" class="absolute inset-0 w-full h-full object-cover" data-alt="aesthetic interior shot of a room corner with minimalist furniture soft warm afternoon sunlight and long artistic shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk4sc7c7WccEPsvufF4fnNCDkaBeb8QNogqaST-GY9ii3yHmPTBUiU-77HAwDao8syFG3_XQoLVinRAICxbmA-66bz3mKTDOG_t6qsX5J953cs2VyMK8SHPYQ14aq9UXf2downtBigZ4FxHEzavfx-6boFFWrgiYJOOw-uAqeUa507m6sOZC9neNHnnDVTakli72w60XL9XBY3fV5IHbhiY0oI5Vxa8iaVMyKNlJhe_tHgdAYF3OtLyv_VGjrzcAbzl9susbYjPMNt"/>
+<!-- Viewfinder Overlays -->
+<div class="absolute inset-0 camera-grid pointer-events-none opacity-40"></div>
+<!-- Focus Bracket -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 pointer-events-none">
+<div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/60"></div>
+<div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-white/60"></div>
+<div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-white/60"></div>
+<div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white/60"></div>
+</div>
+<!-- Lighting Guide Overlay -->
+<div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white/90 text-[10px] font-medium tracking-widest uppercase bg-black/10 backdrop-blur-md px-3 py-2 rounded-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs" data-icon="wb_sunny">wb_sunny</span>
+<span>Natural Light Detected</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs" data-icon="grid_on">grid_on</span>
+<span>Rule of Thirds</span>
+</div>
+</div>
+</div>
+<!-- Camera Controls -->
+<div class="mt-10 flex flex-col items-center gap-8">
+<div class="flex items-center justify-center gap-12">
+<button class="w-12 h-12 rounded-full flex items-center justify-center bg-surface-container text-secondary hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined" data-icon="image">image</span>
+</button>
+<!-- Main Shutter Button -->
+<button class="relative group">
+<div class="w-20 h-20 rounded-full border-2 border-primary/30 flex items-center justify-center p-1 transition-transform active:scale-95 duration-300">
+<div class="w-full h-full rounded-full bg-gradient-to-br from-primary to-primary-container shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-3xl" data-icon="photo_camera" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+</div>
+</div>
+</button>
+<button class="w-12 h-12 rounded-full flex items-center justify-center bg-surface-container text-secondary hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined" data-icon="flip_camera_ios">flip_camera_ios</span>
+</button>
+</div>
+<!-- Hint text -->
+<p class="text-secondary text-xs font-medium tracking-tight bg-secondary-container/30 px-4 py-2 rounded-full">
+                Tip: Try to align the corner with the vertical grid lines
+            </p>
+</div>
+</main>
+<!-- BottomNavBar (Hidden in capture mode to focus on task) -->
+<!-- Suppressed per "Task-Focused" rule in Shell Visibility & Relevance -->
+<!-- Floating Action Logic: Confirm Button (Secondary Action) -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-xs px-6">
+<!-- Hidden until photo is taken in a real app, but showing state for UI purposes -->
+</div>
+</body></html>

@@ -31,19 +31,16 @@
 
 | 库 | 版本 | 用途 | 选型理由 |
 |---|---|---|---|
-| expo | ~51.0 | 开发环境与构建 | 官方推荐，简化原生配置 |
-| react-native | 0.74.x | 跨平台框架 | — |
-| typescript | ^5.3 | 类型安全 | 严格模式，减少运行时错误 |
-| react-native-reanimated | ~3.10 | 高性能动画 | 生成仪式光点动效 |
-| zustand | ^4.5 | 全局状态管理 | 轻量，无 boilerplate，适合 MVP |
-| react-query (react-query) | ^5.0 | 服务端数据缓存 | 自动 refetch、乐观更新、离线处理 |
-| @react-native-async-storage/async-storage | ^1.23.0 | 本地数据存储 | 数据持久化 |
-| react-native-elements | ^3.4.3 | 基础UI组件 | 快速构建基础 UI |
-| react-native-vector-icons | ^10.0.0 | 图标库 | 底部导航、状态图标 |
-| react-native-maps | ^1.14.0 | 地图组件 | 世界地图展示 |
-| expo-image-picker | ~15.0 | 相机 / 相册 | 角色创建照片拍摄 |
-| expo-location | ~17.0 | 获取位置 | 角色出生城市推导 |
-| date-fns-tz | ^3.1 | 时区处理 | 角色当地时间显示 |
+| expo | ~54.0.0 | 开发环境与构建 | 官方推荐，简化原生配置 |
+| react-native | 0.81.5 | 跨平台框架 | — |
+| typescript | ~5.9.2 | 类型安全 | 严格模式，减少运行时错误 |
+| zustand | ^4.5.7 | 全局状态管理 | 轻量，无 boilerplate，适合 MVP |
+| @tanstack/react-query | ^5.95.2 | 服务端数据缓存 | 自动 refetch、乐观更新、离线处理 |
+| @react-native-async-storage/async-storage | 2.2.0 | 本地数据存储 | 数据持久化 |
+| react-native-maps | 1.20.1 | 地图组件 | 世界地图展示 |
+| expo-image-picker | ~17.0.10 | 相机 / 相册 | 角色创建照片拍摄 |
+| expo-location | ~19.0.8 | 获取位置 | 角色出生城市推导 |
+| date-fns-tz | ^3.2.0 | 时区处理 | 角色当地时间显示 |
 
 ### 1.2 状态管理与存储说明
 
@@ -499,12 +496,10 @@ Axios 响应拦截器处理 401：
 ### 10.1 列表渲染
 
 - 消息列表、Timeline 列表一律使用 `FlatList`，禁止 `ScrollView` 嵌套长列表。
-- 图片使用 `react-native-fast-image`（含内置缓存），禁止裸 `<Image />`。
 
 ### 10.2 动画
 
 - 所有动画使用 `useNativeDriver: true`（仅限 transform / opacity 属性）。
-- 生成仪式光点动效：多个 `Animated.Value` 并行随机漂浮，每个独立循环。
 
 ### 10.3 网络
 

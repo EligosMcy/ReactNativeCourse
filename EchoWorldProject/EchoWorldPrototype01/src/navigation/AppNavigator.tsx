@@ -8,12 +8,15 @@ import { colors } from '../theme';
 import { SplashScreen } from '../screens/Auth/SplashScreen';
 import { LoginScreen } from '../screens/Auth/LoginScreen';
 import { RegisterScreen } from '../screens/Auth/RegisterScreen';
+import { SetPasswordScreen } from '../screens/Auth/SetPasswordScreen';
 import { PlayerSetupScreen } from '../screens/Auth/PlayerSetupScreen';
 import { CreateCharacterScreen } from '../screens/Create/CreateCharacterScreen';
 import { WorldScreen } from '../screens/World/WorldScreen';
 import { TimelineScreen } from '../screens/Timeline/TimelineScreen';
 import { PostDetailScreen } from '../screens/Timeline/PostDetailScreen';
 import { SettingsScreen } from '../screens/Settings/SettingsScreen';
+import { EditProfileScreen } from '../screens/Settings/EditProfileScreen';
+import { NotificationSettingsScreen } from '../screens/Settings/NotificationSettingsScreen';
 import { ChatScreen } from '../screens/Chat/ChatScreen';
 import { CharacterStatusScreen } from '../screens/Profile/CharacterStatusScreen';
 
@@ -92,12 +95,15 @@ export const AppNavigator: React.FC = () => {
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="SetPassword" component={SetPasswordScreen} />
         <Stack.Screen name="PlayerSetup" component={PlayerSetupScreen} />
         <Stack.Screen name="CreateCharacter" component={CreateCharacterScreen} />
         <Stack.Screen name="Main" component={MainTabs} />
         <Stack.Screen name="CharacterChat" component={ChatScreen} />
         <Stack.Screen name="CharacterStatus" component={CharacterStatusScreen} />
         <Stack.Screen name="PostDetail" component={PostDetailScreen} />
+        <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+        <Stack.Screen name="NotificationSettings" component={NotificationSettingsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

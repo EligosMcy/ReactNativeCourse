@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@300;400;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#eae8e5",
+              "outline": "#80756a",
+              "on-secondary-fixed": "#211b14",
+              "on-primary-fixed-variant": "#5a431f",
+              "background": "#fbf9f6",
+              "on-background": "#1b1c1a",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#1b1c1a",
+              "on-secondary": "#ffffff",
+              "inverse-on-surface": "#f2f0ed",
+              "tertiary-fixed": "#c5ebd5",
+              "on-error": "#ffffff",
+              "on-surface-variant": "#4e453b",
+              "on-tertiary-fixed": "#002114",
+              "on-secondary-container": "#6a6158",
+              "tertiary-container": "#587b68",
+              "surface-variant": "#e4e2df",
+              "on-tertiary-container": "#eefff3",
+              "on-primary-fixed": "#291800",
+              "surface-tint": "#745a34",
+              "primary-fixed-dim": "#e3c193",
+              "primary-container": "#8b6f47",
+              "inverse-primary": "#e3c193",
+              "outline-variant": "#d1c4b7",
+              "inverse-surface": "#30312f",
+              "on-tertiary": "#ffffff",
+              "secondary": "#665d54",
+              "tertiary-fixed-dim": "#aacfb9",
+              "surface": "#fbf9f6",
+              "error": "#ba1a1a",
+              "error-container": "#ffdad6",
+              "surface-dim": "#dbdad7",
+              "primary": "#705731",
+              "secondary-container": "#eaddd2",
+              "on-secondary-fixed-variant": "#4d453d",
+              "on-primary": "#ffffff",
+              "secondary-fixed": "#ede0d5",
+              "primary-fixed": "#ffddb1",
+              "surface-container-highest": "#e4e2df",
+              "on-tertiary-fixed-variant": "#2c4d3d",
+              "on-primary-container": "#fffaf8",
+              "on-error-container": "#93000a",
+              "surface-container-low": "#f5f3f0",
+              "surface-container": "#efeeeb",
+              "surface-bright": "#fbf9f6",
+              "tertiary": "#406251",
+              "secondary-fixed-dim": "#d1c4b9"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbf9f6;
+            color: #1b1c1a;
+            font-family: 'Inter', sans-serif;
+        }
+        .serif-text {
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-6 h-16 w-full fixed top-0 z-50 bg-[#fbf9f6] dark:bg-[#1A1714]">
+<div class="flex items-center">
+<button class="hover:opacity-80 transition-opacity duration-300 text-[#705731] dark:text-[#8B6F47]">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+</div>
+<h1 class="font-['Noto_Serif'] font-light tracking-widest uppercase text-xl font-bold tracking-widest text-[#705731] dark:text-[#8B6F47]">
+            编辑资料
+        </h1>
+<div class="flex items-center">
+<button class="text-[#705731] dark:text-[#8B6F47] font-medium font-body hover:opacity-80 transition-opacity duration-300">
+                保存
+            </button>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-32 px-6 max-w-2xl mx-auto w-full">
+<!-- Avatar Section -->
+<section class="flex flex-col items-center mb-16">
+<div class="relative group cursor-pointer">
+<div class="w-32 h-32 rounded-full overflow-hidden border-4 border-surface-container shadow-sm">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="close-up portrait of a thoughtful person with warm natural lighting and soft blurred interior background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA95LwACWamXJIQ9rf_PyBAnnKqbnsCszn05one5vqYndZ9NjhVFT9kEIVppUr483FmsxpCakh6jkwy2kRCFmjLfWqclttDyFWdNol0c_D85BHwcaLbIP0bCM4kUB8j0QCnvR-DWqyjKn8YU9kB-cNt3VuQ1oogkiMj5vIcZKJzsC7lZHJL_IdTbaDxhDDGw4diPwOFpqJ4hfLYaqfnepz6kR-ryc19-6agqRWUSiI9MVYjawUOufaiZtBKqehc1waGDewbvNv00zri"/>
+</div>
+<div class="absolute inset-0 flex items-center justify-center bg-black/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="material-symbols-outlined text-white" data-icon="photo_camera">photo_camera</span>
+</div>
+</div>
+<button class="mt-4 text-primary font-body text-sm tracking-wide hover:underline transition-all">
+                更换头像
+            </button>
+</section>
+<!-- Form Section -->
+<div class="space-y-12">
+<!-- Input Group: Name -->
+<div class="space-y-4">
+<label class="block text-secondary font-headline text-xs tracking-widest uppercase px-1">
+                    姓名 / Name
+                </label>
+<div class="relative">
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary px-1 py-3 text-lg font-body text-on-surface transition-colors placeholder:text-outline-variant/50" placeholder="输入您的姓名" type="text" value="Julian Echo"/>
+</div>
+</div>
+<!-- Input Group: Gender -->
+<div class="space-y-4">
+<label class="block text-secondary font-headline text-xs tracking-widest uppercase px-1">
+                    性别 / Gender
+                </label>
+<div class="flex gap-4">
+<button class="flex-1 py-4 px-6 rounded-lg bg-primary-container text-on-primary-container font-body text-sm tracking-wide transition-all shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="male">male</span>
+                        男士
+                    </button>
+<button class="flex-1 py-4 px-6 rounded-lg bg-surface-container-high text-secondary font-body text-sm tracking-wide hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="female">female</span>
+                        女士
+                    </button>
+<button class="flex-1 py-4 px-6 rounded-lg bg-surface-container-high text-secondary font-body text-sm tracking-wide hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="diversity_3">diversity_3</span>
+                        其他
+                    </button>
+</div>
+</div>
+<!-- Input Group: Bio -->
+<div class="space-y-4">
+<label class="block text-secondary font-headline text-xs tracking-widest uppercase px-1">
+                    个人简介 / Biography
+                </label>
+<div class="relative bg-surface-container-low rounded-lg p-6">
+<textarea class="w-full bg-transparent border-0 focus:ring-0 text-on-surface font-body text-base leading-relaxed resize-none p-0" placeholder="写下关于您的故事..." rows="4"></textarea>
+<div class="absolute bottom-4 right-6 text-[10px] text-outline tracking-tighter font-label">
+                        0 / 200
+                    </div>
+</div>
+</div>
+<!-- Input Group: Location -->
+<div class="space-y-4">
+<label class="block text-secondary font-headline text-xs tracking-widest uppercase px-1">
+                    常驻地 / Residence
+                </label>
+<div class="flex items-center bg-surface-container-low rounded-lg px-6 py-4 cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary mr-3" data-icon="location_on">location_on</span>
+<span class="text-on-surface font-body">上海, 中国</span>
+<span class="material-symbols-outlined text-outline ml-auto" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Privacy Footer -->
+<footer class="mt-20 text-center">
+<p class="text-[11px] text-outline font-label uppercase tracking-widest leading-loose">
+                您的资料将仅对 Echoworld 社区成员可见<br/>
+                Your privacy is curated within the sanctuary
+            </p>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#ffffff]/80 dark:bg-[#1A1714]/80 backdrop-blur-xl border-t border-[#d1c4b7]/20 shadow-[0_-4px_40px_rgba(112,87,49,0.05)] rounded-t-[2rem] md:hidden">
+<div class="flex flex-col items-center justify-center text-[#665d54] dark:text-[#a1968d] px-5 py-2 hover:bg-[#f5f3f0] dark:hover:bg-[#25221F] transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="public">public</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-tight mt-1">World</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#665d54] dark:text-[#a1968d] px-5 py-2 hover:bg-[#f5f3f0] dark:hover:bg-[#25221F] transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-tight mt-1">Discover</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#e4e2df] dark:bg-[#2c2824] text-[#705731] dark:text-[#8B6F47] rounded-full px-5 py-2 transition-transform duration-300 scale-95">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-tight mt-1">Settings</span>
+</div>
+</nav>
+</body></html>

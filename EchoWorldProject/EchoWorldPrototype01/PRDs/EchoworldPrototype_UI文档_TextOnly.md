@@ -2,6 +2,7 @@
 
 **平台：iOS / Android · Expo + React Native**
 **版本：Prototype v1.0**
+**技术栈：Expo ~54.0.0 · React Native 0.81.5 · TypeScript ~5.9.2**
 **说明：PRD 描述风格，记录每个界面的元素构成、布局顺序与交互逻辑。含线框图与 SVG 的完整版见《EchoworldPrototype_UI文档.md》。**
 
 ---

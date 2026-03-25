@@ -17,6 +17,8 @@ export interface Player {
   avatarUrl: string | null;
   gender: 'male' | 'female' | 'other' | 'undisclosed';
   createdAt: string;
+  bio?: string;
+  location?: string;
 }
 
 export interface AuthTokens {
@@ -117,6 +119,7 @@ export interface RootStackParamList {
   Splash: undefined;
   Login: undefined;
   Register: undefined;
+  SetPassword: { email: string };
   PlayerSetup: undefined;
   CreateCharacter: undefined;
   Main: undefined;

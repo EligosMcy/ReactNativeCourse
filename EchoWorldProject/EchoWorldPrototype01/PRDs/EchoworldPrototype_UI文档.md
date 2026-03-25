@@ -2,6 +2,7 @@
 
 **平台：iOS / Android · Expo + React Native**
 **版本：Prototype v1.0**
+**技术栈：Expo ~54.0.0 · React Native 0.81.5 · TypeScript ~5.9.2**
 **配套文档：《UI文档_TextOnly.md》《开发技术文档.md》**
 
 ---

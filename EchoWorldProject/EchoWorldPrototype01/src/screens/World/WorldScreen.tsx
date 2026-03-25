@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, typography, spacing, borderRadius } from '../../theme';
-import { Avatar, Button, Card } from '../../components/ui';
+import { Avatar, Button } from '../../components/ui';
 import { useCharacterStore, useUIStore } from '../../stores';
 import { mockApi } from '../../services/mockApi';
 import type { RootStackParamList, Character } from '../../types';
@@ -17,6 +17,8 @@ export const WorldScreen: React.FC = () => {
   const { activeCharacterCardId, setActiveCharacterCard } = useUIStore();
   const [refreshing, setRefreshing] = useState(false);
   const [activeLandmark, setActiveLandmark] = useState<string | null>(null);
+  const [cardAnimation] = useState(new Animated.Value(500));
+  const [overlayOpacity] = useState(new Animated.Value(0));
 
   // 景点数据
   const landmarks = [
@@ -114,6 +116,61 @@ export const WorldScreen: React.FC = () => {
     setActiveLandmark(null);
   };
 
+  useEffect(() => {
+    if (activeCharacterCardId) {
+      Animated.parallel([
+        Animated.timing(cardAnimation, {
+          toValue: 0,
+          duration: 200,
+          useNativeDriver: true,
+        }),
+        Animated.timing(overlayOpacity, {
+          toValue: 0.6,
+          duration: 200,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    } else {
+      Animated.parallel([
+        Animated.timing(cardAnimation, {
+          toValue: 500,
+          duration: 200,
+          useNativeDriver: true,
+        }),
+        Animated.timing(overlayOpacity, {
+          toValue: 0,
+          duration: 200,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    }
+  }, [activeCharacterCardId, cardAnimation, overlayOpacity]);
+
+  const getAvatarStyle = (status: string, isAbandoned: boolean, isLost: boolean) => {
+    if (isLost) {
+      return {
+        opacity: 0.35,
+        borderColor: colors.border.subtle,
+      };
+    }
+    if (isAbandoned) {
+      return {
+        opacity: 0.75,
+        borderColor: colors.accent.danger,
+      };
+    }
+    if (status === 'sleeping') {
+      return {
+        opacity: 0.6,
+        borderColor: colors.border.subtle,
+      };
+    }
+    return {
+      opacity: 1,
+      borderColor: colors.accent.primary,
+    };
+  };
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'home': return colors.state.home;
@@ -149,12 +206,17 @@ export const WorldScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.mapContainer}>
+        {/* 地图背景 */}
         <View style={styles.mapBackground}>
+          {/* 网格线纹理 */}
+          <View style={styles.gridOverlay} />
+          
+          {/* 城市名 */}
           <View style={styles.cityLabel}>
             <Text style={styles.cityText}>{displayCity}</Text>
           </View>
           
-          {/* 景点标记 */}
+          {/* 地标点层 */}
           {landmarks.map((landmark) => (
             <TouchableOpacity
               key={landmark.id}
@@ -168,71 +230,114 @@ export const WorldScreen: React.FC = () => {
               ]}
             >
               <View style={styles.landmarkIconContainer}>
-                <Text style={styles.landmarkIcon}>{landmark.icon}</Text>
+                <View style={styles.landmarkDot} />
               </View>
               <Text style={styles.landmarkName}>{landmark.name}</Text>
             </TouchableOpacity>
           ))}
 
-          {/* 角色标记 - 显示所有角色 */}
-          {characters.map((char, index) => (
-            <View 
-              key={char.id} 
-              style={[
-                styles.characterMarker,
-                { 
-                  top: `${40 + index * 10}%`, 
-                  left: `${20 + index * 10}%` 
-                }
-              ]}
-            >
-              <TouchableOpacity onPress={() => handleCharacterPress(char)}>
-                <View style={styles.markerContainer}>
-                  <Avatar name={char.name} size={60} borderColor={getStatusColor(char.status)} />
-                  <View style={[styles.statusDot, { backgroundColor: getStatusColor(char.status) }]} />
-                </View>
-                <Text style={styles.characterName}>{char.name}</Text>
-                <Text style={styles.characterStatus}>{getStatusText(char.status)}</Text>
-              </TouchableOpacity>
-            </View>
-          ))}
+          {/* 角色图标层 */}
+          {characters.map((char, index) => {
+            const avatarStyle = getAvatarStyle(char.status, char.isAbandoned || false, char.isLost || false);
+            const showStatusDot = char.status !== 'sleeping' && !char.isLost && !char.isAbandoned;
+            
+            return (
+              <View 
+                key={char.id} 
+                style={[
+                  styles.characterMarker,
+                  { 
+                    top: `${40 + index * 10}%`, 
+                    left: `${20 + index * 10}%` 
+                  }
+                ]}
+              >
+                <TouchableOpacity onPress={() => handleCharacterPress(char)}>
+                  <View style={styles.markerContainer}>
+                    <Avatar 
+                      name={char.name} 
+                      size={60} 
+                      style={avatarStyle}
+                    />
+                    {showStatusDot && (
+                      <View style={[styles.statusDot, { backgroundColor: getStatusColor(char.status) }]} />
+                    )}
+                  </View>
+                  <Text style={[styles.characterName, { opacity: char.isLost ? 0.35 : 1 }]}>
+                    {char.name}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            );
+          })}
         </View>
       </View>
 
-      {/* 角色卡片Modal */}
-      <Modal visible={!!activeCharacterCardId} transparent animationType="fade" onRequestClose={handleCloseCard}>
-        <TouchableOpacity style={styles.modalOverlay} activeOpacity={1} onPress={handleCloseCard}>
-          <View style={styles.characterCard}>
-            {activeCharacterCardId && (
-              (() => {
-                const activeCharacter = characters.find(c => c.id === activeCharacterCardId);
-                if (!activeCharacter) return null;
-                
-                return (
-                  <>
-                    <View style={styles.cardHeader}>
-                      <Avatar name={activeCharacter.name} size={48} borderColor={getStatusColor(activeCharacter.status)} />
-                      <View style={styles.cardInfo}>
-                        <Text style={styles.cardName}>{activeCharacter.name}</Text>
-                        <Text style={styles.cardBehavior}>{activeCharacter.currentLocation.landmarkName} · {activeCharacter.currentBehaviorDescription}</Text>
-                      </View>
+      {/* 地图遮罩层 */}
+      {activeCharacterCardId && (
+        <Animated.View 
+          style={[
+            styles.mapOverlay,
+            { opacity: overlayOpacity }
+          ]}
+        />
+      )}
+
+      {/* 底部浮动角色卡片 */}
+      {activeCharacterCardId && (
+        <Animated.View
+          style={[
+            styles.characterCardContainer,
+            { transform: [{ translateY: cardAnimation }] }
+          ]}
+        >
+          <TouchableOpacity 
+            style={styles.characterCard}
+            activeOpacity={1}
+          >
+            {(() => {
+              const activeCharacter = characters.find(c => c.id === activeCharacterCardId);
+              if (!activeCharacter) return null;
+              
+              return (
+                <>
+                  <View style={styles.cardHeader}>
+                    <Avatar 
+                      name={activeCharacter.name} 
+                      size={36} 
+                      style={getAvatarStyle(activeCharacter.status, activeCharacter.isAbandoned || false, activeCharacter.isLost || false)}
+                    />
+                    <View style={styles.cardInfo}>
+                      <Text style={styles.cardName}>{activeCharacter.name}</Text>
+                      <Text style={styles.cardBehavior}>{activeCharacter.currentBehaviorDescription}</Text>
                     </View>
-                    <View style={styles.cardDivider} />
-                    <View style={styles.cardMeta}>
-                      <Text style={styles.cardCity}>{activeCharacter.currentLocation.city}</Text>
-                      <Text style={styles.cardTime}>{new Date(activeCharacter.currentLocation.localTime).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}</Text>
-                    </View>
-                    <View style={styles.cardActions}>
-                      <Button title="发消息" onPress={handleSendMessage} style={{ flex: 1 }} />
-                      <Button title="查看状态" variant="secondary" onPress={handleViewStatus} style={{ flex: 1 }} />
-                    </View>
-                  </>
-                );
-              })()
-            )}
-          </View>
-        </TouchableOpacity>
-      </Modal>
+                  </View>
+                  <View style={styles.cardDivider} />
+                  <View style={styles.cardMeta}>
+                    <Text style={styles.cardCity}>{activeCharacter.currentLocation.city}</Text>
+                    <Text style={styles.cardTime}>
+                      {new Date(activeCharacter.currentLocation.localTime).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}
+                    </Text>
+                  </View>
+                  <View style={styles.cardActions}>
+                    <Button 
+                      title={activeCharacter.isAbandoned ? "回来" : "发消息"} 
+                      onPress={handleSendMessage} 
+                      style={{ flex: 2 }} 
+                    />
+                    <Button 
+                      title="查看状态" 
+                      variant="secondary" 
+                      onPress={handleViewStatus} 
+                      style={{ flex: 1 }} 
+                    />
+                  </View>
+                </>
+              );
+            })()}
+          </TouchableOpacity>
+        </Animated.View>
+      )}
 
       {/* 景点详情Modal */}
       <Modal visible={!!activeLandmark} transparent animationType="fade" onRequestClose={handleCloseLandmark}>
@@ -241,11 +346,11 @@ export const WorldScreen: React.FC = () => {
             {activeLandmark && (
               <>
                 <View style={styles.landmarkCardHeader}>
-                  <Text style={styles.landmarkCardIcon}>
-                    {landmarks.find(l => l.id === activeLandmark)?.icon}
-                  </Text>
                   <Text style={styles.landmarkCardName}>
                     {landmarks.find(l => l.id === activeLandmark)?.name}
+                  </Text>
+                  <Text style={styles.landmarkCardType}>
+                    {landmarks.find(l => l.id === activeLandmark)?.icon} · {landmarks.find(l => l.id === activeLandmark)?.name}
                   </Text>
                 </View>
                 <View style={styles.cardDivider} />
@@ -262,43 +367,102 @@ export const WorldScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.background.elevated },
+  container: { flex: 1, backgroundColor: colors.background.primary },
   emptyContainer: { flex: 1, backgroundColor: colors.background.primary, justifyContent: 'center', alignItems: 'center', gap: spacing.md },
   emptyText: { fontSize: typography.body.fontSize, color: colors.text.tertiary },
-  mapContainer: { flex: 1 },
-  mapBackground: { flex: 1, backgroundColor: colors.background.elevated },
-  cityLabel: { position: 'absolute', top: 60, left: 0, right: 0, alignItems: 'center' },
-  cityText: { fontSize: 12, color: colors.text.tertiary, letterSpacing: 5 },
   
-  // 景点样式
+  // 地图容器
+  mapContainer: { flex: 1 },
+  mapBackground: { 
+    flex: 1, 
+    backgroundColor: colors.background.primary,
+  },
+  
+  // 网格线纹理
+  gridOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'transparent',
+    opacity: 0.1,
+  },
+  
+  // 城市名
+  cityLabel: { position: 'absolute', top: 60, left: 0, right: 0, alignItems: 'center' },
+  cityText: { fontSize: 11, color: colors.text.tertiary, letterSpacing: 3 },
+  
+  // 地图遮罩
+  mapOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: colors.background.primary,
+  },
+  
+  // 地标样式
   landmarkMarker: { position: 'absolute', alignItems: 'center' },
   landmarkIconContainer: { 
-    width: 40, 
-    height: 40, 
-    borderRadius: 20, 
-    backgroundColor: colors.background.primary, 
+    width: 32, 
+    height: 32, 
+    borderRadius: 16, 
+    backgroundColor: colors.background.elevated, 
     justifyContent: 'center', 
     alignItems: 'center',
     borderWidth: 1,
     borderColor: colors.border.subtle,
-    elevation: 2,
   },
-  landmarkIcon: { fontSize: 20 },
-  landmarkName: { fontSize: typography.small.fontSize, color: colors.text.secondary, marginTop: spacing.xs },
+  landmarkDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: colors.accent.primary,
+  },
+  landmarkName: { fontSize: typography.caption.fontSize, color: colors.text.secondary, marginTop: spacing.xs },
   
   // 角色样式
-  characterMarker: { position: 'absolute', top: '40%', left: 0, right: 0, alignItems: 'center' },
+  characterMarker: { position: 'absolute', alignItems: 'center' },
   markerContainer: { position: 'relative' },
   statusDot: { position: 'absolute', bottom: 0, right: 0, width: 12, height: 12, borderRadius: 6, borderWidth: 2, borderColor: colors.background.primary },
+  unreadBadge: {
+    position: 'absolute',
+    top: -4,
+    right: -4,
+    backgroundColor: colors.accent.danger,
+    borderRadius: 10,
+    minWidth: 20,
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 4,
+  },
+
   characterName: { fontSize: typography.caption.fontSize, color: colors.text.secondary, textAlign: 'center', marginTop: spacing.sm },
-  characterStatus: { fontSize: typography.small.fontSize, color: colors.text.tertiary, textAlign: 'center' },
   
-  // Modal样式
-  modalOverlay: { flex: 1, backgroundColor: 'rgba(250, 248, 245, 0.6)', justifyContent: 'flex-end' },
-  
-  // 角色卡片样式
-  characterCard: { backgroundColor: colors.background.primary, borderRadius: 20, padding: spacing.md, margin: spacing.pagePadding, borderWidth: 1, borderColor: colors.border.subtle },
-  cardHeader: { flexDirection: 'row', gap: spacing.md },
+  // 底部浮动角色卡片
+  characterCardContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: spacing.pagePadding,
+  },
+  characterCard: { 
+    backgroundColor: colors.background.elevated, 
+    borderRadius: borderRadius.card, 
+    padding: spacing.md,
+    borderWidth: 1, 
+    borderColor: colors.border.subtle,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
+  },
+  cardHeader: { flexDirection: 'row', gap: spacing.md, alignItems: 'center' },
   cardInfo: { flex: 1 },
   cardName: { fontSize: typography.body.fontSize, color: colors.text.primary, fontWeight: '500' },
   cardBehavior: { fontSize: typography.caption.fontSize, color: colors.text.tertiary, marginTop: spacing.xs },
@@ -308,10 +472,13 @@ const styles = StyleSheet.create({
   cardTime: { fontSize: typography.caption.fontSize, color: colors.text.tertiary },
   cardActions: { flexDirection: 'row', gap: spacing.sm },
   
+  // Modal样式
+  modalOverlay: { flex: 1, backgroundColor: 'rgba(250, 248, 245, 0.6)', justifyContent: 'flex-end' },
+  
   // 景点卡片样式
-  landmarkCard: { backgroundColor: colors.background.primary, borderRadius: 20, padding: spacing.md, margin: spacing.pagePadding, borderWidth: 1, borderColor: colors.border.subtle },
-  landmarkCardHeader: { alignItems: 'center', gap: spacing.md },
-  landmarkCardIcon: { fontSize: 48, marginBottom: spacing.sm },
-  landmarkCardName: { fontSize: typography.body.fontSize, color: colors.text.primary, fontWeight: '500', marginBottom: spacing.md },
+  landmarkCard: { backgroundColor: colors.background.elevated, borderRadius: borderRadius.card, padding: spacing.md, margin: spacing.pagePadding, borderWidth: 1, borderColor: colors.border.subtle },
+  landmarkCardHeader: { alignItems: 'center', gap: spacing.sm },
+  landmarkCardName: { fontSize: typography.body.fontSize, color: colors.text.primary, fontWeight: '500', marginBottom: spacing.xs },
+  landmarkCardType: { fontSize: typography.caption.fontSize, color: colors.text.secondary, marginBottom: spacing.md },
   landmarkCardDescription: { fontSize: typography.body.fontSize, color: colors.text.secondary, lineHeight: 22 },
 });
