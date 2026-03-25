@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -15,7 +15,7 @@ type CharacterStatusNavigationProp = NativeStackNavigationProp<RootStackParamLis
 export const CharacterStatusScreen: React.FC = () => {
   const navigation = useNavigation<CharacterStatusNavigationProp>();
   const route = useRoute<CharacterStatusRouteProp>();
-  const { characters } = useCharacterStore();
+  const { characters, removeCharacter } = useCharacterStore();
   const [currentCharacter, setCurrentCharacter] = useState<Character | null>(null);
 
   useEffect(() => {
@@ -49,6 +49,30 @@ export const CharacterStatusScreen: React.FC = () => {
     if (currentCharacter) {
       navigation.navigate('CharacterChat', { characterId: currentCharacter.id });
     }
+  };
+
+  const handleDeleteCharacter = () => {
+    if (!currentCharacter) return;
+    
+    Alert.alert(
+      '删除角色',
+      `确定要删除角色"${currentCharacter.name}"吗？此操作无法撤销！`,
+      [
+        { text: '取消', style: 'cancel' },
+        { 
+          text: '删除', 
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await removeCharacter(currentCharacter.id);
+              navigation.goBack();
+            } catch (error) {
+              Alert.alert('错误', '删除角色失败，请重试');
+            }
+          }
+        },
+      ]
+    );
   };
 
   if (!currentCharacter) {
@@ -196,7 +220,8 @@ export const CharacterStatusScreen: React.FC = () => {
       </ScrollView>
 
       <View style={styles.footer}>
-        <Button title="发消息" onPress={handleSendMessage} />
+        <Button title="发消息" onPress={handleSendMessage} style={{ flex: 2 }} />
+        <Button title="删除角色" onPress={handleDeleteCharacter} variant="danger" style={{ flex: 1, marginLeft: spacing.sm }} />
       </View>
     </SafeAreaView>
   );
@@ -396,5 +421,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: colors.border.subtle,
     backgroundColor: colors.background.primary,
+    flexDirection: 'row',
+    gap: spacing.sm,
   },
 });

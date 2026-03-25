@@ -79,6 +79,8 @@ export const SettingsScreen: React.FC = () => {
     );
   };
 
+
+
   const handleCreateCharacter = () => {
     navigation.navigate('CreateCharacter');
   };
@@ -145,10 +147,10 @@ export const SettingsScreen: React.FC = () => {
                   >
                     <Text style={styles.characterButtonText}>查看</Text>
                   </TouchableOpacity>
-                </View>
-                {index< characters.length - 1 && (<View style={styles.divider} />)}
-              </React.Fragment>
-            ))}
+                  </View>
+                  {index< characters.length - 1 && (<View key={`divider-${char.id}`} style={styles.divider} />)}
+                </React.Fragment>
+              ))}
             <View style={styles.divider} />
             <SettingItem 
               title={characters.length >0 ? "创建新角色" : "创建角色"} 
@@ -235,13 +237,15 @@ const styles = StyleSheet.create({
   },
   settingItem: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md,
   },
   settingTitle: {
     fontSize: typography.body.fontSize,
     color: colors.text.primary,
+    flex: 1,
+    textAlign: 'left',
   },
   dangerText: {
     color: colors.accent.danger,

@@ -217,9 +217,11 @@ interface TimelinePost {
 
 **authStore**：player、tokens、isAuthenticated、setAuth()、clearAuth()、updatePlayer()
 
-**characterStore**：characters、hasCharacters、currentCharacterId、draft（创建流程草稿）、addCharacter()、updateCharacter()、setCurrentCharacter()、draft 相关操作
+**characterStore**：characters、currentCharacterId、draft（创建流程草稿）、addCharacter()、removeCharacter()、setCurrentCharacter()、draft 相关操作
+- **removeCharacter**：删除角色并更新当前角色状态，删除当前角色时自动选择下一个角色
 
 **chatStore**：messages 列表、prependMessages()、appendMessage()、markAsRead()
+- **appendMessage**：发送消息时只添加一次消息，避免重复显示
 
 **uiStore**：activeCharacterCardId（地图卡片弹出状态）、globalLoading
 
@@ -288,7 +290,9 @@ photo-character → photo-room → generating（轮询）→ maturity → confir
 - 出生城市通过 `expo-location` 获取拍摄时的坐标，由后端反解析为城市名。
 - 生成仪式页后台每 3 秒轮询生成状态（`GET /character/generate/{id}`），完成后自动跳转。
 - 创建进度断点恢复：当前步骤存入 AsyncStorage，下次进入角色创建流程时恢复。
-- **修复**：成熟度选择步骤（第4步）添加验证逻辑，必须选择选项才能进入下一步。
+- **验证逻辑**：成熟度选择步骤（第4步）必须选择选项才能进入下一步，防止空值提交。
+- **年龄限制**：年龄微调范围根据所选成熟度动态调整：青年期（18-35岁），壮年期（36-55岁）。
+- **草稿重置**：点击创建新角色按钮后自动重置草稿状态，确保从第一步开始，避免状态残留问题。
 
 ### 6.2 世界地图
 
@@ -461,6 +465,11 @@ Axios 响应拦截器处理 401：
 | 角色创建进度（断点恢复） | AsyncStorage | 跨 session 持久化 |
 | 消息草稿（未发送） | AsyncStorage | 快速存取 |
 | 服务端数据缓存 | React Query | 离线可用 |
+
+### 8.1 数据清空策略
+- **清空所有数据**：调用 `AsyncStorage.clear()` 清除所有本地存储数据
+- **清空后导航**：清空数据后自动跳转至 Splash 开始界面，支持用户选择注册或登录
+- **安全确认**：清空操作前显示确认对话框，防止误操作
 
 ---
 

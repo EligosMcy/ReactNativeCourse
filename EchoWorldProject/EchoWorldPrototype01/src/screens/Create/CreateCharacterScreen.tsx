@@ -20,6 +20,23 @@ export const CreateCharacterScreen: React.FC = () => {
   const [characterAge, setCharacterAge] = useState(25);
   const [characterGender, setCharacterGender] = useState<'male' | 'female' | 'neutral' | 'unknown'>('neutral');
 
+  useEffect(() => {
+    resetDraft();
+  }, []);
+
+  useEffect(() => {
+    if (draft.lifeStage) {
+      const minAge = draft.lifeStage === 'youth' ? 18 : 36;
+      const maxAge = draft.lifeStage === 'youth' ? 35 : 55;
+      
+      if (characterAge < minAge) {
+        setCharacterAge(minAge);
+      } else if (characterAge > maxAge) {
+        setCharacterAge(maxAge);
+      }
+    }
+  }, [draft.lifeStage, characterAge]);
+
   const steps = [
     '拍摄原型照片',
     '拍摄房间一角',
@@ -280,14 +297,20 @@ export const CreateCharacterScreen: React.FC = () => {
           <View style={styles.ageContainer}>
             <TouchableOpacity 
               style={styles.ageButton}
-              onPress={() => setCharacterAge(Math.max(18, characterAge - 1))}
+              onPress={() => {
+                const minAge = draft.lifeStage === 'youth' ? 18 : 36;
+                setCharacterAge(Math.max(minAge, characterAge - 1));
+              }}
             >
               <Text style={styles.ageButtonText}>‹</Text>
             </TouchableOpacity>
             <Text style={styles.ageText}>{characterAge}岁</Text>
             <TouchableOpacity 
               style={styles.ageButton}
-              onPress={() => setCharacterAge(Math.min(55, characterAge + 1))}
+              onPress={() => {
+                const maxAge = draft.lifeStage === 'youth' ? 35 : 55;
+                setCharacterAge(Math.min(maxAge, characterAge + 1));
+              }}
             >
               <Text style={styles.ageButtonText}>›</Text>
             </TouchableOpacity>

@@ -41,15 +41,6 @@ export const ChatScreen: React.FC = () => {
   const handleSend = async () => {
     if (!inputText.trim() || !character) return;
 
-    const tempMessage: Message = {
-      id: 'temp-' + Date.now(),
-      characterId: character.id,
-      sender: 'player',
-      content: inputText.trim(),
-      timestamp: new Date().toISOString(),
-      status: 'sending',
-    };
-    appendMessage(character.id, tempMessage);
     setInputText('');
     setSending(true);
 
