@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, ActivityIndicator, TextInput } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, ActivityIndicator, TextInput, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -20,6 +20,11 @@ export const CreateCharacterScreen: React.FC = () => {
   const [characterAge, setCharacterAge] = useState(25);
   const [characterGender, setCharacterGender] = useState<'male' | 'female' | 'neutral' | 'unknown'>('neutral');
 
+  // 光点动画值
+  const lightDotAnimations = useRef(
+    Array.from({ length: 20 }, () => new Animated.Value(0))
+  ).current;
+
   useEffect(() => {
     resetDraft();
   }, []);
@@ -36,6 +41,28 @@ export const CreateCharacterScreen: React.FC = () => {
       }
     }
   }, [draft.lifeStage, characterAge]);
+
+  useEffect(() => {
+    if (draft.step === 2) {
+      // 启动所有光点动画
+      lightDotAnimations.forEach((animatedValue, index) => {
+        Animated.loop(
+          Animated.sequence([
+            Animated.timing(animatedValue, {
+              toValue: 1,
+              duration: Math.random() * 2000 + 1000,
+              useNativeDriver: true,
+            }),
+            Animated.timing(animatedValue, {
+              toValue: 0,
+              duration: Math.random() * 2000 + 1000,
+              useNativeDriver: true,
+            }),
+          ])
+        ).start();
+      });
+    }
+  }, [draft.step, lightDotAnimations]);
 
   const steps = [
     '拍摄原型照片',
@@ -171,93 +198,143 @@ export const CreateCharacterScreen: React.FC = () => {
   const renderStep0 = () => (
     <View style={styles.stepContent}>
       <Text style={styles.stepTitle}>拍下它</Text>
-      <Text style={styles.stepSubtitle}>让它成为某个人的起点</Text>
+      <Text style={styles.stepSubtitle}>宠物 · 植物 · 玩具 · 物品</Text>
       
-      <View style={styles.cameraFrame}>
-        {draft.photoUri ? (
-          <Image source={{ uri: draft.photoUri }} style={styles.photo} />
-        ) : (
-          <View style={styles.cameraPlaceholder}>
-            <Text style={styles.cameraIcon}>📷</Text>
-            <Text style={styles.cameraText}>拍摄原型照片</Text>
-          </View>
-        )}
+      <View style={styles.cameraFrameContainer}>
+        <View style={styles.cameraFrame}>
+          {draft.photoUri ? (
+            <Image source={{ uri: draft.photoUri }} style={styles.photo} />
+          ) : (
+            <View style={styles.cameraPlaceholder}>
+              <Text style={styles.cameraIcon}>📷</Text>
+              <Text style={styles.cameraText}>拍摄原型照片</Text>
+            </View>
+          )}
+        </View>
+        {/* 四角棕金装饰线 */}
+        <View style={styles.cornerTopLeft} />
+        <View style={styles.cornerTopRight} />
+        <View style={styles.cornerBottomLeft} />
+        <View style={styles.cornerBottomRight} />
       </View>
 
-      <Text style={styles.hint}>宠物 · 植物 · 玩具 · 物品</Text>
-
       <View style={styles.buttonRow}>
-        <Button title="📷 相机" onPress={handleTakePhoto} variant="secondary" style={{ flex: 1 }} />
-        <Button title="从相册" onPress={handlePickPhoto} variant="secondary" style={{ flex: 1 }} />
+        <Button title="相机" onPress={handleTakePhoto} variant="secondary" style={{ flex: 1 }} />
+        <Button title="从相册选取" onPress={handlePickPhoto} variant="secondary" style={{ flex: 1 }} />
       </View>
     </View>
   );
 
   const renderStep1 = () => (
     <View style={styles.stepContent}>
-      <Text style={styles.stepTitle}>拍下房间一角</Text>
-      <Text style={styles.stepSubtitle}>让它成为角色的居所</Text>
+      <Text style={styles.stepTitle}>拍下你的一个角落</Text>
+      <Text style={styles.stepSubtitle}>让他有个地方可以回来</Text>
       
-      <View style={styles.cameraFrame}>
-        {draft.roomPhotoUri ? (
-          <Image source={{ uri: draft.roomPhotoUri }} style={styles.photo} />
-        ) : (
-          <View style={styles.cameraPlaceholder}>
-            <Text style={styles.cameraIcon}>🏠</Text>
-            <Text style={styles.cameraText}>拍摄房间照片</Text>
-          </View>
-        )}
+      <View style={styles.cameraFrameContainer}>
+        <View style={styles.cameraFrame}>
+          {draft.roomPhotoUri ? (
+            <Image source={{ uri: draft.roomPhotoUri }} style={styles.photo} />
+          ) : (
+            <View style={styles.cameraPlaceholder}>
+              <Text style={styles.cameraIcon}>🏠</Text>
+              <Text style={styles.cameraText}>拍摄房间照片</Text>
+            </View>
+          )}
+          {/* 网格线覆盖效果 */}
+          <View style={styles.gridOverlay} />
+        </View>
+        {/* 四角棕金装饰线 */}
+        <View style={styles.cornerTopLeft} />
+        <View style={styles.cornerTopRight} />
+        <View style={styles.cornerBottomLeft} />
+        <View style={styles.cornerBottomRight} />
       </View>
 
       <View style={styles.buttonRow}>
         <Button title="📷 相机" onPress={handleTakePhoto} variant="secondary" style={{ flex: 1 }} />
-        <Button title="从相册" onPress={handlePickPhoto} variant="secondary" style={{ flex: 1 }} />
+        <Button title="从相册选取" onPress={handlePickPhoto} variant="secondary" style={{ flex: 1 }} />
       </View>
     </View>
   );
 
   const renderStep2 = () => (
-    <View style={styles.stepContent}>
-      <Text style={styles.stepTitle}>生成仪式</Text>
-      <Text style={styles.stepSubtitle}>他正在从那些照片里生长出来</Text>
+    <View style={styles.ritualContainer}>
+      {/* 棕金光点动画 */}
+      <View style={styles.lightDotsContainer}>
+        {lightDotAnimations.map((animatedValue, index) => {
+          const size = Math.random() * 10 + 5;
+          const offsetY = Math.random() * 50 - 25;
+          const offsetX = Math.random() * 50 - 25;
+          
+          return (
+            <Animated.View
+              key={index}
+              style={[
+                styles.lightDot,
+                {
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  width: size,
+                  height: size,
+                  opacity: animatedValue.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0.2, 1],
+                  }),
+                  transform: [
+                    {
+                      translateY: animatedValue.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, offsetY],
+                      }),
+                    },
+                    {
+                      translateX: animatedValue.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, offsetX],
+                      }),
+                    },
+                  ],
+                },
+              ]}
+            />
+          );
+        })}
+      </View>
       
-      <View style={styles.generatingContainer}>
-        {loading ? (
-          <ActivityIndicator size="large" color={colors.accent.primary} />
-        ) : (
-          <View style={styles.glowContainer}>
-            <View style={styles.glow} />
-            <Text style={styles.glowText}>...</Text>
-          </View>
-        )}
+      {/* 两行serif文案 */}
+      <View style={styles.ritualTextContainer}>
+        <Text style={styles.ritualText}>他正在从那些照片里</Text>
+        <Text style={styles.ritualText}>生长出来</Text>
       </View>
     </View>
   );
 
   const renderStep3 = () => (
     <View style={styles.stepContent}>
-      <Text style={styles.stepTitle}>选择成熟度</Text>
-      <Text style={styles.stepSubtitle}>决定角色的成长阶段</Text>
+      <Text style={styles.stepTitle}>他现在几岁</Text>
+      <Text style={styles.stepSubtitle}>这是他来到这里时的年纪</Text>
       
-      <View style={styles.lifeStageContainer}>
+      <View style={styles.lifeStageContainerVertical}>
         <TouchableOpacity
-          style={[styles.lifeStageOption, draft.lifeStage === 'youth' && styles.lifeStageSelected]}
+          style={[styles.lifeStageOptionVertical, draft.lifeStage === 'youth' && styles.lifeStageSelectedVertical]}
           onPress={() => handleSelectLifeStage('youth')}
         >
-          <Text style={[styles.lifeStageText, draft.lifeStage === 'youth' && styles.lifeStageTextSelected]}>
+          <Text style={[styles.lifeStageTextVertical, draft.lifeStage === 'youth' && styles.lifeStageTextSelectedVertical]}>
             青年期
           </Text>
-          <Text style={styles.lifeStageDescription}>18-35岁</Text>
+          <Text style={styles.lifeStageAgeVertical}>18-35岁</Text>
+          <Text style={styles.lifeStagePersonalityVertical}>充满活力，对世界充满好奇</Text>
         </TouchableOpacity>
         
         <TouchableOpacity
-          style={[styles.lifeStageOption, draft.lifeStage === 'prime' && styles.lifeStageSelected]}
+          style={[styles.lifeStageOptionVertical, draft.lifeStage === 'prime' && styles.lifeStageSelectedVertical]}
           onPress={() => handleSelectLifeStage('prime')}
         >
-          <Text style={[styles.lifeStageText, draft.lifeStage === 'prime' && styles.lifeStageTextSelected]}>
+          <Text style={[styles.lifeStageTextVertical, draft.lifeStage === 'prime' && styles.lifeStageTextSelectedVertical]}>
             壮年期
           </Text>
-          <Text style={styles.lifeStageDescription}>36-55岁</Text>
+          <Text style={styles.lifeStageAgeVertical}>36-55岁</Text>
+          <Text style={styles.lifeStagePersonalityVertical}>成熟稳重，富有生活智慧</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -269,16 +346,19 @@ export const CreateCharacterScreen: React.FC = () => {
       <Text style={styles.stepSubtitle}>确认角色的详细信息</Text>
       
       <View style={styles.draftContainer}>
-        {/* 外形预览 */}
+        {/* 头像预览 */}
         <View style={styles.avatarContainer}>
           <View style={styles.avatarPlaceholder}>
             <Text style={styles.avatarIcon}>👤</Text>
           </View>
         </View>
 
-        {/* 名字输入 */}
+        {/* 名字输入框（标注"必填*"） */}
         <View style={styles.inputGroup}>
-          <Text style={styles.label}>名字 * 必填</Text>
+          <View style={styles.nameLabelContainer}>
+            <Text style={styles.label}>名字</Text>
+            <Text style={styles.requiredMark}>*</Text>
+          </View>
           <View style={styles.inputContainer}>
             <TextInput
               style={styles.input}
@@ -291,7 +371,7 @@ export const CreateCharacterScreen: React.FC = () => {
           </View>
         </View>
 
-        {/* 年龄微调 */}
+        {/* 年龄行（数值+左右微调按钮，根据所选成熟度动态限制） */}
         <View style={styles.inputGroup}>
           <Text style={styles.label}>年龄</Text>
           <View style={styles.ageContainer}>
@@ -317,15 +397,14 @@ export const CreateCharacterScreen: React.FC = () => {
           </View>
         </View>
 
-        {/* 性别选择 */}
+        {/* 性别行（"女/男/其他"三选一横排单选） */}
         <View style={styles.inputGroup}>
           <Text style={styles.label}>性别</Text>
           <View style={styles.genderContainer}>
             {[
-              { value: 'male', label: '男' },
               { value: 'female', label: '女' },
-              { value: 'neutral', label: '中性' },
-              { value: 'unknown', label: '未知' },
+              { value: 'male', label: '男' },
+              { value: 'neutral', label: '其他' },
             ].map((gender) => (
               <TouchableOpacity
                 key={gender.value}
@@ -348,7 +427,7 @@ export const CreateCharacterScreen: React.FC = () => {
           </View>
         </View>
 
-        {/* 背景故事（只读） */}
+        {/* 背景区块（只读文字描述） */}
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>背景（只读）</Text>
           <View style={styles.sectionContent}>
@@ -379,7 +458,7 @@ export const CreateCharacterScreen: React.FC = () => {
           </View>
         </View>
 
-        {/* 兴趣标签（只读） */}
+        {/* 兴趣标签区块（圆形标签） */}
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>兴趣</Text>
           <View style={styles.tagsContainer}>
@@ -400,8 +479,43 @@ export const CreateCharacterScreen: React.FC = () => {
     </View>
   );
 
+  const renderEmptyMap = () => (
+    <View style={styles.emptyMapContainer}>
+      {/* 全屏地图背景 */}
+      <View style={styles.mapBackground}>
+        {/* 城市名 */}
+        <Text style={styles.cityName}>上海</Text>
+        
+        {/* 网格线纹理 */}
+        <View style={styles.gridOverlay} />
+      </View>
+      
+      {/* 中央浮层提示卡片 */}
+      <View style={styles.guideCard}>
+        <Text style={styles.guideTitle}>世界在等待</Text>
+        <Text style={styles.guideSubtitle}>创造一个属于你的数字生命</Text>
+        
+        <View style={styles.guideButtons}>
+          <Button
+            title="开始创建"
+            onPress={() => updateDraft({ step: 0 })}
+            style={styles.guidePrimaryButton}
+          />
+          <Button
+            title="浏览热门目的地"
+            onPress={() => {}}
+            variant="secondary"
+            style={styles.guideSecondaryButton}
+          />
+        </View>
+      </View>
+    </View>
+  );
+
   const renderContent = () => {
     switch (draft.step) {
+      case -1:
+        return renderEmptyMap();
       case 0:
         return renderStep0();
       case 1:
@@ -419,65 +533,73 @@ export const CreateCharacterScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={styles.backText}>×</Text>
-        </TouchableOpacity>
-        
-        <View style={styles.progressContainer}>
-          {steps.map((step, index) => (
-            <View key={index} style={styles.progressItem}>
-              <View
-                style={[
-                  styles.progressDot,
-                  index <= draft.step && styles.progressDotActive,
-                ]}
-              />
-              {index < steps.length - 1 && (
+      {draft.step !== -1 && draft.step !== 2 && (
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+            <Text style={styles.backText}>×</Text>
+          </TouchableOpacity>
+          
+          <View style={styles.progressContainer}>
+            {steps.map((step, index) => (
+              <View key={index} style={styles.progressItem}>
                 <View
                   style={[
-                    styles.progressLine,
-                    index < draft.step && styles.progressLineActive,
+                    styles.progressDot,
+                    index <= draft.step && styles.progressDotActive,
                   ]}
                 />
-              )}
-            </View>
-          ))}
+                {index < steps.length - 1 && (
+                  <View
+                    style={[
+                      styles.progressLine,
+                      index < draft.step && styles.progressLineActive,
+                    ]}
+                  />
+                )}
+              </View>
+            ))}
+          </View>
         </View>
-      </View>
+      )}
 
-      <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
-        {renderContent()}
-      </ScrollView>
+      {draft.step === -1 || draft.step === 2 ? (
+        renderContent()
+      ) : (
+        <>
+          <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
+            {renderContent()}
+          </ScrollView>
 
-      <View style={styles.footer}>
-        {draft.step > 0 && (
-          <Button
-            title="返回"
-            onPress={handlePrevious}
-            variant="secondary"
-            style={styles.footerButton}
-          />
-        )}
-        
-        {draft.step < steps.length - 1 ? (
-          <Button
-            title={draft.step === 2 ? '生成' : '下一步'}
-            onPress={handleNext}
-            disabled={loading}
-            loading={loading}
-            style={draft.step === 0 ? { flex: 1 } : styles.footerButton}
-          />
-        ) : (
-          <Button
-            title="进入世界"
-            onPress={handleConfirm}
-            disabled={loading}
-            loading={loading}
-            style={styles.footerButton}
-          />
-        )}
-      </View>
+          <View style={styles.footer}>
+            {draft.step > 0 && (
+              <Button
+                title="返回"
+                onPress={handlePrevious}
+                variant="secondary"
+                style={styles.footerButton}
+              />
+            )}
+            
+            {draft.step < steps.length - 1 ? (
+              <Button
+                title={draft.step === 2 ? '生成' : (draft.step === 3 ? '继续' : '下一步')}
+                onPress={handleNext}
+                disabled={loading}
+                loading={loading}
+                style={draft.step === 0 ? { flex: 1 } : styles.footerButton}
+              />
+            ) : (
+              <Button
+                title="就是她了"
+                onPress={handleConfirm}
+                disabled={loading || !characterName.trim()}
+                loading={loading}
+                style={styles.footerButton}
+              />
+            )}
+          </View>
+        </>
+      )}
     </SafeAreaView>
   );
 };
@@ -557,16 +679,61 @@ const styles = StyleSheet.create({
     color: colors.text.tertiary,
     marginBottom: spacing.xl,
   },
+  cameraFrameContainer: {
+    position: 'relative',
+    marginBottom: spacing.md,
+  },
   cameraFrame: {
     width: 350,
     height: 380,
     borderRadius: borderRadius.card,
     backgroundColor: colors.background.secondary,
-    borderWidth: 1,
-    borderColor: colors.border.subtle,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: spacing.md,
+  },
+  cornerTopLeft: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: 40,
+    height: 40,
+    borderTopWidth: 2,
+    borderLeftWidth: 2,
+    borderColor: colors.accent.primary,
+    borderTopLeftRadius: borderRadius.card,
+  },
+  cornerTopRight: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    width: 40,
+    height: 40,
+    borderTopWidth: 2,
+    borderRightWidth: 2,
+    borderColor: colors.accent.primary,
+    borderTopRightRadius: borderRadius.card,
+  },
+  cornerBottomLeft: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: 40,
+    height: 40,
+    borderBottomWidth: 2,
+    borderLeftWidth: 2,
+    borderColor: colors.accent.primary,
+    borderBottomLeftRadius: borderRadius.card,
+  },
+  cornerBottomRight: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    width: 40,
+    height: 40,
+    borderBottomWidth: 2,
+    borderRightWidth: 2,
+    borderColor: colors.accent.primary,
+    borderBottomRightRadius: borderRadius.card,
   },
   photo: {
     width: '100%',
@@ -594,31 +761,7 @@ const styles = StyleSheet.create({
     gap: spacing.sm,
     width: '100%',
   },
-  generatingContainer: {
-    width: 200,
-    height: 200,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: spacing.xl,
-  },
-  glowContainer: {
-    width: 150,
-    height: 150,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  glow: {
-    position: 'absolute',
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    backgroundColor: colors.accent.primary,
-    opacity: 0.1,
-  },
-  glowText: {
-    fontSize: 32,
-    color: colors.accent.primary,
-  },
+
   lifeStageContainer: {
     flexDirection: 'row',
     gap: spacing.md,
@@ -648,6 +791,43 @@ const styles = StyleSheet.create({
   lifeStageDescription: {
     fontSize: typography.small.fontSize,
     color: colors.text.tertiary,
+  },
+  
+  // 纵向排列的成熟度选项样式
+  lifeStageContainerVertical: {
+    width: '100%',
+    gap: spacing.md,
+    marginVertical: spacing.xl,
+  },
+  lifeStageOptionVertical: {
+    padding: spacing.md,
+    borderRadius: borderRadius.card,
+    backgroundColor: colors.background.secondary,
+    borderWidth: 1,
+    borderColor: colors.border.default,
+    alignItems: 'flex-start',
+  },
+  lifeStageSelectedVertical: {
+    borderColor: colors.accent.primary,
+  },
+  lifeStageTextVertical: {
+    fontSize: typography.body.fontSize,
+    fontWeight: '500',
+    color: colors.text.primary,
+    marginBottom: spacing.xs,
+  },
+  lifeStageTextSelectedVertical: {
+    color: colors.accent.primary,
+  },
+  lifeStageAgeVertical: {
+    fontSize: typography.small.fontSize,
+    color: colors.text.tertiary,
+    marginBottom: spacing.xs,
+  },
+  lifeStagePersonalityVertical: {
+    fontSize: typography.body.fontSize,
+    color: colors.text.secondary,
+    lineHeight: 20,
   },
   confirmContainer: {
     alignItems: 'center',
@@ -681,6 +861,16 @@ const styles = StyleSheet.create({
     fontSize: typography.body.fontSize,
     color: colors.text.primary,
     marginBottom: spacing.xs,
+  },
+  nameLabelContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: spacing.xs,
+  },
+  requiredMark: {
+    fontSize: typography.body.fontSize,
+    color: colors.accent.primary,
+    marginLeft: spacing.xs,
   },
   inputContainer: {
     width: '100%',
@@ -824,5 +1014,95 @@ const styles = StyleSheet.create({
   },
   footerButton: {
     flex: 1,
+  },
+  
+  // 角色生成仪式界面样式
+  ritualContainer: {
+    flex: 1,
+    backgroundColor: colors.background.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+  },
+  lightDotsContainer: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  lightDot: {
+    position: 'absolute',
+    backgroundColor: colors.accent.primary,
+    borderRadius: 50,
+  },
+  ritualTextContainer: {
+    alignItems: 'center',
+  },
+  ritualText: {
+    fontSize: 18,
+    fontWeight: '300',
+    color: colors.text.secondary,
+    marginBottom: spacing.sm,
+    fontFamily: 'serif',
+  },
+
+  // 空世界地图引导界面样式
+  emptyMapContainer: {
+    flex: 1,
+    position: 'relative',
+  },
+  mapBackground: {
+    flex: 1,
+    backgroundColor: '#FAF8F5',
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cityName: {
+    fontSize: 24,
+    fontWeight: '300',
+    color: colors.text.tertiary,
+    letterSpacing: 3,
+    marginBottom: spacing.xl,
+  },
+  gridOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'transparent',
+  },
+  guideCard: {
+    position: 'absolute',
+    top: '45%',
+    left: '10%',
+    right: '10%',
+    backgroundColor: colors.background.secondary,
+    borderRadius: borderRadius.card,
+    padding: spacing.lg,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: colors.border.subtle,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  guideTitle: {
+    fontSize: typography.sectionTitle.fontSize,
+    fontWeight: '300',
+    color: colors.text.primary,
+    marginBottom: spacing.sm,
+  },
+  guideSubtitle: {
+    fontSize: typography.body.fontSize,
+    color: colors.text.secondary,
+    marginBottom: spacing.xl,
+    textAlign: 'center',
+  },
+  guideButtons: {
+    width: '100%',
+    gap: spacing.md,
+  },
+  guidePrimaryButton: {
+    width: '100%',
+  },
+  guideSecondaryButton: {
+    width: '100%',
   },
 });

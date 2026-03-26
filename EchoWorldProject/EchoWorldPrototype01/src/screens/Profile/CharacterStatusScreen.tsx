@@ -124,7 +124,11 @@ export const CharacterStatusScreen: React.FC = () => {
           <View style={styles.locationContent}>
             <Text style={styles.locationIcon}>📍</Text>
             <View style={styles.locationInfo}>
-              <Text style={styles.locationName}>{currentCharacter.currentLocation.landmarkName}</Text>
+              {currentCharacter.status === 'traveling' ? (
+                <Text style={styles.locationName}>在去 {currentCharacter.currentLocation.landmarkName} 的路上</Text>
+              ) : (
+                <Text style={styles.locationName}>{currentCharacter.currentLocation.landmarkName}</Text>
+              )}
               <Text style={styles.locationMeta}>
                 {currentCharacter.currentLocation.city} · {new Date(currentCharacter.currentLocation.localTime).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}
               </Text>
@@ -217,6 +221,23 @@ export const CharacterStatusScreen: React.FC = () => {
             </View>
           </Card>
         </View>
+
+        {currentCharacter.todaySummary.charactersEncountered && currentCharacter.todaySummary.charactersEncountered.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>近期朋友</Text>
+            <Card>
+              {currentCharacter.todaySummary.charactersEncountered.slice(0, 3).map((friend, index) => (
+                <View key={index} style={styles.friendItem}>
+                  <Avatar name={friend.name} size={36} />
+                  <View style={styles.friendInfo}>
+                    <Text style={styles.friendName}>{friend.name}</Text>
+                    <Text style={styles.friendRelation}>聊得火热</Text>
+                  </View>
+                </View>
+              ))}
+            </Card>
+          </View>
+        )}
       </ScrollView>
 
       <View style={styles.footer}>
@@ -414,6 +435,24 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: spacing.xs,
     justifyContent: 'flex-end',
+  },
+  friendItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: spacing.sm,
+  },
+  friendInfo: {
+    flex: 1,
+    marginLeft: spacing.sm,
+  },
+  friendName: {
+    fontSize: typography.body.fontSize,
+    color: colors.text.primary,
+  },
+  friendRelation: {
+    fontSize: typography.caption.fontSize,
+    color: colors.text.secondary,
+    marginTop: 2,
   },
   footer: {
     paddingHorizontal: spacing.pagePadding,

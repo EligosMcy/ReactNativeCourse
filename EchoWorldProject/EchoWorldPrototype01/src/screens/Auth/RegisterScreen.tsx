@@ -15,36 +15,40 @@ export const RegisterScreen: React.FC = () => {
   const navigation = useNavigation<RegisterNavigationProp>();
   const { setAuth } = useAuthStore();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleRegister = async () => {
-    if (!email || !password || !confirmPassword) {
-      Alert.alert('提示', '请填写所有字段');
+  const handleContinue = async () => {
+    if (!email) {
+      Alert.alert('提示', '请填写邮箱地址');
       return;
     }
 
-    if (password !== confirmPassword) {
-      Alert.alert('提示', '两次密码输入不一致');
-      return;
-    }
-
-    if (password.length < 8) {
-      Alert.alert('提示', '密码需要至少8个字符');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      Alert.alert('提示', '请输入有效的邮箱地址');
       return;
     }
 
     setLoading(true);
     try {
-      const { player, tokens } = await mockApi.auth.register(email, password);
-      await setAuth(player, tokens);
-      navigation.replace('PlayerSetup');
+      const exists = await mockApi.auth.checkEmailExists(email);
+      if (exists) {
+        Alert.alert('提示', '该邮箱已有账户', [
+          { text: '取消', style: 'cancel' },
+          { text: '去登录', onPress: () => navigation.navigate('Login') }
+        ]);
+        return;
+      }
+      navigation.navigate('SetPassword', { email });
     } catch (error) {
-      Alert.alert('注册失败', '请稍后重试');
+      Alert.alert('提示', '请稍后重试');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleGoogleRegister = () => {
+    Alert.alert('Google注册', 'Google注册功能即将上线');
   };
 
   return (
@@ -56,7 +60,7 @@ export const RegisterScreen: React.FC = () => {
 
         <View style={styles.header}>
           <Text style={styles.title}>创建账户</Text>
-          <Text style={styles.subtitle}>开启你的数字居所之旅</Text>
+          <Text style={styles.subtitle}>用邮箱开始</Text>
         </View>
 
         <View style={styles.form}>
@@ -68,25 +72,21 @@ export const RegisterScreen: React.FC = () => {
             keyboardType="email-address"
             autoCapitalize="none"
           />
-          <Input
-            label="密码"
-            placeholder="请输入密码（至少8位）"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-            showPasswordToggle
-          />
-          <Input
-            label="确认密码"
-            placeholder="请再次输入密码"
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-            secureTextEntry
-            showPasswordToggle
-          />
         </View>
 
-        <Button title="创建账户" onPress={handleRegister} loading={loading} />
+        <Button title="继续" onPress={handleContinue} loading={loading} />
+
+        <View style={styles.dividerContainer}>
+          <View style={styles.divider} />
+          <Text style={styles.dividerText}>或</Text>
+          <View style={styles.divider} />
+        </View>
+
+        <Button
+          title="Google注册"
+          onPress={handleGoogleRegister}
+          variant="secondary"
+        />
 
         <Text style={styles.hint}>
           已有账户？<Text style={styles.link} onPress={() => navigation.navigate('Login')}>登录</Text>
@@ -132,6 +132,21 @@ const styles = StyleSheet.create({
   },
   form: {
     marginBottom: spacing.lg,
+  },
+  dividerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: spacing.lg,
+  },
+  divider: {
+    flex: 1,
+    height: 1,
+    backgroundColor: colors.border.subtle,
+  },
+  dividerText: {
+    fontSize: typography.caption.fontSize,
+    color: colors.text.tertiary,
+    marginHorizontal: spacing.md,
   },
   hint: {
     fontSize: typography.caption.fontSize,

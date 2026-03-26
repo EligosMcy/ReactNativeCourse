@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'rea
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { colors, typography, spacing } from '../../theme';
+import { colors, typography, spacing, borderRadius } from '../../theme';
 import { Button, Input } from '../../components/ui';
 import { useAuthStore } from '../../stores';
 import { mockApi } from '../../services/mockApi';
@@ -49,17 +49,23 @@ export const LoginScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+      {/* 顶部固定Header */}
+      <View style={styles.headerBar}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Text style={styles.backText}>←</Text>
         </TouchableOpacity>
+        <Text style={styles.brandName}>ECHOWORLD</Text>
+        <View style={styles.placeholder} />
+      </View>
 
-        <View style={styles.header}>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <View style={styles.titleSection}>
           <Text style={styles.title}>登录</Text>
           <Text style={styles.subtitle}>欢迎回来</Text>
         </View>
 
-        <View style={styles.form}>
+        {/* 卡片式表单容器 */}
+        <View style={styles.card}>
           <Input
             label="邮箱地址"
             placeholder="请输入邮箱"
@@ -75,18 +81,19 @@ export const LoginScreen: React.FC = () => {
             onChangeText={setPassword}
             secureTextEntry
             showPasswordToggle
+            style={styles.passwordInput}
           />
+
+          <Button title="登录" onPress={handleLogin} loading={loading} style={styles.loginButton} />
+
+          <View style={styles.divider}>
+            <View style={styles.dividerLine} />
+            <Text style={styles.dividerText}>或</Text>
+            <View style={styles.dividerLine} />
+          </View>
+
+          <Button title="验证码登录" variant="secondary" onPress={handleCodeLogin} />
         </View>
-
-        <Button title="登录" onPress={handleLogin} loading={loading} />
-
-        <View style={styles.divider}>
-          <View style={styles.dividerLine} />
-          <Text style={styles.dividerText}>或</Text>
-          <View style={styles.dividerLine} />
-        </View>
-
-        <Button title="验证码登录" variant="secondary" onPress={handleCodeLogin} />
 
         <Text style={styles.hint}>忘记密码？用验证码登录即可</Text>
       </ScrollView>
@@ -99,13 +106,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background.primary,
   },
-  scrollContent: {
+  // 顶部固定Header
+  headerBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: spacing.pagePadding,
-    paddingTop: spacing.xl,
+    paddingVertical: spacing.md,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border.subtle,
+    backgroundColor: colors.background.primary,
   },
   backButton: {
-    width: 56,
-    height: 56,
+    width: 44,
+    height: 44,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -113,8 +127,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: colors.text.secondary,
   },
-  header: {
-    marginTop: spacing.lg,
+  brandName: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: colors.text.primary,
+    letterSpacing: 1,
+  },
+  placeholder: {
+    width: 44,
+  },
+  scrollContent: {
+    paddingHorizontal: spacing.pagePadding,
+    paddingTop: spacing.xl,
+    paddingBottom: spacing.xl,
+  },
+  titleSection: {
     marginBottom: spacing.xl,
   },
   title: {
@@ -128,8 +155,19 @@ const styles = StyleSheet.create({
     color: colors.text.tertiary,
     marginTop: spacing.xs,
   },
-  form: {
-    marginBottom: spacing.lg,
+  // 卡片式表单容器
+  card: {
+    backgroundColor: colors.background.secondary,
+    borderRadius: borderRadius.card,
+    padding: spacing.md,
+    borderWidth: 1,
+    borderColor: colors.border.default,
+  },
+  passwordInput: {
+    marginTop: spacing.md,
+  },
+  loginButton: {
+    marginTop: spacing.lg,
   },
   divider: {
     flexDirection: 'row',
@@ -139,7 +177,7 @@ const styles = StyleSheet.create({
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: colors.border.default,
+    backgroundColor: colors.border.subtle,
   },
   dividerText: {
     fontSize: typography.small.fontSize,

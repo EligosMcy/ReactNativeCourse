@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, typography, spacing } from '../../theme';
@@ -14,6 +14,7 @@ export const SplashScreen: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuthStore();
   const { characters } = useCharacterStore();
   const [isNavigationComplete, setIsNavigationComplete] = useState(false);
+  const fadeAnim = new Animated.Value(0);
 
   useEffect(() => {
     initializeAuth();
@@ -33,6 +34,14 @@ export const SplashScreen: React.FC = () => {
     }
   }, [isLoading, isAuthenticated, characters, navigation, isNavigationComplete]);
 
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  }, []);
+
   const handleStart = () => {
     navigation.navigate('Register');
   };
@@ -43,21 +52,23 @@ export const SplashScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Text style={styles.logo}>ECHO</Text>
-        <Text style={styles.logo}>WORLD</Text>
-        <Text style={styles.tagline}>一个数字居所</Text>
-      </View>
-
-      <View style={styles.divider} />
-
-      <View style={styles.buttonContainer}>
-        <Button title="开始" onPress={handleStart} />
-        <View style={styles.loginLink}>
-          <Text style={styles.loginText}>已有账户？</Text>
-          <Button title="登录" variant="ghost" onPress={handleLogin} />
+      <StatusBar hidden />
+      <Animated.View style={[styles.content, { opacity: fadeAnim }]}>
+        <View style={styles.logoContainer}>
+          <Text style={styles.logo}>ECHO</Text>
+          <Text style={styles.logo}>WORLD</Text>
+          <View style={styles.divider} />
+          <Text style={styles.tagline}>一个数字居所</Text>
         </View>
-      </View>
+
+        <View style={styles.buttonContainer}>
+          <Button title="开始" onPress={handleStart} />
+          <View style={styles.loginLink}>
+            <Text style={styles.loginText}>已有账户？</Text>
+            <Button title="登录" variant="ghost" onPress={handleLogin} />
+          </View>
+        </View>
+      </Animated.View>
     </View>
   );
 };
@@ -66,18 +77,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background.primary,
-    paddingHorizontal: spacing.pagePadding,
+  },
+  content: {
+    flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: spacing.pagePadding,
   },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: spacing.xl,
+    marginBottom: spacing.xl * 3,
   },
   logo: {
     fontFamily: 'serif',
     fontSize: typography.pageTitle.fontSize,
     fontWeight: typography.pageTitle.fontWeight,
-    letterSpacing: 12,
+    letterSpacing: 16,
     color: colors.text.primary,
   },
   tagline: {
@@ -90,10 +105,11 @@ const styles = StyleSheet.create({
     width: 80,
     height: 1,
     backgroundColor: colors.border.subtle,
-    alignSelf: 'center',
-    marginBottom: spacing.xl * 2,
+    marginTop: spacing.lg,
+    marginBottom: spacing.lg,
   },
   buttonContainer: {
+    width: '100%',
     gap: spacing.md,
   },
   loginLink: {

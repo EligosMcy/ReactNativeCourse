@@ -92,42 +92,23 @@ export const SettingsScreen: React.FC = () => {
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Card style={styles.profileCard}>
-          <View style={styles.profileContent}>
-            <Avatar name={player?.name || '?'} size={56} />
-            <View style={styles.profileInfo}>
-              <Text style={styles.profileName}>{player?.name || '未设置'}</Text>
-              <Text style={styles.profileGender}>
+        {/* 玩家信息区 */}
+        <TouchableOpacity style={styles.playerInfoContainer} onPress={() => navigation.navigate('EditProfile')}>
+          <View style={styles.playerInfoContent}>
+            <Avatar name={player?.name || '?'} size={52} />
+            <View style={styles.playerInfoDetails}>
+              <Text style={styles.playerName}>{player?.name || '未设置'}</Text>
+              <Text style={styles.playerGender}>
                 {player?.gender === 'male' ? '男' : player?.gender === 'female' ? '女' : player?.gender === 'other' ? '其他' : '不透露'}
               </Text>
             </View>
           </View>
-        </Card>
+          <Text style={styles.arrow}>›</Text>
+        </TouchableOpacity>
 
+        {/* 角色信息区 */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>账户</Text>
-          <Card>
-            <SettingItem title="Profile" onPress={() => {}} />
-            <View style={styles.divider} />
-            <SettingItem title="Change Password" onPress={() => {}} />
-            <View style={styles.divider} />
-            <SettingItem title="Change Email" onPress={() => {}} />
-            <View style={styles.divider} />
-            <SettingItem title="Sign Out" onPress={handleSignOut} showArrow={false} danger />
-            <View style={styles.divider} />
-            <SettingItem title="清空所有数据" onPress={handleClearAllData} showArrow={false} danger />
-          </Card>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>通知</Text>
-          <Card>
-            <SettingItem title="Notification" onPress={() => {}} />
-          </Card>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>角色</Text>
+          <Text style={styles.sectionTitle}>角色信息</Text>
           <Card>
             {characters.map((char, index) => (
               <React.Fragment key={char.id}>
@@ -148,17 +129,58 @@ export const SettingsScreen: React.FC = () => {
                     <Text style={styles.characterButtonText}>查看</Text>
                   </TouchableOpacity>
                   </View>
-                  {index< characters.length - 1 && (<View key={`divider-${char.id}`} style={styles.divider} />)}
+                  {index < characters.length - 1 && (
+                    <View key={`divider-${char.id}`} style={styles.divider} />
+                  )}
                 </React.Fragment>
               ))}
-            <View style={styles.divider} />
+            {characters.length > 0 && <View style={styles.divider} />}
             <SettingItem 
-              title={characters.length >0 ? "创建新角色" : "创建角色"} 
+              title={characters.length > 0 ? "创建新角色" : "创建角色"} 
               onPress={handleCreateCharacter} 
             />
           </Card>
         </View>
 
+        {/* 数据管理分组 */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>数据管理</Text>
+          <Card>
+            <SettingItem title="清空数据" onPress={handleClearAllData} showArrow={false} danger />
+          </Card>
+        </View>
+
+        {/* 账户分组 */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>账户</Text>
+          <Card>
+            <SettingItem title="Profile" onPress={() => navigation.navigate('EditProfile')} />
+            <View style={styles.divider} />
+            <SettingItem title="Change Password" onPress={() => {}} />
+            <View style={styles.divider} />
+            <SettingItem title="Change Email" onPress={() => {}} />
+            <View style={styles.divider} />
+            <SettingItem title="Sign Out" onPress={handleSignOut} showArrow={false} danger />
+          </Card>
+        </View>
+
+        {/* 通知分组 */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>通知</Text>
+          <Card>
+            <SettingItem title="Notification" onPress={() => navigation.navigate('NotificationSettings')} />
+          </Card>
+        </View>
+
+        {/* 偏好分组 */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>偏好</Text>
+          <Card>
+            <SettingItem title="Languages" onPress={() => {}} />
+          </Card>
+        </View>
+
+        {/* 支持分组 */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>支持</Text>
           <Card>
@@ -168,6 +190,7 @@ export const SettingsScreen: React.FC = () => {
           </Card>
         </View>
 
+        {/* 法律分组 */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>法律</Text>
           <Card>
@@ -204,23 +227,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.pagePadding,
     paddingBottom: spacing.xl,
   },
-  profileCard: {
+  playerInfoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: spacing.lg,
+    paddingVertical: spacing.md,
   },
-  profileContent: {
+  playerInfoContent: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.md,
   },
-  profileInfo: {
+  playerInfoDetails: {
     flex: 1,
   },
-  profileName: {
+  playerName: {
     fontSize: typography.body.fontSize,
     color: colors.text.primary,
     fontWeight: '500',
   },
-  profileGender: {
+  playerGender: {
     fontSize: typography.caption.fontSize,
     color: colors.text.secondary,
     marginTop: spacing.xs,

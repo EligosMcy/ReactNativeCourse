@@ -57,8 +57,8 @@ export const TimelineScreen: React.FC = () => {
         
         // 为每个角色生成随机帖子
         characters.forEach((char, charIndex) => {
-          for (let i = 0; i< 5; i++) {
-            const isImagePost = Math.random() >0.5;
+          for (let i = 0; i < 5; i++) {
+            const isImagePost = Math.random() > 0.5;
             generatedPosts.push({
               id: `${char.id}-post-${i}`,
               characterId: char.id,
@@ -71,7 +71,7 @@ export const TimelineScreen: React.FC = () => {
               publishedAt: new Date(Date.now() - 1000 * 60 * 60 * Math.floor(Math.random() * 72)).toISOString(),
               likeCount: Math.floor(Math.random() * 50),
               replyCount: Math.floor(Math.random() * 20),
-              isLikedByPlayer: Math.random() >0.7,
+              isLikedByPlayer: Math.random() > 0.7,
             });
           }
         });
@@ -144,11 +144,11 @@ export const TimelineScreen: React.FC = () => {
           </View>
         </View>
 
-        <Text style={styles.postText}>{item.text}</Text>
-
         {item.contentType === 'image' && item.imageUrl && (
           <Image source={{ uri: item.imageUrl }} style={styles.postImage} />
         )}
+
+        <Text style={styles.postText}>{item.text}</Text>
 
         <View style={styles.postActions}>
           <TouchableOpacity 
@@ -159,7 +159,7 @@ export const TimelineScreen: React.FC = () => {
             }}
           >
             <Text style={[styles.actionText, item.isLikedByPlayer && styles.likedText]}>
-              ♡ {item.likeCount}
+              {item.isLikedByPlayer ? '♥' : '♡'} {item.likeCount}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity 
@@ -270,6 +270,11 @@ const styles = StyleSheet.create({
   },
   postCard: {
     marginBottom: spacing.md,
+    backgroundColor: colors.background.primary,
+    borderRadius: borderRadius.card,
+    borderWidth: 1,
+    borderColor: colors.border.subtle,
+    padding: spacing.md,
   },
   postHeader: {
     flexDirection: 'row',
@@ -284,19 +289,19 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
   },
   postLocation: {
-    fontSize: typography.small.fontSize,
+    fontSize: typography.caption.fontSize,
     color: colors.text.tertiary,
-  },
-  postText: {
-    fontSize: typography.body.fontSize,
-    color: colors.text.secondary,
-    lineHeight: 22,
-    marginBottom: spacing.sm,
   },
   postImage: {
     width: '100%',
-    height: 150,
+    height: 220,
     borderRadius: borderRadius.card,
+    marginBottom: spacing.sm,
+  },
+  postText: {
+    fontSize: 14,
+    color: colors.text.secondary,
+    lineHeight: 22,
     marginBottom: spacing.sm,
   },
   postActions: {

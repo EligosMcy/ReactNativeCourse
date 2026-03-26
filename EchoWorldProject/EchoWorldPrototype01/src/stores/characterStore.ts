@@ -16,7 +16,7 @@ interface CharacterState {
 }
 
 const initialDraft: CharacterDraft = {
-  step: 0,
+  step: -1,
   photoUri: null,
   roomPhotoUri: null,
   generatedData: null,

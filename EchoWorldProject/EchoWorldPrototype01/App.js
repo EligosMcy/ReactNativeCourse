@@ -17,21 +17,15 @@ const queryClient = new QueryClient({
 });
 
 export default function App() {
-  const [isReady, setIsReady] = useState(false);
   const { loadDraft } = useCharacterStore();
 
   useEffect(() => {
     const init = async () => {
       await initializeAuth();
       await loadDraft();
-      setIsReady(true);
     };
     init();
   }, []);
-
-  if (!isReady) {
-    return null;
-  }
 
   return (
     <QueryClientProvider client={queryClient}>

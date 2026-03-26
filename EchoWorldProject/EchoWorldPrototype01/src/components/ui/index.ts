@@ -3,3 +3,4 @@ export * from './Input';
 export * from './Card';
 export * from './Avatar';
 export * from './MessageBubble';
+export * from './Toggle';

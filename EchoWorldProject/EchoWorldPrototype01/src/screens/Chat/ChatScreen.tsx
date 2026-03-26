@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -54,10 +54,30 @@ export const ChatScreen: React.FC = () => {
     }
   };
 
+  const handleInputPress = () => {
+    if (!character) return;
+    
+    if (character.isAbandoned) {
+      Alert.alert(
+        '发送消息即表示回来',
+        '发送消息即表示回来，倒计时解除',
+        [
+          { text: '取消', style: 'cancel' },
+          { text: '继续发送', onPress: () => { /* 可以在这里处理取消放弃的逻辑 */ } }
+        ]
+      );
+    }
+  };
+
   const getStatusText = () => {
     if (!character) return '';
+    return character.currentBehaviorDescription || '在线';
+  };
+
+  const getLocationText = () => {
+    if (!character) return '';
     const location = character.currentLocation;
-    return `${location.landmarkName} · ${location.city} ${new Date(location.localTime).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}`;
+    return `${location.city} · ${new Date(location.localTime).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}`;
   };
 
   return (
@@ -75,43 +95,71 @@ export const ChatScreen: React.FC = () => {
             style={styles.headerInfo}
             onPress={() => navigation.navigate('CharacterStatus', { characterId: character?.id || '' })}
           >
-            <Avatar name={character?.name || '?'} size={36} />
+            <View style={[
+              styles.avatarContainer,
+              character?.isAbandoned && styles.avatarAbandoned,
+              character?.isLost && styles.avatarLost
+            ]}>
+              <Avatar name={character?.name || '?'} size={36} style={character?.isLost && styles.avatarGrayscale} />
+            </View>
             <View style={styles.headerText}>
               <Text style={styles.headerName}>{character?.name || ''}</Text>
               <Text style={styles.headerStatus}>{getStatusText()}</Text>
             </View>
           </TouchableOpacity>
+          <Text style={styles.headerLocation}>{getLocationText()}</Text>
         </View>
 
-        <FlatList
-          ref={flatListRef}
-          data={characterMessages}
-          renderItem={({ item }) => <MessageBubble message={item} />}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.messageList}
-          onContentSizeChange={() => flatListRef.current?.scrollToEnd()}
-        />
-
-        <View style={styles.inputContainer}>
-        <View style={styles.inputWrapper}>
-          <TextInput
-            style={styles.input}
-            placeholder="..."
-            placeholderTextColor={colors.text.tertiary}
-            value={inputText}
-            onChangeText={setInputText}
-            multiline
-            maxLength={500}
+        <View style={styles.messageContainer}>
+          <FlatList
+            ref={flatListRef}
+            data={characterMessages}
+            renderItem={({ item }) => <MessageBubble message={item} />}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={styles.messageList}
+            onContentSizeChange={() => flatListRef.current?.scrollToEnd()}
           />
+          {character?.isLost && (
+            <View style={styles.messageGradientMask} />
+          )}
         </View>
-        <TouchableOpacity 
-          style={[styles.sendButton, (!inputText.trim() || sending) && styles.sendButtonDisabled]}
-          onPress={handleSend}
-          disabled={!inputText.trim() || sending}
-        >
-          <Text style={styles.sendIcon}>▶</Text>
-        </TouchableOpacity>
-      </View>
+
+        {!character?.isLost ? (
+          <View style={styles.inputContainer}>
+            <TouchableOpacity 
+              style={styles.inputWrapper}
+              onPress={handleInputPress}
+              disabled={!character?.isAbandoned}
+            >
+              <TextInput
+                style={styles.input}
+                placeholder={character?.isAbandoned ? "发一条消息，就是你回来了" : "..."}
+                placeholderTextColor={colors.text.tertiary}
+                value={character?.isAbandoned ? "" : inputText}
+                onChangeText={character?.isAbandoned ? undefined : setInputText}
+                multiline
+                maxLength={500}
+                editable={!character?.isAbandoned}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={[
+                styles.sendButton, 
+                ((!inputText.trim() || sending) || character?.isAbandoned) && styles.sendButtonDisabled
+              ]}
+              onPress={handleSend}
+              disabled={(!inputText.trim() || sending) || character?.isAbandoned}
+            >
+              <Text style={styles.sendIcon}>▶</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View style={styles.lostMessageContainer}>
+            <Text style={styles.lostMessage}>
+              {character?.name}已失踪于 {new Date().toLocaleDateString('zh-CN')}
+            </Text>
+          </View>
+        )}
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -160,10 +208,44 @@ const styles = StyleSheet.create({
   },
   headerStatus: {
     fontSize: typography.small.fontSize,
+    color: colors.text.secondary,
+  },
+  headerLocation: {
+    fontSize: typography.small.fontSize,
     color: colors.text.tertiary,
+    textAlign: 'right',
+  },
+  avatarContainer: {
+    borderRadius: 18,
+    overflow: 'hidden',
+  },
+  avatarAbandoned: {
+    borderWidth: 2,
+    borderColor: '#9E4A3A',
+    opacity: 0.75,
+  },
+  avatarLost: {
+    borderWidth: 2,
+    borderColor: '#C4B5A5',
+    opacity: 0.35,
+  },
+  avatarGrayscale: {
+    opacity: 0.35,
+  },
+  messageContainer: {
+    flex: 1,
+    position: 'relative',
   },
   messageList: {
     paddingVertical: spacing.md,
+  },
+  messageGradientMask: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 80,
+    backgroundColor: colors.background.primary,
   },
   inputContainer: {
     flexDirection: 'row',
@@ -204,5 +286,16 @@ const styles = StyleSheet.create({
   sendIcon: {
     fontSize: 14,
     color: colors.text.inverse,
+  },
+  lostMessageContainer: {
+    paddingHorizontal: spacing.pagePadding,
+    paddingVertical: spacing.md,
+    borderTopWidth: 1,
+    borderTopColor: colors.border.subtle,
+    alignItems: 'center',
+  },
+  lostMessage: {
+    fontSize: typography.body.fontSize,
+    color: colors.text.secondary,
   },
 });
