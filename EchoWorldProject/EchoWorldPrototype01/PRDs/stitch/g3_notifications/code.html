@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@300;400;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#eae8e5",
+              "outline": "#80756a",
+              "on-secondary-fixed": "#211b14",
+              "on-primary-fixed-variant": "#5a431f",
+              "background": "#fbf9f6",
+              "on-background": "#1b1c1a",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#1b1c1a",
+              "on-secondary": "#ffffff",
+              "inverse-on-surface": "#f2f0ed",
+              "tertiary-fixed": "#c5ebd5",
+              "on-error": "#ffffff",
+              "on-surface-variant": "#4e453b",
+              "on-tertiary-fixed": "#002114",
+              "on-secondary-container": "#6a6158",
+              "tertiary-container": "#587b68",
+              "surface-variant": "#e4e2df",
+              "on-tertiary-container": "#eefff3",
+              "on-primary-fixed": "#291800",
+              "surface-tint": "#745a34",
+              "primary-fixed-dim": "#e3c193",
+              "primary-container": "#8b6f47",
+              "inverse-primary": "#e3c193",
+              "outline-variant": "#d1c4b7",
+              "inverse-surface": "#30312f",
+              "on-tertiary": "#ffffff",
+              "secondary": "#665d54",
+              "tertiary-fixed-dim": "#aacfb9",
+              "surface": "#fbf9f6",
+              "error": "#ba1a1a",
+              "error-container": "#ffdad6",
+              "surface-dim": "#dbdad7",
+              "primary": "#705731",
+              "secondary-container": "#eaddd2",
+              "on-secondary-fixed-variant": "#4d453d",
+              "on-primary": "#ffffff",
+              "secondary-fixed": "#ede0d5",
+              "primary-fixed": "#ffddb1",
+              "surface-container-highest": "#e4e2df",
+              "on-tertiary-fixed-variant": "#2c4d3d",
+              "on-primary-container": "#fffaf8",
+              "on-error-container": "#93000a",
+              "surface-container-low": "#f5f3f0",
+              "surface-container": "#efeeeb",
+              "surface-bright": "#fbf9f6",
+              "tertiary": "#406251",
+              "secondary-fixed-dim": "#d1c4b9"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        background-color: #fbf9f6;
+        color: #1b1c1a;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-primary-fixed selection:text-on-primary-fixed min-h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-6 h-16 w-full bg-[#fbf9f6] sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity duration-300 text-[#705731]">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold tracking-widest text-[#705731] font-['Noto_Serif'] font-light uppercase">ECHOWORLD</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity duration-300 text-[#705731]">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</header>
+<main class="max-w-2xl mx-auto px-6 pt-8 pb-32">
+<!-- Editorial Header -->
+<section class="mb-12">
+<span class="text-secondary font-label text-sm uppercase tracking-widest block mb-2">System Preferences</span>
+<h2 class="font-headline text-4xl lg:text-5xl font-light tracking-tight text-on-surface">通知</h2>
+<p class="text-on-surface-variant mt-4 font-body leading-relaxed max-w-md">
+                管理您的提醒并策划您的宁静时刻。在数字居住中定义您的节奏。
+            </p>
+</section>
+<!-- Main Settings Bento-ish Grid -->
+<div class="space-y-6">
+<!-- Push Notifications Toggle Card -->
+<div class="bg-surface-container-low p-8 rounded-lg transition-colors duration-300 hover:bg-surface-container">
+<div class="flex items-center justify-between">
+<div class="space-y-1">
+<h3 class="font-headline text-xl text-primary">推送通知</h3>
+<p class="text-secondary text-sm">接收关于新发现和世界更新的实时提醒。</p>
+</div>
+<!-- Custom Toggle Switch -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-14 h-8 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Quiet Window Section -->
+<div class="bg-surface-container-low rounded-lg overflow-hidden">
+<div class="p-8 pb-4">
+<div class="flex items-center justify-between">
+<div class="space-y-1">
+<h3 class="font-headline text-xl text-primary">静默窗口</h3>
+<p class="text-secondary text-sm">在指定时间内暂停所有通知以保持专注。</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-14 h-8 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Time Settings List - No Lines Rule -->
+<div class="px-8 pb-8 pt-4 space-y-4">
+<div class="flex items-center justify-between py-4 group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline">schedule</span>
+<span class="font-body text-on-surface">开始时间</span>
+</div>
+<div class="bg-surface-container-highest px-4 py-2 rounded-full text-primary font-medium tracking-tight">
+                            22:00
+                        </div>
+</div>
+<div class="flex items-center justify-between py-4 group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline">alarm_off</span>
+<span class="font-body text-on-surface">结束时间</span>
+</div>
+<div class="bg-surface-container-highest px-4 py-2 rounded-full text-primary font-medium tracking-tight">
+                            07:00
+                        </div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-secondary/60 italic text-xs font-light">
+<span class="material-symbols-outlined text-sm">info</span>
+<span>时间以您的设备时区为准</span>
+</div>
+</div>
+</div>
+<!-- Decorative Visual Element -->
+<div class="relative h-48 rounded-lg overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent z-10"></div>
+<img alt="Peaceful interior" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Minimalist sunlit room with a single designer lamp and warm soft shadows on a linen textured wall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVJp0_I92p73FaWkIDfhZ0KO6S4XNiD91CCddBLe9jxeJkWI_bOSXexaWqT4fgK3kU_fjr_EPYy3PcQvaBPSGlGYMBhZpwWxFn1Sd7Iau0WJ2Gamn_VT2Yo83OWLF5xmKUGLwFDjj2QclL4S53AKQcWGXX4Nm_1BjiFe9g52QbdQA55miDal-JFFTg7xzK_LggneQKTY5db-3eAGwL9QqYtjGoKGnZbvqled6RrK7ud4rfT5JIyJkna8IePSEYuA4ufXUweeiGrjc2"/>
+<div class="absolute bottom-6 left-6 z-20">
+<span class="bg-white/10 backdrop-blur-md px-4 py-1 rounded-full text-white text-xs tracking-widest uppercase">Atmosphere</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#ffffff]/80 backdrop-blur-xl shadow-[0_-4px_40px_rgba(112,87,49,0.05)] rounded-t-[2rem]">
+<a class="flex flex-col items-center justify-center text-[#665d54] px-5 py-2 hover:bg-[#f5f3f0] transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-tight">World</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#665d54] px-5 py-2 hover:bg-[#f5f3f0] transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-tight">Discover</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#e4e2df] text-[#705731] rounded-full px-5 py-2 transition-transform duration-300 active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-tight">Settings</span>
+</a>
+</nav>
+</body></html>

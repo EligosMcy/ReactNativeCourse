@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@300;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#eae8e5",
+              "outline": "#80756a",
+              "on-secondary-fixed": "#211b14",
+              "on-primary-fixed-variant": "#5a431f",
+              "background": "#fbf9f6",
+              "on-background": "#1b1c1a",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#1b1c1a",
+              "on-secondary": "#ffffff",
+              "inverse-on-surface": "#f2f0ed",
+              "tertiary-fixed": "#c5ebd5",
+              "on-error": "#ffffff",
+              "on-surface-variant": "#4e453b",
+              "on-tertiary-fixed": "#002114",
+              "on-secondary-container": "#6a6158",
+              "tertiary-container": "#587b68",
+              "surface-variant": "#e4e2df",
+              "on-tertiary-container": "#eefff3",
+              "on-primary-fixed": "#291800",
+              "surface-tint": "#745a34",
+              "primary-fixed-dim": "#e3c193",
+              "primary-container": "#8b6f47",
+              "inverse-primary": "#e3c193",
+              "outline-variant": "#d1c4b7",
+              "inverse-surface": "#30312f",
+              "on-tertiary": "#ffffff",
+              "secondary": "#665d54",
+              "tertiary-fixed-dim": "#aacfb9",
+              "surface": "#fbf9f6",
+              "error": "#ba1a1a",
+              "error-container": "#ffdad6",
+              "surface-dim": "#dbdad7",
+              "primary": "#705731",
+              "secondary-container": "#eaddd2",
+              "on-secondary-fixed-variant": "#4d453d",
+              "on-primary": "#ffffff",
+              "secondary-fixed": "#ede0d5",
+              "primary-fixed": "#ffddb1",
+              "surface-container-highest": "#e4e2df",
+              "on-tertiary-fixed-variant": "#2c4d3d",
+              "on-primary-container": "#fffaf8",
+              "on-error-container": "#93000a",
+              "surface-container-low": "#f5f3f0",
+              "surface-container": "#efeeeb",
+              "surface-bright": "#fbf9f6",
+              "tertiary": "#406251",
+              "secondary-fixed-dim": "#d1c4b9"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+            font-size: 48px;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fbf9f6;
+        }
+        .serif-text {
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- Top Navigation Anchor -->
+<header class="flex justify-between items-center px-6 h-16 w-full bg-[#fbf9f6] dark:bg-[#1A1714]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-size: 24px;">arrow_back</span>
+</div>
+<h1 class="font-['Noto_Serif'] font-bold tracking-widest uppercase text-xl text-[#705731] dark:text-[#8B6F47]">ECHOWORLD</h1>
+<div class="w-10 h-10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-size: 24px;">account_circle</span>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-6 max-w-2xl mx-auto w-full">
+<!-- Editorial Layout: Asymmetric Decorative Element -->
+<div class="relative w-full mb-16 flex justify-center">
+<div class="absolute -top-12 -left-8 w-48 h-48 bg-secondary-container/30 rounded-full blur-3xl -z-10"></div>
+<!-- Minimalist Envelope Icon Container -->
+<div class="bg-surface-container-low p-12 rounded-lg shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container" data-icon="mail">mail</span>
+</div>
+</div>
+<!-- Verification Message -->
+<div class="text-center space-y-6">
+<h2 class="serif-text font-light text-4xl tracking-wider text-primary mb-4">验证邮件已发送</h2>
+<p class="text-on-surface-variant leading-relaxed text-lg max-w-md mx-auto">
+                我们已向您的邮箱发送了一封确认函，请点击邮件中的链接以激活您的账户：
+                <span class="block mt-3 font-semibold text-primary underline underline-offset-8 decoration-outline-variant/40">
+                    user@residence-digital.com
+                </span>
+</p>
+</div>
+<!-- Interaction Zone -->
+<div class="mt-16 w-full space-y-8 flex flex-col items-center">
+<!-- Resend Button with Cooldown State -->
+<div class="group relative">
+<button class="bg-primary-container text-on-primary-container px-12 py-4 rounded-lg font-medium tracking-wide flex items-center gap-3 opacity-60 cursor-not-allowed transition-all duration-300">
+<span>重新发送</span>
+<span class="text-sm font-mono bg-on-primary-container/10 px-2 py-0.5 rounded">60s</span>
+</button>
+</div>
+<!-- Contextual Footnote -->
+<div class="flex flex-col items-center gap-2">
+<p class="text-secondary text-sm font-medium tracking-tight">没有收到？检查垃圾邮件</p>
+<div class="h-px w-12 bg-outline-variant/30"></div>
+<a class="text-primary text-sm hover:opacity-80 transition-opacity underline-offset-4 underline decoration-primary/20" href="#">联系技术支持</a>
+</div>
+</div>
+<!-- Asymmetric Detail: Ambient Image -->
+<div class="mt-24 w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div class="rounded-lg overflow-hidden h-48 surface-container">
+<img alt="Minimalist workspace" class="w-full h-full object-cover grayscale opacity-40 mix-blend-multiply" data-alt="Close-up of a high-end cream-colored paper envelope on a textured linen surface with soft morning shadows and warm light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbA-qvYoOYJFgepAUmo7agXdyGwVUgl67NuhvGgZQoHZZLHbNitsB-eeTr0OtLDQkjn3EzeT9M0cwu0VoN3ME8uCyPGbdxGTIATttXGKTu38cWnh2bx0sjfGr17YegN9Lj-TFq-55P190PzVcsFji11Tfkd2rSxN9yBrVcOy66hjm-2ikPQ-nP1aA6VkZYYZjJDkE4PgDijkiT14hcDRUio2fKZd1zqRfgBSXaNd18fw3aAzvWTI0b0GF0KyaNceOtpBTaVUSzJj46"/>
+</div>
+<div class="text-left">
+<span class="serif-text italic text-secondary/60 text-sm tracking-widest uppercase">The Digital Residence</span>
+<p class="text-on-surface-variant/70 text-xs mt-2 font-medium tracking-widest leading-loose">
+                    您的隐私与安全是我们的首要任务。我们的系统采用最高标准的加密技术。
+                </p>
+</div>
+</div>
+</main>
+<!-- Shell Navigation (Hidden on Verification page per UX guidelines for focused journey) -->
+<!-- But included as requested for semantic integrity of the EchoWorld app if this were a top level, though suppressed for verification flow -->
+<!-- Mobile Bottom Nav - Only visible on specific top level routes, suppressed here for focus -->
+<div class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#ffffff]/80 dark:bg-[#1A1714]/80 backdrop-blur-xl border-t border-[#d1c4b7]/20 shadow-[0_-4px_40px_rgba(112,87,49,0.05)] rounded-t-[2rem] md:hidden opacity-0 pointer-events-none">
+<!-- Suppressed for Focus -->
+</div>
+</body></html>

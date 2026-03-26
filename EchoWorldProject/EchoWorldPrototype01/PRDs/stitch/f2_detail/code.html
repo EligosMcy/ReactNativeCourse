@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ECHOWORLD | Post Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@300;400;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#eae8e5",
+              "outline": "#80756a",
+              "on-secondary-fixed": "#211b14",
+              "on-primary-fixed-variant": "#5a431f",
+              "background": "#fbf9f6",
+              "on-background": "#1b1c1a",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#1b1c1a",
+              "on-secondary": "#ffffff",
+              "inverse-on-surface": "#f2f0ed",
+              "tertiary-fixed": "#c5ebd5",
+              "on-error": "#ffffff",
+              "on-surface-variant": "#4e453b",
+              "on-tertiary-fixed": "#002114",
+              "on-secondary-container": "#6a6158",
+              "tertiary-container": "#587b68",
+              "surface-variant": "#e4e2df",
+              "on-tertiary-container": "#eefff3",
+              "on-primary-fixed": "#291800",
+              "surface-tint": "#745a34",
+              "primary-fixed-dim": "#e3c193",
+              "primary-container": "#8b6f47",
+              "inverse-primary": "#e3c193",
+              "outline-variant": "#d1c4b7",
+              "inverse-surface": "#30312f",
+              "on-tertiary": "#ffffff",
+              "secondary": "#665d54",
+              "tertiary-fixed-dim": "#aacfb9",
+              "surface": "#fbf9f6",
+              "error": "#ba1a1a",
+              "error-container": "#ffdad6",
+              "surface-dim": "#dbdad7",
+              "primary": "#705731",
+              "secondary-container": "#eaddd2",
+              "on-secondary-fixed-variant": "#4d453d",
+              "on-primary": "#ffffff",
+              "secondary-fixed": "#ede0d5",
+              "primary-fixed": "#ffddb1",
+              "surface-container-highest": "#e4e2df",
+              "on-tertiary-fixed-variant": "#2c4d3d",
+              "on-primary-container": "#fffaf8",
+              "on-error-container": "#93000a",
+              "surface-container-low": "#f5f3f0",
+              "surface-container": "#efeeeb",
+              "surface-bright": "#fbf9f6",
+              "tertiary": "#406251",
+              "secondary-fixed-dim": "#d1c4b9"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbf9f6;
+            color: #1b1c1a;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .serif-display {
+            font-family: 'Noto Serif', serif;
+        }
+        /* Custom scrollbar for chat feel */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<nav class="fixed top-0 left-0 w-full z-50 bg-[#fbf9f6] dark:bg-[#1A1714] flex justify-between items-center px-6 h-16 w-full">
+<button class="text-[#705731] dark:text-[#8B6F47] hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-['Noto_Serif'] font-light tracking-widest uppercase text-xl font-bold tracking-widest text-[#705731] dark:text-[#8B6F47]">ECHOWORLD</h1>
+<button class="text-[#705731] dark:text-[#8B6F47] hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</nav>
+<main class="pt-20 pb-32 max-w-4xl mx-auto px-4 sm:px-8">
+<!-- Post Header: Asymmetric Layout -->
+<header class="mb-12">
+<div class="flex flex-col md:flex-row gap-8 items-start">
+<div class="w-full md:w-3/5">
+<div class="rounded-lg overflow-hidden bg-surface-container shadow-sm mb-6">
+<img alt="Interior of a minimalist tea room" class="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500" data-alt="minimalist Japanese tea room with warm sunlight streaming through shoji screens onto a polished wooden floor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCygIHF0ZS5Wn0F85ZDzTXipJFwGwmACA-mErRV2EdEVXKwxKtH8iXWuQwBIoOrlmTgS8iOkD1UUZk6NXqsGuCCgFshr8tZaFs1TSt5E1kUrkl1W4ujlnLMUaSrMG5fOts3hX8jML3s3vQUIdTLC0YwSwXTaIHlFJxo0KHDZWW2olGaN86-U9Zga4sp0dikp2kiZpkhVnkAZLkgvD2McB_CYmr1-i-xscdR-TEv7ang3cfr1gwbwLoJOrEdcyXrmWLMRIk1_R_aUA45"/>
+</div>
+</div>
+<div class="w-full md:w-2/5 md:pt-8">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-tertiary flex items-center justify-center text-on-tertiary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">home</span>
+</div>
+<div>
+<p class="font-semibold text-on-surface">Elena Vance</p>
+<p class="text-xs text-secondary font-medium tracking-tight">2 hours ago • Kyoto, Japan</p>
+</div>
+</div>
+<h2 class="serif-display text-3xl font-light tracking-wide text-primary leading-snug mb-4">
+                        Morning Stillness in the Tea Pavilion
+                    </h2>
+<p class="text-on-surface-variant leading-relaxed font-body text-sm mb-6">
+                        There is a specific kind of silence that only exists before the city wakes. The architecture here doesn't just house tea; it houses the soul's quietest intentions.
+                    </p>
+<div class="flex gap-4">
+<button class="flex items-center gap-1 text-primary hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="text-xs font-medium">1.2k</span>
+</button>
+<button class="flex items-center gap-1 text-secondary hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined">share</span>
+<span class="text-xs font-medium">Share</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Divider / Section Title -->
+<div class="flex items-center gap-4 mb-8">
+<h3 class="serif-display text-xl text-primary font-medium italic">Conversations</h3>
+<div class="flex-grow h-px bg-outline-variant opacity-20"></div>
+</div>
+<!-- Replies Section (Chat-like) -->
+<section class="space-y-6 mb-16">
+<!-- Message 1 -->
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="flex items-center gap-2 mb-1 px-2">
+<span class="text-[10px] font-bold text-secondary uppercase tracking-widest">Julian M.</span>
+</div>
+<div class="bg-surface-container-low px-5 py-3 rounded-tr-lg rounded-br-lg rounded-bl-lg text-sm text-on-surface-variant leading-relaxed">
+                    The way the light hits the floorboards in your photo is incredible. It feels so tangible, almost like I could step right into the room.
+                </div>
+<span class="text-[9px] text-outline mt-1 px-2">10:42 AM</span>
+</div>
+<!-- Message 2 (Author Reply) -->
+<div class="flex flex-col items-end self-end ml-auto max-w-[85%]">
+<div class="flex items-center gap-2 mb-1 px-2">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">Elena Vance (Author)</span>
+</div>
+<div class="bg-primary-container text-on-primary-container px-5 py-3 rounded-tl-lg rounded-bl-lg rounded-br-lg text-sm leading-relaxed shadow-sm">
+                    Thank you, Julian. It took about forty minutes of waiting for that specific angle of the sun. Patience is the best lens.
+                </div>
+<span class="text-[9px] text-outline mt-1 px-2">10:45 AM</span>
+</div>
+<!-- Message 3 -->
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="flex items-center gap-2 mb-1 px-2">
+<span class="text-[10px] font-bold text-secondary uppercase tracking-widest">Sophia Chen</span>
+</div>
+<div class="bg-surface-container-low px-5 py-3 rounded-tr-lg rounded-br-lg rounded-bl-lg text-sm text-on-surface-variant leading-relaxed">
+                    Is this the pavilion near the silver temple? I visited last autumn but the light was so different then. It was much moodier.
+                </div>
+<span class="text-[9px] text-outline mt-1 px-2">11:15 AM</span>
+</div>
+<!-- Message 4 -->
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="flex items-center gap-2 mb-1 px-2">
+<span class="text-[10px] font-bold text-secondary uppercase tracking-widest">Marcus Reed</span>
+</div>
+<div class="bg-surface-container-low px-5 py-3 rounded-tr-lg rounded-br-lg rounded-bl-lg text-sm text-on-surface-variant leading-relaxed">
+                    Beautifully curated space. EchoWorld needs more of this architectural appreciation.
+                </div>
+<span class="text-[9px] text-outline mt-1 px-2">11:30 AM</span>
+</div>
+</section>
+</main>
+<!-- Bottom Input Area (Fixed) -->
+<div class="fixed bottom-0 left-0 w-full bg-[#ffffff]/80 dark:bg-[#1A1714]/80 backdrop-blur-xl border-t border-[#d1c4b7]/20 px-6 pb-8 pt-4 z-40">
+<div class="max-w-4xl mx-auto flex items-center gap-4">
+<div class="flex-grow relative">
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary focus:ring-0 transition-all duration-300 py-3 px-6 rounded-full text-sm font-body text-on-surface placeholder:text-outline/50" placeholder="Add to the conversation..." type="text"/>
+</div>
+<button class="w-12 h-12 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center hover:opacity-90 transition-opacity active:scale-95 duration-300 shadow-lg">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<!-- Hidden Bottom Nav (Suppressed for this specific sub-page to focus on conversation) -->
+</body></html>

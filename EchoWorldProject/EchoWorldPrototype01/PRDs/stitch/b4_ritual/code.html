@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;600&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#eae8e5",
+              "outline": "#80756a",
+              "on-secondary-fixed": "#211b14",
+              "on-primary-fixed-variant": "#5a431f",
+              "background": "#fbf9f6",
+              "on-background": "#1b1c1a",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#1b1c1a",
+              "on-secondary": "#ffffff",
+              "inverse-on-surface": "#f2f0ed",
+              "tertiary-fixed": "#c5ebd5",
+              "on-error": "#ffffff",
+              "on-surface-variant": "#4e453b",
+              "on-tertiary-fixed": "#002114",
+              "on-secondary-container": "#6a6158",
+              "tertiary-container": "#587b68",
+              "surface-variant": "#e4e2df",
+              "on-tertiary-container": "#eefff3",
+              "on-primary-fixed": "#291800",
+              "surface-tint": "#745a34",
+              "primary-fixed-dim": "#e3c193",
+              "primary-container": "#8b6f47",
+              "inverse-primary": "#e3c193",
+              "outline-variant": "#d1c4b7",
+              "inverse-surface": "#30312f",
+              "on-tertiary": "#ffffff",
+              "secondary": "#665d54",
+              "tertiary-fixed-dim": "#aacfb9",
+              "surface": "#fbf9f6",
+              "error": "#ba1a1a",
+              "error-container": "#ffdad6",
+              "surface-dim": "#dbdad7",
+              "primary": "#705731",
+              "secondary-container": "#eaddd2",
+              "on-secondary-fixed-variant": "#4d453d",
+              "on-primary": "#ffffff",
+              "secondary-fixed": "#ede0d5",
+              "primary-fixed": "#ffddb1",
+              "surface-container-highest": "#e4e2df",
+              "on-tertiary-fixed-variant": "#2c4d3d",
+              "on-primary-container": "#fffaf8",
+              "on-error-container": "#93000a",
+              "surface-container-low": "#f5f3f0",
+              "surface-container": "#efeeeb",
+              "surface-bright": "#fbf9f6",
+              "tertiary": "#406251",
+              "secondary-fixed-dim": "#d1c4b9"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif SC", "serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fbf9f6;
+            color: #1b1c1a;
+            overflow: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, #8b6f47 0%, transparent 70%);
+            pointer-events: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-primary-container/20">
+<!-- Top Navigation Shell (Contextual Suppression: Hidden for Ritual Step) -->
+<nav class="flex justify-between items-center px-6 h-16 w-full fixed top-0 left-0 z-50">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary hover:opacity-80 transition-opacity cursor-pointer">arrow_back</span>
+</div>
+<div class="font-headline font-light tracking-widest uppercase text-xl font-bold text-primary">ECHOWORLD</div>
+<div class="w-10"></div> <!-- Spacer for balance -->
+</nav>
+<!-- Main Ritual Canvas -->
+<main class="relative h-screen w-full flex flex-col items-center justify-center bg-surface overflow-hidden">
+<!-- Background Subtle Texture -->
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxuPrGopIay7DpWsF7omRKj7DdFVc69t_feOT1YNB6kdXRQ2jpaDxF75FQyhanVzp75eL3gExQYTOSkuT0kNQ81VdA0RjdwHx-SsHD5VykaqzVjEiSxfxvIJKcDEwCUGwiQqPHjj9rsVVjPjiWx9u20yWjGPFentF2GGC0UxlMkjaL8LeDOAkYmMnVxTkpsrA0uMXmoYSHKwkopHEd7Waa9WWtiZIAuypYCKMG22ysaAiyHlp9D99ViDJRbWZGmjXXK87SfFY_rrTD');">
+</div>
+<!-- Decorative Progress Indicator (Step 3 of 5) -->
+<div class="absolute top-24 flex flex-col items-center gap-4">
+<div class="flex gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-outline-variant"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-outline-variant"></div>
+<div class="w-8 h-1.5 rounded-full bg-primary-container"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-outline-variant"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-outline-variant"></div>
+</div>
+<span class="font-label text-xs tracking-[0.2em] text-secondary uppercase">Generation Ritual • Step 03</span>
+</div>
+<!-- Central Floating Particles Container -->
+<div class="relative w-full h-96 flex items-center justify-center">
+<!-- Simulated Particle Field (Using CSS for static representation) -->
+<div class="absolute w-64 h-64 rounded-full bg-primary-container/5 blur-3xl"></div>
+<!-- Individual "Light Particles" -->
+<div class="particle w-4 h-4 opacity-40 translate-x-12 -translate-y-20 blur-[1px]"></div>
+<div class="particle w-2 h-2 opacity-60 -translate-x-24 translate-y-10 blur-[0.5px]"></div>
+<div class="particle w-3 h-3 opacity-30 translate-x-32 translate-y-24 blur-[1.5px]"></div>
+<div class="particle w-1.5 h-1.5 opacity-80 -translate-x-10 -translate-y-32"></div>
+<div class="particle w-5 h-5 opacity-20 translate-x-20 translate-y-5 blur-sm"></div>
+<div class="particle w-2.5 h-2.5 opacity-50 -translate-x-36 -translate-y-12 blur-[1px]"></div>
+<div class="particle w-1 h-1 opacity-90 translate-x-8 translate-y-36"></div>
+<div class="particle w-6 h-6 opacity-10 -translate-x-16 translate-y-28 blur-md"></div>
+<!-- Central Visual Anchor -->
+<div class="relative z-10 w-48 h-64 rounded-lg overflow-hidden shadow-2xl rotate-2 bg-surface-container-low flex items-center justify-center p-4">
+<img alt="abstract portrait forming from shimmering gold particles and vintage photographic textures in warm white light" class="w-full h-full object-cover grayscale opacity-40 mix-blend-multiply" data-alt="abstract ethereal portrait forming from shimmering gold particles and vintage photographic textures in a warm white studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4zK4V1MdkkBHQ0QO-iYOPbnTdKNGVrSDg-7ebKqpPFu_4AggVmNnvnvhkeOGxFbDbpw-Bv0_vNhLwHvUh3Kma8P1eSTCxP3_Tvut3Trhpzh9lzQGw7EIzaeh3Narn_Z5FwUesBrPp_84REdK0msjjJbCMSpLS7bfLp1EEoJUP4LjM12prLu4MGIPpFG-AxAYIafSs7IGeNUbIiy3XgX3xL_vg739lc0hgtY85aQMcF6o3yHgJx8UrNe6M-OsGz0KELrzjrLVuN_SX"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-60"></div>
+</div>
+</div>
+<!-- Narrative Typography -->
+<div class="mt-16 text-center flex flex-col gap-6 px-8 max-w-lg">
+<h1 class="font-headline text-3xl md:text-4xl font-light text-on-background tracking-loose leading-relaxed">
+                他正在从那些照片里
+                <br/>
+<span class="inline-block mt-4 text-primary italic font-semibold">生长出来</span>
+</h1>
+<p class="font-body text-secondary text-sm md:text-base leading-relaxed max-w-xs mx-auto opacity-70">
+                记忆正在重组。光影正在凝结成新的生命脉络。
+            </p>
+</div>
+<!-- Secondary Ritual Interaction -->
+<div class="absolute bottom-16 flex flex-col items-center gap-8">
+<div class="w-px h-16 bg-gradient-to-b from-primary-container to-transparent"></div>
+<button class="px-10 py-4 bg-primary-container text-on-primary-container rounded-lg font-label tracking-widest text-sm hover:opacity-90 transition-all active:scale-95 shadow-lg shadow-primary-container/20">
+                继续见证
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Shell (Suppressed for Ritual Focus) -->
+<!-- Navigation is only visible on top-level destination screens -->
+</body></html>

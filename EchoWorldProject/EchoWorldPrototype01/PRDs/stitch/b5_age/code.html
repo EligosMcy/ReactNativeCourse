@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@300;400;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#eae8e5",
+              "outline": "#80756a",
+              "on-secondary-fixed": "#211b14",
+              "on-primary-fixed-variant": "#5a431f",
+              "background": "#fbf9f6",
+              "on-background": "#1b1c1a",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#1b1c1a",
+              "on-secondary": "#ffffff",
+              "inverse-on-surface": "#f2f0ed",
+              "tertiary-fixed": "#c5ebd5",
+              "on-error": "#ffffff",
+              "on-surface-variant": "#4e453b",
+              "on-tertiary-fixed": "#002114",
+              "on-secondary-container": "#6a6158",
+              "tertiary-container": "#587b68",
+              "surface-variant": "#e4e2df",
+              "on-tertiary-container": "#eefff3",
+              "on-primary-fixed": "#291800",
+              "surface-tint": "#745a34",
+              "primary-fixed-dim": "#e3c193",
+              "primary-container": "#8b6f47",
+              "inverse-primary": "#e3c193",
+              "outline-variant": "#d1c4b7",
+              "inverse-surface": "#30312f",
+              "on-tertiary": "#ffffff",
+              "secondary": "#665d54",
+              "tertiary-fixed-dim": "#aacfb9",
+              "surface": "#fbf9f6",
+              "error": "#ba1a1a",
+              "error-container": "#ffdad6",
+              "surface-dim": "#dbdad7",
+              "primary": "#705731",
+              "secondary-container": "#eaddd2",
+              "on-secondary-fixed-variant": "#4d453d",
+              "on-primary": "#ffffff",
+              "secondary-fixed": "#ede0d5",
+              "primary-fixed": "#ffddb1",
+              "surface-container-highest": "#e4e2df",
+              "on-tertiary-fixed-variant": "#2c4d3d",
+              "on-primary-container": "#fffaf8",
+              "on-error-container": "#93000a",
+              "surface-container-low": "#f5f3f0",
+              "surface-container": "#efeeeb",
+              "surface-bright": "#fbf9f6",
+              "tertiary": "#406251",
+              "secondary-fixed-dim": "#d1c4b9"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fbf9f6;
+        }
+        .serif-text {
+            font-family: 'Noto Serif', serif;
+        }
+        .bronze-gradient {
+            background: linear-gradient(135deg, #705731 0%, #8b6f47 100%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex justify-between items-center px-6 h-16 w-full bg-[#fbf9f6] dark:bg-[#1A1714]">
+<button class="flex items-center justify-center text-[#705731] hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Noto_Serif'] font-light tracking-widest uppercase text-xl font-bold tracking-widest text-[#705731] dark:text-[#8B6F47]">ECHOWORLD</h1>
+<button class="flex items-center justify-center text-[#705731] hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</header>
+<main class="flex-grow flex flex-col items-center px-6 pt-12 pb-24 max-w-2xl mx-auto w-full">
+<!-- Progress Indicator -->
+<div class="w-full mb-12 flex flex-col items-center">
+<span class="text-secondary font-label text-xs tracking-[0.2em] uppercase mb-4 opacity-70">Step 4 of 5</span>
+<div class="flex gap-2 w-full max-w-[200px]">
+<div class="h-[2px] flex-1 bg-primary-container"></div>
+<div class="h-[2px] flex-1 bg-primary-container"></div>
+<div class="h-[2px] flex-1 bg-primary-container"></div>
+<div class="h-[2px] flex-1 bg-primary-container"></div>
+<div class="h-[2px] flex-1 bg-surface-container-highest"></div>
+</div>
+</div>
+<!-- Main Heading -->
+<div class="text-center mb-16">
+<h2 class="serif-text text-4xl font-light tracking-wide text-on-surface mb-4">他现在几岁</h2>
+<p class="text-secondary font-body text-sm leading-relaxed max-w-xs mx-auto">
+                选择最能描述他当前生命阶段的状态，以定制您的数字居住体验。
+            </p>
+</div>
+<!-- Selection Cards -->
+<div class="w-full space-y-6">
+<!-- Selected Card (Youth) -->
+<button class="w-full text-left group transition-all duration-400 ease-in-out relative">
+<div class="p-8 rounded-lg bg-surface-container-lowest ring-2 ring-primary-container shadow-[0_20px_50px_rgba(112,87,49,0.1)] flex items-start gap-6">
+<div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-surface-container">
+<img alt="Portrait of a young adult" class="w-full h-full object-cover" data-alt="close-up portrait of a young man with thoughtful expression in soft natural lighting and warm earthy tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwIqhiqcngJAkKgXtZ_85jVxnoat7kFr3QuX_XNdTOWsiquSgeX98R-y-yXIsGZ3u0QdOZ4l4D1bGKeVYIdrk7PwPxkgdWwH27XfAOGGvENSFSvhA9okYWfvVAXgDX0ST5XhSn7-0WXZioQ_PLEHD7Q9S3OcDgw64aw0OowM7-Xq7_44yB_fUjxu3zYZvQ-l3WDdj1Ms1RKNfvjW9P-x9ruR33CZk79uL48xPVIPhZxdE8JKpPtbYc578jaO_6CYbtNi_XCMBqabbj"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-center mb-2">
+<h3 class="serif-text text-xl font-medium text-primary">青年期 (18-35岁)</h3>
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed">
+                            充满活力与探索欲的阶段。专注于自我发现、职业起步以及建立深厚的人际连接。
+                        </p>
+</div>
+</div>
+</button>
+<!-- Inactive Card (Prime) -->
+<button class="w-full text-left group transition-all duration-300 ease-in-out">
+<div class="p-8 rounded-lg bg-surface-container-low hover:bg-surface-container-highest transition-colors flex items-start gap-6">
+<div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-surface-container-highest grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all">
+<img alt="Portrait of a mature man" class="w-full h-full object-cover" data-alt="refined portrait of a mature man with salt and pepper hair against a minimalist stone wall background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUwI5xhdNog0_Ritfauozj0mCOkcQTgdyKIhY1kqyRKopUh6850Ht4WzuyPCQbA_VFexJfTYsrl40Il7ZxyT6DnyhD8HS58ubng-vh8Mi7jOb2EyjAOFViH_9PlJSiRMBh41X-YHSYYc4rjsK4d4k3xOZvkY9t6wyPQyixr1Q6vwWqyexaKcCL6azGFnfrvJ7FDewtB19obDZTXJsZJl4hBXkogoWmiaKiS7t59PU_113-5nCNuPKLI6MAUkp33pnveZ-8MNsHsEcW"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-center mb-2">
+<h3 class="serif-text text-xl font-medium text-on-surface opacity-80 group-hover:opacity-100">壮年期 (36-55岁)</h3>
+</div>
+<p class="text-secondary font-body text-sm leading-relaxed">
+                            处于事业与生活的巅峰期。追求稳定、深度与质感，在责任与自我实现之间寻找平衡。
+                        </p>
+</div>
+</div>
+</button>
+</div>
+<!-- Footer Action -->
+<div class="fixed bottom-0 left-0 w-full px-6 py-10 bg-gradient-to-t from-background via-background/90 to-transparent flex justify-center">
+<button class="bronze-gradient text-on-primary-container px-16 py-4 rounded-lg font-medium tracking-widest text-sm shadow-xl hover:opacity-90 transition-all active:scale-95">
+                继续
+            </button>
+</div>
+</main>
+<!-- Navigation Shell Background Elements (Decorative Asymmetry) -->
+<div class="fixed top-1/4 -left-20 w-64 h-64 rounded-full bg-primary/5 blur-[100px] pointer-events-none"></div>
+<div class="fixed bottom-1/4 -right-20 w-80 h-80 rounded-full bg-tertiary/5 blur-[100px] pointer-events-none"></div>
+</body></html>

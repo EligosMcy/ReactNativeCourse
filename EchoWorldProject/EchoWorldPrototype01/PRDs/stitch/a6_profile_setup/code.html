@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@300;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#eae8e5",
+              "outline": "#80756a",
+              "on-secondary-fixed": "#211b14",
+              "on-primary-fixed-variant": "#5a431f",
+              "background": "#fbf9f6",
+              "on-background": "#1b1c1a",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#1b1c1a",
+              "on-secondary": "#ffffff",
+              "inverse-on-surface": "#f2f0ed",
+              "tertiary-fixed": "#c5ebd5",
+              "on-error": "#ffffff",
+              "on-surface-variant": "#4e453b",
+              "on-tertiary-fixed": "#002114",
+              "on-secondary-container": "#6a6158",
+              "tertiary-container": "#587b68",
+              "surface-variant": "#e4e2df",
+              "on-tertiary-container": "#eefff3",
+              "on-primary-fixed": "#291800",
+              "surface-tint": "#745a34",
+              "primary-fixed-dim": "#e3c193",
+              "primary-container": "#8b6f47",
+              "inverse-primary": "#e3c193",
+              "outline-variant": "#d1c4b7",
+              "inverse-surface": "#30312f",
+              "on-tertiary": "#ffffff",
+              "secondary": "#665d54",
+              "tertiary-fixed-dim": "#aacfb9",
+              "surface": "#fbf9f6",
+              "error": "#ba1a1a",
+              "error-container": "#ffdad6",
+              "surface-dim": "#dbdad7",
+              "primary": "#705731",
+              "secondary-container": "#eaddd2",
+              "on-secondary-fixed-variant": "#4d453d",
+              "on-primary": "#ffffff",
+              "secondary-fixed": "#ede0d5",
+              "primary-fixed": "#ffddb1",
+              "surface-container-highest": "#e4e2df",
+              "on-tertiary-fixed-variant": "#2c4d3d",
+              "on-primary-container": "#fffaf8",
+              "on-error-container": "#93000a",
+              "surface-container-low": "#f5f3f0",
+              "surface-container": "#efeeeb",
+              "surface-bright": "#fbf9f6",
+              "tertiary": "#406251",
+              "secondary-fixed-dim": "#d1c4b9"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fbf9f6;
+        }
+        .serif-headline {
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- Top Navigation Shell -->
+<header class="flex justify-between items-center px-6 h-16 w-full fixed top-0 bg-[#fbf9f6] z-50">
+<button class="text-[#705731] hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Noto_Serif'] font-bold tracking-widest text-xl text-[#705731] uppercase">ECHOWORLD</h1>
+<div class="w-10"></div> <!-- Spacer for balance -->
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-8 pt-24 pb-12 max-w-2xl mx-auto w-full">
+<!-- Header Section -->
+<div class="text-center mb-12">
+<h2 class="serif-headline text-3xl font-light tracking-wide text-primary mb-4">告诉角色你是谁</h2>
+<p class="text-secondary font-body text-sm tracking-relaxed">开启一段跨越时空的共鸣旅程</p>
+</div>
+<!-- Form Canvas -->
+<div class="w-full space-y-12">
+<!-- Avatar Upload Section -->
+<div class="flex flex-col items-center">
+<div class="relative group">
+<div class="w-32 h-32 rounded-full bg-surface-container-low flex items-center justify-center overflow-hidden border-2 border-dashed border-outline-variant group-hover:bg-surface-container transition-colors duration-300">
+<span class="material-symbols-outlined text-outline text-4xl" data-icon="add_a_photo">add_a_photo</span>
+</div>
+<button class="absolute bottom-0 right-0 bg-primary text-on-primary w-10 h-10 rounded-full flex items-center justify-center shadow-lg transform group-active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+<span class="mt-4 text-xs font-label text-secondary uppercase tracking-widest">设置形象</span>
+</div>
+<!-- Input Fields Container -->
+<div class="space-y-10">
+<!-- Name Input -->
+<div class="relative">
+<label class="block text-[10px] font-label font-semibold text-primary uppercase tracking-[0.2em] mb-2 px-1">角色姓名</label>
+<input class="w-full bg-transparent border-b border-outline-variant py-3 px-1 text-on-surface focus:outline-none focus:border-primary transition-colors duration-300 font-body placeholder:text-outline-variant/60" placeholder="输入你的名字..." required="" type="text"/>
+</div>
+<!-- Gender Selection -->
+<div>
+<label class="block text-[10px] font-label font-semibold text-primary uppercase tracking-[0.2em] mb-4 px-1">性别身份</label>
+<div class="flex flex-wrap gap-3">
+<button class="px-6 py-2.5 rounded-full bg-surface-container-highest text-primary font-label text-xs tracking-wide hover:bg-primary hover:text-on-primary transition-all duration-300 ease-in-out">
+                            男性
+                        </button>
+<button class="px-6 py-2.5 rounded-full bg-primary text-on-primary font-label text-xs tracking-wide shadow-sm">
+                            女性
+                        </button>
+<button class="px-6 py-2.5 rounded-full bg-surface-container-highest text-primary font-label text-xs tracking-wide hover:bg-primary hover:text-on-primary transition-all duration-300 ease-in-out">
+                            非二元
+                        </button>
+<button class="px-6 py-2.5 rounded-full bg-surface-container-highest text-primary font-label text-xs tracking-wide hover:bg-primary hover:text-on-primary transition-all duration-300 ease-in-out">
+                            暂不透露
+                        </button>
+</div>
+</div>
+<!-- Bio/Flavor Text (Asymmetric Addition) -->
+<div class="bg-surface-container-low p-6 rounded-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 opacity-5 -mr-4 -mt-4">
+<span class="material-symbols-outlined text-8xl" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<p class="text-[11px] leading-relaxed text-on-surface-variant font-body italic">
+                        "每一个来到 EchoWorld 的灵魂都带着独特的光。你的名字和性格将决定你如何与这个世界的角色产生共振。"
+                    </p>
+</div>
+</div>
+<!-- Action Section -->
+<div class="pt-8">
+<button class="w-full py-5 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary-container font-headline font-bold tracking-[0.3em] shadow-xl hover:opacity-90 active:scale-[0.98] transition-all duration-300 uppercase">
+                    进入世界
+                </button>
+<p class="mt-6 text-center text-[10px] text-outline font-label tracking-tight">
+                    点击进入即代表您同意我们的 <a class="underline" href="#">服务条款</a> 与 <a class="underline" href="#">隐私政策</a>
+</p>
+</div>
+</div>
+</main>
+<!-- Decorative Elements -->
+<div class="fixed top-20 left-10 w-32 h-32 bg-primary-fixed-dim/10 rounded-full blur-3xl -z-10"></div>
+<div class="fixed bottom-20 right-10 w-48 h-48 bg-tertiary-fixed-dim/10 rounded-full blur-3xl -z-10"></div>
+<!-- Hidden Shell Elements (Suppressed as per rules for Transactional Screens) -->
+<!-- BottomNavBar Suppressed -->
+</body></html>

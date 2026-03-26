@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>登录 - ECHOWORLD</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@300;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-high": "#eae8e5",
+                        "outline": "#80756a",
+                        "on-secondary-fixed": "#211b14",
+                        "on-primary-fixed-variant": "#5a431f",
+                        "background": "#fbf9f6",
+                        "on-background": "#1b1c1a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1b1c1a",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f2f0ed",
+                        "tertiary-fixed": "#c5ebd5",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#4e453b",
+                        "on-tertiary-fixed": "#002114",
+                        "on-secondary-container": "#6a6158",
+                        "tertiary-container": "#587b68",
+                        "surface-variant": "#e4e2df",
+                        "on-tertiary-container": "#eefff3",
+                        "on-primary-fixed": "#291800",
+                        "surface-tint": "#745a34",
+                        "primary-fixed-dim": "#e3c193",
+                        "primary-container": "#8b6f47",
+                        "inverse-primary": "#e3c193",
+                        "outline-variant": "#d1c4b7",
+                        "inverse-surface": "#30312f",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#665d54",
+                        "tertiary-fixed-dim": "#aacfb9",
+                        "surface": "#fbf9f6",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dbdad7",
+                        "primary": "#705731",
+                        "secondary-container": "#eaddd2",
+                        "on-secondary-fixed-variant": "#4d453d",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#ede0d5",
+                        "primary-fixed": "#ffddb1",
+                        "surface-container-highest": "#e4e2df",
+                        "on-tertiary-fixed-variant": "#2c4d3d",
+                        "on-primary-container": "#fffaf8",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f5f3f0",
+                        "surface-container": "#efeeeb",
+                        "surface-bright": "#fbf9f6",
+                        "tertiary": "#406251",
+                        "secondary-fixed-dim": "#d1c4b9"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbf9f6;
+            color: #1b1c1a;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Anchor (Manual suppression of global nav for transactional screen) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-background">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors duration-300 text-primary">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<span class="font-headline font-bold tracking-widest text-primary text-xl">ECHOWORLD</span>
+<div class="w-10"></div> <!-- Spacer for symmetry -->
+</header>
+<main class="min-h-screen pt-24 pb-12 px-6 flex flex-col items-center max-w-lg mx-auto">
+<!-- Hero Section / Header -->
+<section class="w-full mb-12 text-center md:text-left">
+<h1 class="font-headline text-4xl font-light tracking-wide text-on-surface mb-2">登录</h1>
+<p class="font-body text-secondary tracking-tight">欢迎回来</p>
+</section>
+<!-- Aesthetic Card Composition -->
+<div class="w-full bg-surface-container-low rounded-xl p-8 md:p-10 space-y-8">
+<!-- Login Form -->
+<form class="space-y-6">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block font-label text-xs uppercase tracking-widest text-secondary ml-1">邮箱地址</label>
+<input class="w-full bg-surface border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 px-1 py-3 transition-colors duration-300 placeholder:text-outline-variant/60 text-on-surface" placeholder="example@echoworld.com" type="email"/>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<label class="block font-label text-xs uppercase tracking-widest text-secondary ml-1">密码</label>
+<input class="w-full bg-surface border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 px-1 py-3 transition-colors duration-300 placeholder:text-outline-variant/60 text-on-surface" placeholder="••••••••" type="password"/>
+</div>
+<!-- Primary Action -->
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-medium py-4 rounded-lg shadow-sm hover:opacity-90 transition-all duration-300 active:scale-[0.98]" type="submit">
+                    登录
+                </button>
+</form>
+<!-- Divider -->
+<div class="relative flex items-center justify-center py-2">
+<div class="w-full h-px bg-outline-variant opacity-30"></div>
+<span class="absolute px-4 bg-surface-container-low font-label text-xs text-secondary uppercase tracking-widest">或</span>
+</div>
+<!-- Secondary Actions -->
+<div class="space-y-4">
+<button class="w-full bg-surface-container-highest text-primary font-medium py-4 rounded-lg hover:bg-surface-container-high transition-colors duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="smartphone">smartphone</span>
+                    验证码登录
+                </button>
+</div>
+</div>
+<!-- Footer Links -->
+<footer class="mt-8 flex flex-col items-center gap-4">
+<a class="text-primary text-sm font-medium border-b border-transparent hover:border-primary transition-all duration-300" href="#">
+                忘记密码？
+            </a>
+<p class="text-secondary text-xs mt-4">
+                还没有账号？ <a class="text-primary font-semibold" href="#">立即加入</a>
+</p>
+</footer>
+<!-- Decorative Background Element -->
+<div class="fixed -bottom-24 -right-24 w-64 h-64 bg-primary-container opacity-5 blur-[100px] pointer-events-none"></div>
+<div class="fixed -top-24 -left-24 w-64 h-64 bg-tertiary opacity-5 blur-[100px] pointer-events-none"></div>
+</main>
+<!-- Background Image (Subtle Texture) -->
+<div class="fixed inset-0 -z-10 opacity-[0.03] pointer-events-none">
+<img alt="" class="w-full h-full object-cover" data-alt="Macro photography of fine linen texture with soft shadows and warm neutral tones for a minimalist architectural background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9Mu1ayDj0MANnp7GeIQTMF0K_to1JeXSjQsw61X2ITjT1kPTya-QjeJBWInkvOfWwWuqKh5qMoriQux3Bj5SgJCF00WlBF11hq2F6pPPBeebXx_aYRQXBWiSsvaTSDf5InHZksXJPZjRG8ZDqEi-TUu1GfZ6OhwxCN8z8gcuDf6Qbg0ouvzFaPHjgZaBBiB93Mvp2ANTlZ5jx6M4MjT55ryigDfEw88QYT2Mw4StQie8GMaJNmzqBPeDdrGrmwWIomtmRjcNHolki"/>
+</div>
+</body></html>

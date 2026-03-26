@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@300;400;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#eae8e5",
+              "outline": "#80756a",
+              "on-secondary-fixed": "#211b14",
+              "on-primary-fixed-variant": "#5a431f",
+              "background": "#fbf9f6",
+              "on-background": "#1b1c1a",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#1b1c1a",
+              "on-secondary": "#ffffff",
+              "inverse-on-surface": "#f2f0ed",
+              "tertiary-fixed": "#c5ebd5",
+              "on-error": "#ffffff",
+              "on-surface-variant": "#4e453b",
+              "on-tertiary-fixed": "#002114",
+              "on-secondary-container": "#6a6158",
+              "tertiary-container": "#587b68",
+              "surface-variant": "#e4e2df",
+              "on-tertiary-container": "#eefff3",
+              "on-primary-fixed": "#291800",
+              "surface-tint": "#745a34",
+              "primary-fixed-dim": "#e3c193",
+              "primary-container": "#8b6f47",
+              "inverse-primary": "#e3c193",
+              "outline-variant": "#d1c4b7",
+              "inverse-surface": "#30312f",
+              "on-tertiary": "#ffffff",
+              "secondary": "#665d54",
+              "tertiary-fixed-dim": "#aacfb9",
+              "surface": "#fbf9f6",
+              "error": "#ba1a1a",
+              "error-container": "#ffdad6",
+              "surface-dim": "#dbdad7",
+              "primary": "#705731",
+              "secondary-container": "#eaddd2",
+              "on-secondary-fixed-variant": "#4d453d",
+              "on-primary": "#ffffff",
+              "secondary-fixed": "#ede0d5",
+              "primary-fixed": "#ffddb1",
+              "surface-container-highest": "#e4e2df",
+              "on-tertiary-fixed-variant": "#2c4d3d",
+              "on-primary-container": "#fffaf8",
+              "on-error-container": "#93000a",
+              "surface-container-low": "#f5f3f0",
+              "surface-container": "#efeeeb",
+              "surface-bright": "#fbf9f6",
+              "tertiary": "#406251",
+              "secondary-fixed-dim": "#d1c4b9"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbf9f6;
+            color: #1b1c1a;
+            overflow-x: hidden;
+        }
+        .map-canvas {
+            background-image: radial-gradient(#d1c4b7 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-primary-container/30">
+<!-- Top Navigation Shell -->
+<nav class="flex justify-between items-center px-6 h-16 w-full fixed top-0 left-0 z-50 transition-opacity duration-300">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-80 transition-opacity">arrow_back</span>
+</div>
+<div class="font-['Noto_Serif'] font-light tracking-widest uppercase text-xl font-bold tracking-widest text-[#705731] dark:text-[#8B6F47]">
+            ECHOWORLD
+        </div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-80 transition-opacity">account_circle</span>
+</div>
+</nav>
+<!-- Main Content: The Digital Residence Map Shell -->
+<main class="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-surface">
+<!-- Subtle Map Background -->
+<div class="absolute inset-0 z-0 overflow-hidden">
+<div class="absolute inset-0 opacity-40 map-canvas"></div>
+<!-- Hand-drawn style map elements (Conceptual) -->
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-surface-container-low rounded-full blur-[100px] opacity-60"></div>
+<div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-secondary-container/20 rounded-full blur-[120px] opacity-40"></div>
+<!-- Map Texture Overlay -->
+<div class="absolute inset-0 bg-white/10 backdrop-blur-[2px]"></div>
+<!-- Paris City Label Anchor -->
+<div class="absolute top-32 left-1/2 -translate-x-1/2 flex flex-col items-center text-center">
+<span class="font-headline text-primary font-light tracking-[0.4em] text-sm mb-2 opacity-60">CURRENT LOCATION</span>
+<h2 class="font-headline text-6xl md:text-8xl text-primary font-light tracking-widest selection:bg-transparent">PARIS</h2>
+<div class="h-[1px] w-24 bg-primary/20 mt-6"></div>
+</div>
+<!-- Contextual Map Visuals -->
+<img class="absolute bottom-10 right-10 w-64 h-64 object-contain opacity-20 grayscale pointer-events-none" data-alt="vintage line drawing of an ornate classical compass rose on aged warm ivory parchment paper" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByRD8k_ZpeqUm9TgKYE-zejlrTdDW9EbU_tGYsWaNnqZDie6YTzT-bAcgs8EjZBwXaU2weOHd6MjzGM_pOPy2KaiXyYziKZg3JbHHKFh2FjRLDQijCDWfe5fJsJKKsymuSMI5JG0ZGLw6ceLWr_87f0Iq62kIBlzHiWEFTAoPUc_ggXTFfCOxgSU1OLVKpVW_L7szpwj245xUKbBmwUYqw2ywkoN5EGn7vsbY7D6pOLyGdxLE5Ai04U1H2ayTqfcUPitviyEEKS_Mv"/>
+</div>
+<!-- Central Floating Card: "The Curated Sanctuary" Pattern -->
+<section class="relative z-10 w-[90%] max-w-md">
+<div class="bg-surface-container-lowest/80 backdrop-blur-xl rounded-lg p-10 md:p-14 text-center shadow-[0_32px_80px_rgba(112,87,49,0.08)] flex flex-col items-center border border-white/40">
+<div class="w-12 h-[1px] bg-primary mb-8 opacity-40"></div>
+<h1 class="font-headline text-3xl md:text-4xl text-on-surface font-light leading-relaxed tracking-wide mb-6">
+                    世界在等待
+                </h1>
+<p class="font-body text-secondary text-base font-light leading-relaxed mb-12 max-w-xs mx-auto">
+                    开启一段专属于你的数字旅程。在这里，每一寸土地都等待着你的发现与记录。
+                </p>
+<div class="flex flex-col w-full gap-4">
+<!-- Primary CTA -->
+<button class="bg-primary-container text-on-primary-container py-5 px-10 rounded-full font-label text-sm font-medium tracking-widest hover:opacity-90 transition-all duration-300 shadow-xl shadow-primary-container/20 group">
+<span class="inline-block transform transition-transform duration-300 group-active:scale-95 uppercase">开始创建</span>
+</button>
+<!-- Secondary CTA -->
+<button class="text-primary font-label text-[11px] font-semibold tracking-widest py-3 hover:opacity-70 transition-opacity uppercase">
+                        浏览热门目的地
+                    </button>
+</div>
+<div class="w-12 h-[1px] bg-primary mt-12 opacity-40"></div>
+</div>
+</section>
+<!-- Decorative Map Coordinates (Asymmetric Layout) -->
+<aside class="absolute bottom-24 left-12 hidden md:block select-none pointer-events-none">
+<div class="flex flex-col gap-1 font-label text-[10px] tracking-widest text-outline uppercase opacity-40">
+<span>LAT: 48.8566° N</span>
+<span>LNG: 2.3522° E</span>
+</div>
+</aside>
+<aside class="absolute top-1/2 right-12 -translate-y-1/2 hidden lg:block select-none pointer-events-none">
+<div class="[writing-mode:vertical-rl] font-headline text-sm tracking-[0.5em] text-primary/30 uppercase">
+                Architecture . Narrative . Permanence
+            </div>
+</aside>
+</main>
+<!-- Bottom Navigation Shell -->
+<div class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#ffffff]/80 dark:bg-[#1A1714]/80 backdrop-blur-xl shadow-[0_-4px_40px_rgba(112,87,49,0.05)] rounded-t-[2rem] md:hidden">
+<a class="flex flex-col items-center justify-center bg-[#e4e2df] dark:bg-[#2c2824] text-[#705731] dark:text-[#8B6F47] rounded-full px-5 py-2 group transition-all active:scale-95 duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">public</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-tight mt-1">World</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#665d54] dark:text-[#a1968d] px-5 py-2 hover:bg-[#f5f3f0] dark:hover:bg-[#25221F] transition-colors duration-300 group transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-tight mt-1">Discover</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#665d54] dark:text-[#a1968d] px-5 py-2 hover:bg-[#f5f3f0] dark:hover:bg-[#25221F] transition-colors duration-300 group transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-tight mt-1">Settings</span>
+</a>
+</div>
+</body></html>
