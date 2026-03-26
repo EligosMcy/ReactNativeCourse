@@ -20,9 +20,12 @@ export default function App() {
   const { loadDraft } = useCharacterStore();
 
   useEffect(() => {
+    console.log('🟢 App component mounted');
     const init = async () => {
+      console.log('🟢 Starting app initialization');
       await initializeAuth();
       await loadDraft();
+      console.log('🟢 App initialization complete');
     };
     init();
   }, []);

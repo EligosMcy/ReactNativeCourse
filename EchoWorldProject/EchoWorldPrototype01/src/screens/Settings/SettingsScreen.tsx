@@ -28,7 +28,7 @@ const SettingItem: React.FC<SettingItemProps> = ({ title, onPress, showArrow = t
 export const SettingsScreen: React.FC = () => {
   const navigation = useNavigation<SettingsNavigationProp>();
   const { player, clearAuth } = useAuthStore();
-  const { characters, currentCharacterId } = useCharacterStore();
+  const { characters, currentCharacterId, resetCharacters } = useCharacterStore();
   
   // 获取当前角色
   const currentCharacter = characters.find(c => c.id === currentCharacterId);
@@ -66,6 +66,8 @@ export const SettingsScreen: React.FC = () => {
           onPress: async () => {
             try {
               await AsyncStorage.clear();
+              await clearAuth();
+              await resetCharacters();
               navigation.reset({
                 index: 0,
                 routes: [{ name: 'Splash' }],

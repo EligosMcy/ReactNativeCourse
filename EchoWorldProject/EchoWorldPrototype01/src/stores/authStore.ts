@@ -43,22 +43,37 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 }));
 
 export const initializeAuth = async () => {
+  console.log('🔐 initializeAuth started');
+  
   try {
     const tokensStr = await AsyncStorage.getItem('tokens');
     const playerStr = await AsyncStorage.getItem('player');
+    
+    console.log('🔐 Tokens found:', !!tokensStr);
+    console.log('🔐 Player found:', !!playerStr);
     
     if (tokensStr && playerStr) {
       const tokens = JSON.parse(tokensStr) as AuthTokens;
       const player = JSON.parse(playerStr) as Player;
       
+      console.log('🔐 Tokens expiresAt:', tokens.expiresAt);
+      console.log('🔐 Current time:', Date.now());
+      console.log('🔐 Tokens valid:', tokens.expiresAt > Date.now());
+      
       if (tokens.expiresAt > Date.now()) {
+        console.log('🔐 Setting authenticated state');
         useAuthStore.setState({ player, tokens, isAuthenticated: true, isLoading: false });
         return;
+      } else {
+        console.log('🔐 Tokens expired, setting unauthenticated');
       }
+    } else {
+      console.log('🔐 No tokens or player found');
     }
   } catch (error) {
-    console.error('Failed to initialize auth:', error);
+    console.error('🔐 Failed to initialize auth:', error);
   }
   
+  console.log('🔐 Setting isLoading to false');
   useAuthStore.setState({ isLoading: false });
 };

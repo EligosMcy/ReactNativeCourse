@@ -11,6 +11,7 @@ interface CharacterState {
   setCurrentCharacter: (characterId: string) => void;
   updateDraft: (draft: Partial<CharacterDraft>) => void;
   resetDraft: () => void;
+  resetCharacters: () => Promise<void>;
   saveDraft: () => Promise<void>;
   loadDraft: () => Promise<void>;
 }
@@ -78,23 +79,45 @@ export const useCharacterStore = create<CharacterState>((set, get) => ({
     await AsyncStorage.setItem('characterDraft', JSON.stringify(draft));
   },
 
+  resetCharacters: async () => {
+    await AsyncStorage.removeItem('characters');
+    await AsyncStorage.removeItem('characterDraft');
+    set({ 
+      characters: [], 
+      currentCharacterId: null,
+      draft: initialDraft
+    });
+  },
+
   loadDraft: async () => {
+    console.log('🎭 loadDraft started');
+    
     try {
       const draftStr = await AsyncStorage.getItem('characterDraft');
       const charactersStr = await AsyncStorage.getItem('characters');
       
+      console.log('🎭 Draft found:', !!draftStr);
+      console.log('🎭 Characters found:', !!charactersStr);
+      
       if (draftStr) {
         const draft = JSON.parse(draftStr) as CharacterDraft;
+        console.log('🎭 Loaded draft with step:', draft.step);
         set({ draft });
       }
       
       if (charactersStr) {
         const characters = JSON.parse(charactersStr) as Character[];
+        console.log('🎭 Loaded', characters.length, 'characters');
         const currentCharacterId = characters.length > 0 ? characters[0].id : null;
         set({ characters, currentCharacterId });
+      } else {
+        console.log('🎭 No characters found, setting empty array');
+        set({ characters: [], currentCharacterId: null });
       }
     } catch (error) {
-      console.error('Failed to load draft:', error);
+      console.error('🎭 Failed to load draft:', error);
     }
+    
+    console.log('🎭 loadDraft completed');
   },
 }));
