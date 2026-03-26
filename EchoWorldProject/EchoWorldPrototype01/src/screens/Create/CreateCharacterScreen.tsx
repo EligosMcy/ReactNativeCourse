@@ -61,8 +61,32 @@ export const CreateCharacterScreen: React.FC = () => {
           ])
         ).start();
       });
+      
+      // 自动开始角色生成
+      const startGenerate = async () => {
+        if (!draft.isGenerating) {
+          setLoading(true);
+          updateDraft({ isGenerating: true });
+          try {
+            const result = await mockApi.character.generate(draft.photoUri!, draft.roomPhotoUri!, draft.lifeStage || 'youth');
+            updateDraft({ 
+              generatedCharacterId: result.characterId,
+              isGenerating: false,
+              step: 3
+            });
+          } catch (error) {
+            alert('生成失败，请重试');
+            updateDraft({ isGenerating: false });
+          } finally {
+            setLoading(false);
+          }
+        }
+      };
+      
+      // 延迟一小段时间再开始生成，让动画先显示
+      setTimeout(startGenerate, 500);
     }
-  }, [draft.step, lightDotAnimations]);
+  }, [draft.step, lightDotAnimations, draft.isGenerating, draft.photoUri, draft.roomPhotoUri, draft.lifeStage]);
 
   const steps = [
     '拍摄原型照片',
@@ -131,21 +155,8 @@ export const CreateCharacterScreen: React.FC = () => {
     }
 
     if (draft.step === 2) {
-      setLoading(true);
-      updateDraft({ isGenerating: true });
-      try {
-        const result = await mockApi.character.generate(draft.photoUri!, draft.roomPhotoUri!, draft.lifeStage || 'youth');
-        updateDraft({ 
-          generatedCharacterId: result.characterId,
-          isGenerating: false,
-          step: 3
-        });
-      } catch (error) {
-        alert('生成失败，请重试');
-        updateDraft({ isGenerating: false });
-      } finally {
-        setLoading(false);
-      }
+      // 角色生成已经在useEffect中自动处理，这里不需要额外操作
+      return;
     } else if (draft.step === 3 && !draft.lifeStage) {
       alert('请选择角色的成熟度');
       return;
@@ -580,9 +591,9 @@ export const CreateCharacterScreen: React.FC = () => {
               />
             )}
             
-            {draft.step < steps.length - 1 ? (
+            {draft.step < steps.length - 1 && draft.step !== 2 ? (
               <Button
-                title={draft.step === 2 ? '生成' : (draft.step === 3 ? '继续' : '下一步')}
+                title={draft.step === 3 ? '继续' : '下一步'}
                 onPress={handleNext}
                 disabled={loading}
                 loading={loading}
