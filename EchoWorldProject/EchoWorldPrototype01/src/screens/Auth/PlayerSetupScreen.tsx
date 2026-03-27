@@ -49,7 +49,9 @@ export const PlayerSetupScreen: React.FC = () => {
     setLoading(true);
     try {
       const updatedPlayer = await mockApi.player.updateMe({ name: name.trim(), gender });
-      updatePlayer(updatedPlayer);
+      console.log('🎮 PlayerSetup: received updated player from mockApi', updatedPlayer);
+      await updatePlayer(updatedPlayer);
+      console.log('🎮 PlayerSetup: player data updated successfully');
       
       // 如果已经有角色，直接进入主界面
       if (characters.length > 0) {
@@ -59,6 +61,7 @@ export const PlayerSetupScreen: React.FC = () => {
         navigation.replace('CreateCharacter');
       }
     } catch (error) {
+      console.error('🎮 PlayerSetup: failed to save player data', error);
       Alert.alert('保存失败', '请稍后重试');
     } finally {
       setLoading(false);
@@ -116,14 +119,17 @@ export const PlayerSetupScreen: React.FC = () => {
 
         <View style={styles.form}>
           {/* 名字输入框 */}
+          {/* 名字输入框 - 填满整个界面宽度 */}
           <View style={styles.nameInputContainer}>
-            <Input
-              label="你的名字 *"
-              placeholder="请输入你的名字"
-              value={name}
-              onChangeText={setName}
-              style={styles.nameInput}
-            />
+            <View style={styles.inputWrapper}>
+              <Input
+                label="你的名字 *"
+                placeholder="请输入"
+                value={name}
+                onChangeText={setName}
+                style={styles.nameInput}
+              />
+            </View>
             <Text style={styles.characterCount}>{name.length}/20</Text>
           </View>
           
@@ -305,8 +311,11 @@ const styles = StyleSheet.create({
     gap: spacing.sm,
     marginBottom: spacing.lg,
   },
-  nameInput: {
+  inputWrapper: {
     flex: 1,
+  },
+  nameInput: {
+    width: '100%',
   },
   characterCount: {
     fontSize: typography.caption.fontSize,

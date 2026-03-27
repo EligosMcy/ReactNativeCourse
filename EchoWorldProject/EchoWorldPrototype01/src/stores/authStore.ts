@@ -10,7 +10,7 @@ interface AuthState {
   hasCharacter: boolean;
   setAuth: (player: Player, tokens: AuthTokens) => Promise<void>;
   clearAuth: () => Promise<void>;
-  updatePlayer: (player: Partial<Player>) => void;
+  updatePlayer: (player: Partial<Player>) => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
@@ -32,12 +32,21 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     set({ player: null, tokens: null, isAuthenticated: false });
   },
 
-  updatePlayer: (playerData) => {
+  updatePlayer: async (playerData) => {
     const current = get().player;
     if (current) {
       const updated = { ...current, ...playerData };
-      AsyncStorage.setItem('player', JSON.stringify(updated));
-      set({ player: updated });
+      console.log('🔐 updatePlayer: updating player data', updated);
+      try {
+        await AsyncStorage.setItem('player', JSON.stringify(updated));
+        console.log('🔐 updatePlayer: player data saved to AsyncStorage');
+        set({ player: updated });
+        console.log('🔐 updatePlayer: player state updated');
+      } catch (error) {
+        console.error('🔐 updatePlayer: failed to save player data', error);
+      }
+    } else {
+      console.log('🔐 updatePlayer: no current player found');
     }
   },
 }));

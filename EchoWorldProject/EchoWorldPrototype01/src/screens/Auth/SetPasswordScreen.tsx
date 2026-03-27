@@ -16,7 +16,7 @@ export const SetPasswordScreen: React.FC = () => {
   const navigation = useNavigation<SetPasswordNavigationProp>();
   const route = useRoute<SetPasswordRouteProp>();
   const { setAuth } = useAuthStore();
-  const { email } = route.params;
+  const { email = 'test@example.com' } = route.params || {};
   
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');

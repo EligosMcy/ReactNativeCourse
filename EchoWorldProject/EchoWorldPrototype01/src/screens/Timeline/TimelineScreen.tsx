@@ -30,8 +30,12 @@ export const TimelineScreen: React.FC = () => {
     try {
       const data = await mockApi.timeline.getPosts();
       
-      // 如果没有数据，为每个角色生成随机帖子
-      if (data.length === 0 && characters.length > 0) {
+      // 检查是否有新角色需要生成帖子
+      const existingCharacterIds = new Set(data.map(post => post.characterId));
+      const newCharacters = characters.filter(char => !existingCharacterIds.has(char.id));
+      
+      // 如果没有数据，或者有新角色，生成帖子
+      if (data.length === 0 || newCharacters.length > 0) {
         // 随机帖子内容
         const postTexts = [
           '今天天气真好，适合出去走走！',
@@ -210,9 +214,8 @@ export const TimelineScreen: React.FC = () => {
       <FlatList
         data={selectedFilter === 'all' 
           ? posts 
-          : posts.filter(post => 
-              post.characterName === selectedFilter || post.characterId === selectedFilter
-            )}
+          : posts.filter(post => post.characterId === selectedFilter)
+        }
         renderItem={renderPost}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContent}

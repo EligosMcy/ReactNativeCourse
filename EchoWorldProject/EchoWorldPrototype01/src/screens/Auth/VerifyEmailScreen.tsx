@@ -14,7 +14,7 @@ type VerifyEmailRouteProp = RouteProp<RootStackParamList, 'VerifyEmail'>;
 export const VerifyEmailScreen: React.FC = () => {
   const navigation = useNavigation<VerifyEmailNavigationProp>();
   const route = useRoute<VerifyEmailRouteProp>();
-  const { email } = route.params;
+  const { email = 'test@example.com' } = route.params || {};
   
   const [resendCountdown, setResendCountdown] = useState(0);
 
@@ -50,6 +50,11 @@ export const VerifyEmailScreen: React.FC = () => {
     navigation.goBack();
   };
 
+  const handleTestVerify = () => {
+    // 测试用：模拟验证通过，直接进入下一步
+    navigation.replace('SetPassword');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -77,6 +82,14 @@ export const VerifyEmailScreen: React.FC = () => {
           onPress={handleResend}
           disabled={resendCountdown > 0}
           style={styles.resendButton}
+        />
+
+        {/* 测试按钮：模拟验证通过 */}
+        <Button
+          title="测试验证通过"
+          onPress={handleTestVerify}
+          variant="ghost"
+          style={styles.testButton}
         />
 
         <Text style={styles.hint}>
@@ -179,6 +192,9 @@ const styles = StyleSheet.create({
   },
   resendButton: {
     marginTop: spacing.md,
+    marginBottom: spacing.lg,
+  },
+  testButton: {
     marginBottom: spacing.xl,
   },
   hint: {

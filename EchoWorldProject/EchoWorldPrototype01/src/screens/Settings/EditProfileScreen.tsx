@@ -41,7 +41,7 @@ export const EditProfileScreen: React.FC = () => {
     setHasChanges(hasChange);
   }, [name, gender, bio, location, player]);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const newErrors: { [key: string]: string } = {};
     
     if (!name.trim()) {
@@ -53,15 +53,19 @@ export const EditProfileScreen: React.FC = () => {
       return;
     }
 
-    updatePlayer({
-      name,
-      gender,
-      bio,
-      location,
-    });
-
-    Alert.alert('成功', '资料已保存');
-    navigation.goBack();
+    try {
+      await updatePlayer({
+        name,
+        gender,
+        bio,
+        location,
+      });
+      Alert.alert('成功', '资料已保存');
+      navigation.goBack();
+    } catch (error) {
+      console.error('✏️ EditProfile: failed to save profile', error);
+      Alert.alert('保存失败', '请稍后重试');
+    }
   };
 
   const handleChangeAvatar = () => {
