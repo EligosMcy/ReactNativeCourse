@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { Player, AuthTokens } from '../types';
+import { api } from '../services/api';
 
 interface AuthState {
   player: Player | null;
@@ -21,15 +22,31 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   hasCharacter: false,
 
   setAuth: async (player, tokens) => {
-    await AsyncStorage.setItem('tokens', JSON.stringify(tokens));
-    await AsyncStorage.setItem('player', JSON.stringify(player));
-    set({ player, tokens, isAuthenticated: true });
+    console.log('🔐 setAuth: saving auth data', { player, tokens });
+    try {
+      await AsyncStorage.setItem('tokens', JSON.stringify(tokens));
+      await AsyncStorage.setItem('player', JSON.stringify(player));
+      api.setAccessToken(tokens.accessToken);
+      set({ player, tokens, isAuthenticated: true });
+      console.log('🔐 setAuth: auth data saved successfully');
+    } catch (error) {
+      console.error('🔐 setAuth: failed to save auth data', error);
+      throw error;
+    }
   },
 
   clearAuth: async () => {
-    await AsyncStorage.removeItem('tokens');
-    await AsyncStorage.removeItem('player');
-    set({ player: null, tokens: null, isAuthenticated: false });
+    console.log('🔐 clearAuth: removing auth data');
+    try {
+      await AsyncStorage.removeItem('tokens');
+      await AsyncStorage.removeItem('player');
+      api.clearAccessToken();
+      set({ player: null, tokens: null, isAuthenticated: false });
+      console.log('🔐 clearAuth: auth data removed successfully');
+    } catch (error) {
+      console.error('🔐 clearAuth: failed to remove auth data', error);
+      throw error;
+    }
   },
 
   updatePlayer: async (playerData) => {
@@ -38,12 +55,13 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       const updated = { ...current, ...playerData };
       console.log('🔐 updatePlayer: updating player data', updated);
       try {
+        await api.player.updateMe(playerData);
         await AsyncStorage.setItem('player', JSON.stringify(updated));
-        console.log('🔐 updatePlayer: player data saved to AsyncStorage');
+        console.log('🔐 updatePlayer: player data updated successfully');
         set({ player: updated });
-        console.log('🔐 updatePlayer: player state updated');
       } catch (error) {
-        console.error('🔐 updatePlayer: failed to save player data', error);
+        console.error('🔐 updatePlayer: failed to update player data', error);
+        throw error;
       }
     } else {
       console.log('🔐 updatePlayer: no current player found');
@@ -71,6 +89,7 @@ export const initializeAuth = async () => {
       
       if (tokens.expiresAt > Date.now()) {
         console.log('🔐 Setting authenticated state');
+        api.setAccessToken(tokens.accessToken);
         useAuthStore.setState({ player, tokens, isAuthenticated: true, isLoading: false });
         return;
       } else {

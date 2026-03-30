@@ -6,7 +6,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { Button, Input } from '../../components/ui';
 import { useAuthStore } from '../../stores';
-import { mockApi } from '../../services/mockApi';
+import { api } from '../../services/api';
 import type { RootStackParamList } from '../../types';
 
 type LoginNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Login'>;
@@ -26,7 +26,7 @@ export const LoginScreen: React.FC = () => {
 
     setLoading(true);
     try {
-      const { player, tokens } = await mockApi.auth.login(email, password);
+      const { player, tokens } = await api.auth.login(email, password);
       await setAuth(player, tokens);
       
       // Check if player has name set

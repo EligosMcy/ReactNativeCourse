@@ -6,7 +6,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { Button, Input, Avatar } from '../../components/ui';
 import { useAuthStore, useCharacterStore } from '../../stores';
-import { mockApi } from '../../services/mockApi';
+import { api } from '../../services/api';
 import type { RootStackParamList } from '../../types';
 
 type PlayerSetupNavigationProp = NativeStackNavigationProp<RootStackParamList, 'PlayerSetup'>;
@@ -48,9 +48,9 @@ export const PlayerSetupScreen: React.FC = () => {
 
     setLoading(true);
     try {
-      const updatedPlayer = await mockApi.player.updateMe({ name: name.trim(), gender });
-      console.log('🎮 PlayerSetup: received updated player from mockApi', updatedPlayer);
-      await updatePlayer(updatedPlayer);
+      const updatedPlayer = await api.player.updateMe({ name: name.trim(), gender });
+      console.log('🎮 PlayerSetup: received updated player from API', updatedPlayer);
+      await updatePlayer({ name: name.trim(), gender });
       console.log('🎮 PlayerSetup: player data updated successfully');
       
       // 如果已经有角色，直接进入主界面
