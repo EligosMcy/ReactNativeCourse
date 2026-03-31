@@ -6,7 +6,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { Avatar, Card } from '../../components/ui';
 import { useCharacterStore } from '../../stores';
-import { mockApi } from '../../services/mockApi';
+import { api } from '../../services/api';
 import type { RootStackParamList, TimelinePost } from '../../types';
 
 type TimelineNavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -28,7 +28,7 @@ export const TimelineScreen: React.FC = () => {
   const loadPosts = async () => {
     setLoading(true);
     try {
-      const data = await mockApi.timeline.getPosts();
+      const data = await api.timeline.getPosts();
       
       // 检查是否有新角色需要生成帖子
       const existingCharacterIds = new Set(data.map(post => post.characterId));
@@ -80,7 +80,7 @@ export const TimelineScreen: React.FC = () => {
           }
         });
         
-        mockApi.timeline.savePosts(generatedPosts);
+        // 真实API不需要手动保存生成的帖子
         setPosts(generatedPosts);
       } else {
         setPosts(data);
@@ -101,9 +101,9 @@ export const TimelineScreen: React.FC = () => {
   const handleLike = async (postId: string, isLiked: boolean) => {
     try {
       if (isLiked) {
-        await mockApi.timeline.unlike(postId);
+        await api.timeline.unlike(postId);
       } else {
-        await mockApi.timeline.like(postId);
+        await api.timeline.like(postId);
       }
       setPosts(posts.map(post => 
         post.id === postId 

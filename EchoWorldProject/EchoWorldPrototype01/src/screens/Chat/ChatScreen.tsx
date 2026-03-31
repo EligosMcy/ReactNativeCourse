@@ -6,7 +6,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { Avatar, MessageBubble } from '../../components/ui';
 import { useCharacterStore, useChatStore } from '../../stores';
-import { mockApi } from '../../services/mockApi';
+import { api } from '../../services/api';
 import type { RootStackParamList, Message } from '../../types';
 
 type ChatRouteProp = RouteProp<RootStackParamList, 'CharacterChat'>;
@@ -31,7 +31,7 @@ export const ChatScreen: React.FC = () => {
   useEffect(() => {
     const loadMessages = async () => {
       if (character) {
-        const data = await mockApi.messages.getList(character.id);
+        const data = await api.messages.getList(character.id);
         data.forEach(msg => appendMessage(character.id, msg));
       }
     };
@@ -45,7 +45,7 @@ export const ChatScreen: React.FC = () => {
     setSending(true);
 
     try {
-      const sentMessage = await mockApi.messages.send(character.id, inputText.trim());
+      const sentMessage = await api.messages.send(character.id, inputText.trim());
       appendMessage(character.id, sentMessage);
     } catch (error) {
       console.error('Failed to send message:', error);

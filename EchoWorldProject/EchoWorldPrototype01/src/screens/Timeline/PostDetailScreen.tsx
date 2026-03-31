@@ -5,7 +5,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { Avatar, Button } from '../../components/ui';
-import { mockApi } from '../../services/mockApi';
+import { api } from '../../services/api';
 import type { RootStackParamList, TimelinePost } from '../../types';
 
 type PostDetailNavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -31,7 +31,7 @@ export const PostDetailScreen: React.FC = () => {
 
   const loadPost = async () => {
     try {
-      const foundPost = await mockApi.timeline.getPostById(postId);
+      const foundPost = await api.timeline.getPostById(postId);
       if (foundPost) {
         setPost(foundPost);
       }
@@ -72,9 +72,9 @@ export const PostDetailScreen: React.FC = () => {
     
     try {
       if (post.isLikedByPlayer) {
-        await mockApi.timeline.unlike(post.id);
+        await api.timeline.unlike(post.id);
       } else {
-        await mockApi.timeline.like(post.id);
+        await api.timeline.like(post.id);
       }
       setPost({
         ...post,

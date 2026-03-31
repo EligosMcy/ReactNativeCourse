@@ -6,7 +6,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, typography, spacing } from '../../theme';
 import { Button, Input } from '../../components/ui';
 import { useAuthStore } from '../../stores';
-import { mockApi } from '../../services/mockApi';
+import { api } from '../../services/api';
 import type { RootStackParamList } from '../../types';
 
 type SetPasswordNavigationProp = NativeStackNavigationProp<RootStackParamList, 'SetPassword'>;
@@ -69,11 +69,21 @@ export const SetPasswordScreen: React.FC = () => {
 
     setLoading(true);
     try {
-      const { player, tokens } = await mockApi.auth.register(email, password);
+      const { player, tokens } = await api.auth.register(email, password);
       await setAuth(player, tokens);
       navigation.replace('PlayerSetup');
     } catch (error) {
-      Alert.alert('注册失败', '请稍后重试');
+      const errorMessage = error instanceof Error ? error.message : '注册失败';
+      
+      // 检查是否是邮箱已存在的错误
+      if (errorMessage.includes('exists') || errorMessage.includes('已存在')) {
+        Alert.alert('注册失败', '该邮箱已有账户', [
+          { text: '取消', style: 'cancel' },
+          { text: '去登录', onPress: () => navigation.navigate('Login') }
+        ]);
+      } else {
+        Alert.alert('注册失败', errorMessage);
+      }
     } finally {
       setLoading(false);
     }

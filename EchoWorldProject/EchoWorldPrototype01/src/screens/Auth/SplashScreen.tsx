@@ -25,6 +25,7 @@ export const SplashScreen: React.FC = () => {
       } else if (isAuthenticated) {
         navigation.replace('PlayerSetup');
       }
+      // 未认证用户保持在SplashScreen，等待用户选择登录或注册
     }
   }, [isLoading, isAuthenticated, characters, navigation, isNavigationComplete]);
 

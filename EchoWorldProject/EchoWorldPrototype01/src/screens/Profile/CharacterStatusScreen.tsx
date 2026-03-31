@@ -6,7 +6,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { Avatar, Button, Card } from '../../components/ui';
 import { useCharacterStore } from '../../stores';
-import { mockApi } from '../../services/mockApi';
+import { api } from '../../services/api';
 import type { RootStackParamList, Character } from '../../types';
 
 type CharacterStatusRouteProp = RouteProp<RootStackParamList, 'CharacterStatus'>;
@@ -25,7 +25,7 @@ export const CharacterStatusScreen: React.FC = () => {
       if (foundCharacter) {
         setCurrentCharacter(foundCharacter);
       } else {
-        const data = await mockApi.character.get(characterId);
+        const data = await api.character.get(characterId);
         if (data) {
           setCurrentCharacter(data);
         }
@@ -37,7 +37,7 @@ export const CharacterStatusScreen: React.FC = () => {
   useEffect(() => {
     if (!currentCharacter) return;
     const interval = setInterval(async () => {
-      const updated = await mockApi.character.getStatus(currentCharacter.id);
+      const updated = await api.character.getStatus(currentCharacter.id);
       if (updated) {
         setCurrentCharacter(updated);
       }

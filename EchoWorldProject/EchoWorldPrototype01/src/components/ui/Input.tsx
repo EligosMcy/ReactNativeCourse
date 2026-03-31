@@ -37,7 +37,7 @@ export const Input: React.FC<InputProps> = ({
       >
         <TextInput
           style={styles.input}
-          placeholderTextColor={colors.text.tertiary}
+          placeholderTextColor={colors.text.secondary}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           secureTextEntry={secureTextEntry && !showPassword}
@@ -47,8 +47,9 @@ export const Input: React.FC<InputProps> = ({
           <TouchableOpacity
             onPress={() => setShowPassword(!showPassword)}
             style={styles.toggleButton}
+            hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
           >
-            <Text style={styles.toggleText}>{showPassword ? '👁' : '👁'}</Text>
+            <Text style={styles.toggleText}>{showPassword ? '🙈' : '👁'}</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -69,11 +70,11 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 52,
+    justifyContent: 'space-between',
     backgroundColor: colors.background.secondary,
     borderRadius: borderRadius.input,
     borderWidth: 1,
-    borderColor: colors.border.default,
+    borderColor: colors.border.subtle,
     paddingHorizontal: spacing.md,
   },
   inputFocused: {
@@ -84,15 +85,19 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    paddingHorizontal: spacing.md,
+    paddingVertical: 16,
     fontSize: typography.body.fontSize,
     color: colors.text.primary,
+    textAlign: 'left',
+    textAlignVertical: 'center',
   },
   toggleButton: {
-    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs,
+    marginLeft: 'auto',
   },
   toggleText: {
     fontSize: 18,
+    color: colors.text.secondary,
   },
   errorText: {
     fontSize: typography.small.fontSize,

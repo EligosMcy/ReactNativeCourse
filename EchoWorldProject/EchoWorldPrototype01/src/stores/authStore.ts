@@ -69,6 +69,13 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   },
 }));
 
+// 验证JWT格式是否正确
+const isValidJwtFormat = (token: string): boolean => {
+  if (!token) return false;
+  const parts = token.split('.');
+  return parts.length === 3;
+};
+
 export const initializeAuth = async () => {
   console.log('🔐 initializeAuth started');
   
@@ -86,20 +93,51 @@ export const initializeAuth = async () => {
       console.log('🔐 Tokens expiresAt:', tokens.expiresAt);
       console.log('🔐 Current time:', Date.now());
       console.log('🔐 Tokens valid:', tokens.expiresAt > Date.now());
+      console.log('🔐 JWT format valid:', isValidJwtFormat(tokens.accessToken));
       
-      if (tokens.expiresAt > Date.now()) {
+      // 检查tokens是否有效、格式正确且用户信息完整
+      if (
+        tokens.expiresAt > Date.now() && 
+        player && 
+        player.name &&
+        isValidJwtFormat(tokens.accessToken)
+      ) {
         console.log('🔐 Setting authenticated state');
         api.setAccessToken(tokens.accessToken);
-        useAuthStore.setState({ player, tokens, isAuthenticated: true, isLoading: false });
-        return;
+        
+        // 尝试验证token的有效性
+        try {
+          await api.auth.validateToken();
+          console.log('🔐 Token validated successfully');
+          useAuthStore.setState({ player, tokens, isAuthenticated: true, isLoading: false });
+          return;
+        } catch (validationError) {
+          console.error('🔐 Token validation failed:', validationError);
+          // Token无效，清理数据
+          await AsyncStorage.removeItem('tokens');
+          await AsyncStorage.removeItem('player');
+          api.clearAccessToken();
+        }
       } else {
-        console.log('🔐 Tokens expired, setting unauthenticated');
+        console.log('🔐 Tokens expired, invalid format or player info incomplete, clearing auth data');
+        // 清理过期或不完整的认证数据
+        await AsyncStorage.removeItem('tokens');
+        await AsyncStorage.removeItem('player');
+        api.clearAccessToken();
       }
     } else {
       console.log('🔐 No tokens or player found');
     }
   } catch (error) {
     console.error('🔐 Failed to initialize auth:', error);
+    // 出错时清理可能损坏的数据
+    try {
+      await AsyncStorage.removeItem('tokens');
+      await AsyncStorage.removeItem('player');
+      api.clearAccessToken();
+    } catch (clearError) {
+      console.error('🔐 Failed to clear auth data:', clearError);
+    }
   }
   
   console.log('🔐 Setting isLoading to false');

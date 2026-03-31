@@ -1,4 +1,5 @@
 import type { Player, AuthTokens, Character, Message, TimelinePost, LifeStage } from '../types';
+import { useAuthStore } from '../stores/authStore';
 
 const API_BASE_URL = 'https://showx-api-server-820411680197.us-west1.run.app';
 
@@ -29,7 +30,7 @@ class ApiService {
     const url = `${API_BASE_URL}${endpoint}`;
 
     console.log(`[API Request] ${options.method || 'GET'} ${url}`);
-    if (options.body) {
+    if (options.body && typeof options.body === 'string') {
       console.log(`[API Request Body]`, JSON.parse(options.body));
     }
     
@@ -45,6 +46,15 @@ class ApiService {
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
         console.error(`[API Error] ${response.status}: ${JSON.stringify(errorData, null, 2)}`);
+        
+        // 检查是否是认证错误
+        if (response.status === 401 || response.status === 403) {
+          console.error('[API Auth Error] Token is invalid or expired, clearing auth state');
+          // 清除认证状态
+          useAuthStore.getState().clearAuth();
+          throw new Error('认证失败，请重新登录');
+        }
+        
         throw new Error(errorData.error?.message || errorData.error || `HTTP error! status: ${response.status}`);
       }
 
@@ -66,7 +76,7 @@ class ApiService {
     },
 
     login: async (email: string, password: string) => {
-      return this.request<{ player: Player; tokens: AuthTokens }>('/api/auth/login/password', {
+      return this.request<{ player: Player; tokens: AuthTokens }>('/api/auth/login', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
       });
@@ -82,6 +92,13 @@ class ApiService {
       return this.request<{ exists: boolean }>('/api/auth/check-email', {
         method: 'POST',
         body: JSON.stringify({ email }),
+      });
+    },
+
+    validateToken: async () => {
+      // 使用player.getMe来验证token是否有效
+      return this.request<Player>('/api/player/me', {
+        method: 'GET',
       });
     },
   };

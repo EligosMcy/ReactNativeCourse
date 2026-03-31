@@ -6,7 +6,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, typography, spacing } from '../../theme';
 import { Button, Input } from '../../components/ui';
 import { useAuthStore } from '../../stores';
-import { mockApi } from '../../services/mockApi';
+import { api } from '../../services/api';
 import type { RootStackParamList } from '../../types';
 
 type RegisterNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Register'>;
@@ -29,22 +29,8 @@ export const RegisterScreen: React.FC = () => {
       return;
     }
 
-    setLoading(true);
-    try {
-      const exists = await mockApi.auth.checkEmailExists(email);
-      if (exists) {
-        Alert.alert('提示', '该邮箱已有账户', [
-          { text: '取消', style: 'cancel' },
-          { text: '去登录', onPress: () => navigation.navigate('Login') }
-        ]);
-        return;
-      }
-      navigation.navigate('SetPassword', { email });
-    } catch (error) {
-      Alert.alert('提示', '请稍后重试');
-    } finally {
-      setLoading(false);
-    }
+    // 直接进入设置密码页面，邮箱检查在注册时由服务器处理
+    navigation.navigate('SetPassword', { email });
   };
 
   

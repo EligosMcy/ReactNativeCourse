@@ -7,7 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { Button } from '../../components/ui';
 import { useCharacterStore } from '../../stores';
-import { mockApi } from '../../services/mockApi';
+import { api } from '../../services/api';
 import type { RootStackParamList, LifeStage } from '../../types';
 
 type CreateCharacterNavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -87,7 +87,7 @@ export const CreateCharacterScreen: React.FC = () => {
           setLoading(true);
           updateDraft({ isGenerating: true });
           try {
-            const result = await mockApi.character.generate(draft.photoUri!, draft.roomPhotoUri!, draft.lifeStage || 'youth');
+            const result = await api.character.generate(draft.photoUri!, draft.roomPhotoUri!, draft.lifeStage || 'youth');
             updateDraft({ 
               generatedCharacterId: result.characterId,
               isGenerating: false,
@@ -207,7 +207,7 @@ export const CreateCharacterScreen: React.FC = () => {
 
     setLoading(true);
     try {
-      const character = await mockApi.character.get(draft.generatedCharacterId);
+      const character = await api.character.get(draft.generatedCharacterId);
       if (character) {
         const updatedCharacter = {
           ...character,

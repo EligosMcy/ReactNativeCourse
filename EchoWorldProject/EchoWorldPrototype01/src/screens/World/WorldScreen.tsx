@@ -6,7 +6,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors, typography, spacing, borderRadius } from '../../theme';
 import { Avatar, Button } from '../../components/ui';
 import { useCharacterStore, useUIStore } from '../../stores';
-import { mockApi } from '../../services/mockApi';
+import { api } from '../../services/api';
 import type { RootStackParamList, Character } from '../../types';
 
 type WorldNavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -69,7 +69,7 @@ export const WorldScreen: React.FC = () => {
     
     characters.forEach((char) => {
       const interval = setInterval(async () => {
-        const updated = await mockApi.character.getStatus(char.id);
+        const updated = await api.character.getStatus(char.id);
         // 这里可以添加更新角色状态的逻辑
       }, 60000);
       intervals.push(interval);
@@ -84,7 +84,7 @@ export const WorldScreen: React.FC = () => {
     setRefreshing(true);
     // 刷新所有角色状态
     for (const char of characters) {
-      await mockApi.character.getStatus(char.id);
+      await api.character.getStatus(char.id);
     }
     setRefreshing(false);
   };

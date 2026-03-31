@@ -62,7 +62,23 @@ export const PlayerSetupScreen: React.FC = () => {
       }
     } catch (error) {
       console.error('🎮 PlayerSetup: failed to save player data', error);
-      Alert.alert('保存失败', '请稍后重试');
+      const errorMessage = error instanceof Error ? error.message : '保存失败';
+      
+      // 检查是否是认证错误
+      if (errorMessage.includes('认证失败') || errorMessage.includes('token')) {
+        Alert.alert(
+          '登录失效',
+          '您的登录已过期，请重新登录',
+          [
+            {
+              text: '重新登录',
+              onPress: () => navigation.replace('Login')
+            }
+          ]
+        );
+      } else {
+        Alert.alert('保存失败', '请稍后重试');
+      }
     } finally {
       setLoading(false);
     }
